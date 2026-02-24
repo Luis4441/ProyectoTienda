@@ -14,7 +14,11 @@ class UsuarioServicio {
         if (!coincide) throw new Error("Contraseña incorrecta");
 
         const token = jwt.sign(
-            { id: usuario.id, rol: usuario.rol },
+            {
+                id:            usuario.id,
+                rol:           usuario.rol,
+                nombreUsuario: usuario.nombreUsuario   // ← AÑADIDO: para leer el rol en el frontend
+            },
             "CLAVE_SECRETA",
             { expiresIn: "2h" }
         );
@@ -60,11 +64,9 @@ class UsuarioServicio {
             throw new Error("Todos los campos son requeridos");
         }
 
-        // Verificar que el usuario existe
         const existente = await usuarioRepositorio.buscarPorId(id);
         if (!existente) throw new Error("Usuario no encontrado");
 
-        // Proteger al admin inicial
         if (existente.nombreUsuario === "admininicial") {
             throw new Error("No se puede modificar el usuario administrador inicial");
         }
