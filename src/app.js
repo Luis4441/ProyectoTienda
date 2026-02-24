@@ -1,6 +1,7 @@
 const express = require("express");
 const path = require("path");
 const authRutas = require("./rutas/authRutas");
+const inicializarBD = require("./config/inicializarBD");
 
 const app = express();
 
@@ -8,12 +9,7 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// ── Log de rutas para diagnóstico ──
-console.log("📁 __dirname:", __dirname);
-console.log("📄 Ruta login.html:", path.join(__dirname, "vistas", "login.html"));
-console.log("📄 Ruta dashboard.html:", path.join(__dirname, "vistas", "dashboard.html"));
-
-// ── Archivos estáticos (CSS, JS, imágenes si los hubiera) ──
+// ── Archivos estáticos ──
 app.use(express.static(path.join(__dirname, "publico")));
 
 // ── Vistas ──
@@ -22,15 +18,11 @@ app.get("/", (req, res) => {
 });
 
 app.get("/login", (req, res) => {
-    const rutaLogin = path.join(__dirname, "vistas", "login.html");
-    console.log("🌐 Sirviendo login desde:", rutaLogin);
-    res.sendFile(rutaLogin);
+    res.sendFile(path.join(__dirname, "vistas", "login.html"));
 });
 
 app.get("/dashboard", (req, res) => {
-    const rutaDashboard = path.join(__dirname, "vistas", "dashboard.html");
-    console.log("🌐 Sirviendo dashboard desde:", rutaDashboard);
-    res.sendFile(rutaDashboard);
+    res.sendFile(path.join(__dirname, "vistas", "dashboard.html"));
 });
 
 // ── Rutas API ──
@@ -47,8 +39,11 @@ app.use((err, req, res, next) => {
     res.status(500).json({ error: "Error interno del servidor" });
 });
 
-// ── Inicio del servidor ──
+// ── Inicializar BD y arrancar servidor ──
 const PUERTO = process.env.PORT || 3000;
-app.listen(PUERTO, () => {
-    console.log(`Servidor ejecutándose en http://localhost:${PUERTO}`);
+
+inicializarBD().then(() => {
+    app.listen(PUERTO, () => {
+        console.log(`Servidor ejecutándose en http://localhost:${PUERTO}`);
+    });
 });
