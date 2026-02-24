@@ -4,25 +4,14 @@ const usuarioRepositorio = require("../repositorios/UsuarioRepositorio");
 
 class UsuarioServicio {
 
+    // ── LOGIN ──
     async login(nombreUsuario, contrasena) {
-        console.log("→ Buscando usuario:", nombreUsuario);
-
         const usuario = await usuarioRepositorio.buscarPorNombre(nombreUsuario);
-        console.log("→ Usuario encontrado:", usuario);
 
-        if (!usuario) {
-            throw new Error("Usuario no encontrado");
-        }
-
-        console.log("→ Contraseña ingresada:", contrasena);
-        console.log("→ Hash en BD:", usuario.contrasena);
+        if (!usuario) throw new Error("Usuario no encontrado");
 
         const coincide = await bcrypt.compare(contrasena, usuario.contrasena);
-        console.log("→ Contraseñas coinciden:", coincide);
-
-        if (!coincide) {
-            throw new Error("Contraseña incorrecta");
-        }
+        if (!coincide) throw new Error("Contraseña incorrecta");
 
         const token = jwt.sign(
             { id: usuario.id, rol: usuario.rol },
@@ -31,6 +20,79 @@ class UsuarioServicio {
         );
 
         return token;
+    }
+
+    // ── LISTAR ──
+    async listar() {
+        return await usuarioRepositorio.listarTodos();
+    }
+
+    // ── CREAR ──
+    async crear(datos) {
+        const { cedula, nombreCompleto, nombreUsuario, correo, contrasena } = datos;
+
+        if (!cedula || !nombreCompleto || !nombreUsuario || !correo || !contrasena) {
+            throw new Error("Todos los campos son requeridos");
+        }
+
+        if (await usuarioRepositorio.existeCedula(cedula)) {
+            throw new Error("Ya existe un usuario con esa cédula");
+        }
+        if (await usuarioRepositorio.existeNombreUsuario(nombreUsuario)) {
+            throw new Error("El nombre de usuario ya está en uso");
+        }
+        if (await usuarioRepositorio.existeCorreo(correo)) {
+            throw new Error("El correo electrónico ya está en uso");
+        }
+
+        const hash = await bcrypt.hash(contrasena, 10);
+
+        return await usuarioRepositorio.crear(
+            cedula, nombreCompleto, nombreUsuario, correo, hash, "ADMIN"
+        );
+    }
+
+    // ── ACTUALIZAR ──
+    async actualizar(id, datos) {
+        const { cedula, nombreCompleto, nombreUsuario, correo } = datos;
+
+        if (!cedula || !nombreCompleto || !nombreUsuario || !correo) {
+            throw new Error("Todos los campos son requeridos");
+        }
+
+        // Verificar que el usuario existe
+        const existente = await usuarioRepositorio.buscarPorId(id);
+        if (!existente) throw new Error("Usuario no encontrado");
+
+        // Proteger al admin inicial
+        if (existente.nombreUsuario === "admininicial") {
+            throw new Error("No se puede modificar el usuario administrador inicial");
+        }
+
+        if (await usuarioRepositorio.existeCedula(cedula, id)) {
+            throw new Error("Ya existe un usuario con esa cédula");
+        }
+        if (await usuarioRepositorio.existeNombreUsuario(nombreUsuario, id)) {
+            throw new Error("El nombre de usuario ya está en uso");
+        }
+        if (await usuarioRepositorio.existeCorreo(correo, id)) {
+            throw new Error("El correo electrónico ya está en uso");
+        }
+
+        return await usuarioRepositorio.actualizar(id, cedula, nombreCompleto, nombreUsuario, correo, "ADMIN");
+    }
+
+    // ── ELIMINAR ──
+    async eliminar(id) {
+        const existente = await usuarioRepositorio.buscarPorId(id);
+        if (!existente) throw new Error("Usuario no encontrado");
+
+        if (existente.nombreUsuario === "admininicial") {
+            throw new Error("No se puede eliminar el usuario administrador inicial");
+        }
+
+        const eliminado = await usuarioRepositorio.eliminar(id);
+        if (!eliminado) throw new Error("No se pudo eliminar el usuario");
     }
 }
 

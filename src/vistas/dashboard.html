@@ -21,432 +21,180 @@
       --text:        #2d3e50;
       --muted:       #7a9ab8;
       --border:      #ddeaf7;
-      --active-bg:   rgba(91,155,213,0.12);
       --danger:      #e07070;
+      --danger-bg:   #fdf0f0;
+      --success:     #4caf7d;
+      --success-bg:  #f0fdf6;
+      --warn:        #e0a040;
     }
 
-    html, body {
-      height: 100%;
-      font-family: 'Nunito', sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      overflow: hidden;
-    }
-
+    html, body { height: 100%; font-family: 'Nunito', sans-serif; background: var(--bg); color: var(--text); overflow: hidden; }
     .shell { display: flex; height: 100vh; }
 
     /* ══ SIDEBAR ══ */
-    .sidebar {
-      width: var(--sidebar-w);
-      background: var(--sidebar-bg);
-      display: flex;
-      flex-direction: column;
-      flex-shrink: 0;
-      position: relative;
-      z-index: 10;
-    }
-
-    .sidebar::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 3px;
-      background: linear-gradient(to right, #a8d8f0, var(--blue-mid), #a8d8f0);
-    }
-
-    .sidebar-brand {
-      padding: 28px 20px 24px;
-      border-bottom: 1px solid rgba(255,255,255,0.08);
-    }
-
+    .sidebar { width: var(--sidebar-w); background: var(--sidebar-bg); display: flex; flex-direction: column; flex-shrink: 0; position: relative; z-index: 10; }
+    .sidebar::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(to right, #a8d8f0, var(--blue-mid), #a8d8f0); }
+    .sidebar-brand { padding: 28px 20px 24px; border-bottom: 1px solid rgba(255,255,255,0.08); }
     .brand-logo { display: flex; align-items: center; gap: 10px; }
-
-    .brand-icon {
-      width: 34px; height: 34px;
-      background: rgba(255,255,255,0.1);
-      border: 1.5px solid rgba(168,204,239,0.4);
-      border-radius: 10px;
-      display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0;
-    }
+    .brand-icon { width: 34px; height: 34px; background: rgba(255,255,255,0.1); border: 1.5px solid rgba(168,204,239,0.4); border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
     .brand-icon svg { width: 18px; height: 18px; }
-
-    .brand-name {
-      font-family: 'Pacifico', cursive;
-      font-size: 1.1rem;
-      color: #e8f3fd;
-      line-height: 1;
-    }
-
-    .brand-sub {
-      font-size: 0.62rem;
-      color: rgba(255,255,255,0.35);
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      margin-top: 3px;
-      font-weight: 400;
-    }
-
-    .sidebar-user {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 12px 16px;
-      margin: 16px 12px 0;
-      background: rgba(255,255,255,0.07);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 12px;
-    }
-
-    .user-avatar {
-      width: 30px; height: 30px;
-      border-radius: 50%;
-      background: var(--blue-mid);
-      display: flex; align-items: center; justify-content: center;
-      font-family: 'Nunito', sans-serif;
-      font-size: 0.75rem;
-      font-weight: 800;
-      color: var(--sidebar-bg);
-      flex-shrink: 0;
-    }
-
+    .brand-name { font-family: 'Pacifico', cursive; font-size: 1.1rem; color: #e8f3fd; line-height: 1; }
+    .brand-sub { font-size: 0.62rem; color: rgba(255,255,255,0.35); letter-spacing: 0.12em; text-transform: uppercase; margin-top: 3px; font-weight: 400; }
+    .sidebar-user { display: flex; align-items: center; gap: 10px; padding: 12px 16px; margin: 16px 12px 0; background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; }
+    .user-avatar { width: 30px; height: 30px; border-radius: 50%; background: var(--blue-mid); display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 800; color: var(--sidebar-bg); flex-shrink: 0; }
     .user-info { flex: 1; min-width: 0; }
-    .user-name {
-      font-size: 0.78rem;
-      font-weight: 700;
-      color: #e8f3fd;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-    .user-role {
-      font-size: 0.62rem;
-      color: var(--blue-mid);
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      font-weight: 600;
-    }
-
-    .sidebar-nav {
-      flex: 1;
-      padding: 20px 12px;
-      overflow-y: auto;
-    }
-
-    .nav-section-label {
-      font-size: 0.6rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.25);
-      padding: 0 8px;
-      margin-bottom: 6px;
-      margin-top: 20px;
-      font-weight: 700;
-    }
+    .user-name { font-size: 0.78rem; font-weight: 700; color: #e8f3fd; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .user-role { font-size: 0.62rem; color: var(--blue-mid); letter-spacing: 0.06em; text-transform: uppercase; font-weight: 600; }
+    .sidebar-nav { flex: 1; padding: 20px 12px; overflow-y: auto; }
+    .nav-section-label { font-size: 0.6rem; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.25); padding: 0 8px; margin-bottom: 6px; margin-top: 20px; font-weight: 700; }
     .nav-section-label:first-child { margin-top: 0; }
-
-    .nav-item {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 10px 12px;
-      border-radius: 10px;
-      cursor: pointer;
-      transition: background 0.15s, color 0.15s;
-      color: rgba(255,255,255,0.5);
-      font-size: 0.83rem;
-      font-weight: 600;
-      border: none;
-      background: none;
-      width: 100%;
-      text-align: left;
-      position: relative;
-      margin-bottom: 2px;
-    }
-
-    .nav-item svg {
-      width: 16px; height: 16px;
-      fill: none;
-      stroke: currentColor;
-      stroke-width: 2;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-      flex-shrink: 0;
-    }
-
+    .nav-item { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: 10px; cursor: pointer; transition: background 0.15s; color: rgba(255,255,255,0.5); font-size: 0.83rem; font-weight: 600; border: none; background: none; width: 100%; text-align: left; position: relative; margin-bottom: 2px; }
+    .nav-item svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
     .nav-item:hover { background: rgba(255,255,255,0.07); color: rgba(255,255,255,0.85); }
-
-    .nav-item.active {
-      background: rgba(168,204,239,0.18);
-      color: #c8e4f8;
-    }
-
-    .nav-item.active::before {
-      content: '';
-      position: absolute;
-      left: 0; top: 25%; bottom: 25%;
-      width: 3px;
-      background: var(--blue-mid);
-      border-radius: 3px;
-    }
-
-    .sidebar-footer {
-      padding: 16px 12px;
-      border-top: 1px solid rgba(255,255,255,0.08);
-    }
-
-    .btn-logout {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      width: 100%;
-      padding: 10px 12px;
-      background: none;
-      border: 1px solid rgba(224,112,112,0.25);
-      border-radius: 10px;
-      color: rgba(224,112,112,0.65);
-      font-family: 'Nunito', sans-serif;
-      font-size: 0.78rem;
-      font-weight: 700;
-      cursor: pointer;
-      transition: all 0.15s;
-    }
+    .nav-item.active { background: rgba(168,204,239,0.18); color: #c8e4f8; }
+    .nav-item.active::before { content: ''; position: absolute; left: 0; top: 25%; bottom: 25%; width: 3px; background: var(--blue-mid); border-radius: 3px; }
+    .sidebar-footer { padding: 16px 12px; border-top: 1px solid rgba(255,255,255,0.08); }
+    .btn-logout { display: flex; align-items: center; gap: 10px; width: 100%; padding: 10px 12px; background: none; border: 1px solid rgba(224,112,112,0.25); border-radius: 10px; color: rgba(224,112,112,0.65); font-family: 'Nunito', sans-serif; font-size: 0.78rem; font-weight: 700; cursor: pointer; transition: all 0.15s; }
     .btn-logout svg { width: 15px; height: 15px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
     .btn-logout:hover { background: rgba(224,112,112,0.1); color: var(--danger); border-color: rgba(224,112,112,0.45); }
 
     /* ══ MAIN ══ */
     .main { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
-
-    .topbar {
-      background: var(--surface);
-      border-bottom: 1.5px solid var(--border);
-      padding: 0 32px;
-      height: 62px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-shrink: 0;
-      box-shadow: 0 2px 8px rgba(91,155,213,0.06);
-    }
-
+    .topbar { background: var(--surface); border-bottom: 1.5px solid var(--border); padding: 0 32px; height: 62px; display: flex; align-items: center; justify-content: space-between; flex-shrink: 0; box-shadow: 0 2px 8px rgba(91,155,213,0.06); }
     .topbar-left { display: flex; align-items: center; gap: 12px; }
-
-    .page-title {
-      font-family: 'Nunito', sans-serif;
-      font-size: 1.05rem;
-      font-weight: 800;
-      color: var(--text);
-    }
-
-    .page-badge {
-      font-size: 0.65rem;
-      background: var(--blue-light);
-      color: var(--blue-dark);
-      border: 1px solid rgba(91,155,213,0.2);
-      padding: 3px 10px;
-      border-radius: 20px;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      font-weight: 700;
-    }
-
+    .page-title { font-size: 1.05rem; font-weight: 800; color: var(--text); }
+    .page-badge { font-size: 0.65rem; background: var(--blue-light); color: var(--blue-dark); border: 1px solid rgba(91,155,213,0.2); padding: 3px 10px; border-radius: 20px; letter-spacing: 0.06em; text-transform: uppercase; font-weight: 700; }
     .topbar-date { font-size: 0.75rem; color: var(--muted); font-weight: 600; }
+    .content { flex: 1; overflow-y: auto; padding: 32px; }
 
-    .content {
-      flex: 1;
-      overflow-y: auto;
-      padding: 32px;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     .panel { display: none; }
     .panel.active { display: block; animation: fadeIn 0.35s ease both; }
 
     /* ══ MODULE HEADER ══ */
-    .module-header {
-      display: flex;
-      align-items: flex-end;
-      justify-content: space-between;
-      margin-bottom: 28px;
-      padding-bottom: 20px;
-      border-bottom: 1.5px solid var(--border);
-    }
-
-    .module-title {
-      font-family: 'Nunito', sans-serif;
-      font-size: 1.6rem;
-      font-weight: 800;
-      color: var(--text);
-      line-height: 1;
-    }
-
+    .module-header { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 28px; padding-bottom: 20px; border-bottom: 1.5px solid var(--border); flex-wrap: wrap; gap: 12px; }
+    .module-title { font-size: 1.6rem; font-weight: 800; color: var(--text); line-height: 1; }
     .module-desc { font-size: 0.82rem; color: var(--muted); margin-top: 5px; font-weight: 400; }
 
-    .btn-primary {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      padding: 10px 18px;
-      background: linear-gradient(135deg, var(--blue) 0%, var(--blue-dark) 100%);
-      border: none;
-      border-radius: 10px;
-      color: #fff;
-      font-family: 'Nunito', sans-serif;
-      font-size: 0.82rem;
-      font-weight: 700;
-      cursor: pointer;
-      transition: opacity 0.15s, box-shadow 0.15s;
-      box-shadow: 0 3px 12px rgba(58,122,191,0.25);
-    }
+    /* ══ BUTTONS ══ */
+    .btn-primary { display: inline-flex; align-items: center; gap: 7px; padding: 10px 18px; background: linear-gradient(135deg, var(--blue) 0%, var(--blue-dark) 100%); border: none; border-radius: 10px; color: #fff; font-family: 'Nunito', sans-serif; font-size: 0.82rem; font-weight: 700; cursor: pointer; transition: opacity 0.15s, box-shadow 0.15s; box-shadow: 0 3px 12px rgba(58,122,191,0.25); }
     .btn-primary svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
     .btn-primary:hover { opacity: 0.9; box-shadow: 0 5px 16px rgba(58,122,191,0.35); }
+    .btn-secondary { display: inline-flex; align-items: center; gap: 7px; padding: 8px 14px; background: var(--surface); border: 1.5px solid var(--border); border-radius: 8px; color: var(--muted); font-family: 'Nunito', sans-serif; font-size: 0.8rem; font-weight: 700; cursor: pointer; transition: all 0.15s; }
+    .btn-secondary:hover { border-color: var(--blue-mid); color: var(--blue-dark); }
+    .btn-danger { display: inline-flex; align-items: center; gap: 7px; padding: 7px 12px; background: var(--danger-bg); border: 1.5px solid rgba(224,112,112,0.3); border-radius: 8px; color: var(--danger); font-family: 'Nunito', sans-serif; font-size: 0.78rem; font-weight: 700; cursor: pointer; transition: all 0.15s; }
+    .btn-danger:hover { background: #fbe0e0; border-color: var(--danger); }
+    .btn-edit { display: inline-flex; align-items: center; gap: 6px; padding: 7px 12px; background: var(--blue-soft); border: 1.5px solid rgba(91,155,213,0.25); border-radius: 8px; color: var(--blue-dark); font-family: 'Nunito', sans-serif; font-size: 0.78rem; font-weight: 700; cursor: pointer; transition: all 0.15s; }
+    .btn-edit:hover { background: var(--blue-light); }
+    .btn-danger svg, .btn-edit svg { width: 13px; height: 13px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+    .btn-secondary svg { width: 13px; height: 13px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+    /* ══ TABLA ══ */
+    .table-wrap { background: var(--surface); border: 1.5px solid var(--border); border-radius: 14px; overflow: hidden; box-shadow: 0 2px 12px rgba(91,155,213,0.06); }
+    .table-toolbar { display: flex; align-items: center; justify-content: space-between; padding: 16px 20px; border-bottom: 1px solid var(--border); gap: 12px; flex-wrap: wrap; }
+    .table-search { display: flex; align-items: center; gap: 8px; background: var(--bg); border: 1.5px solid var(--border); border-radius: 8px; padding: 8px 12px; flex: 1; max-width: 280px; }
+    .table-search svg { width: 14px; height: 14px; fill: none; stroke: var(--muted); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
+    .table-search input { border: none; background: none; outline: none; font-family: 'Nunito', sans-serif; font-size: 0.82rem; color: var(--text); width: 100%; }
+    .table-search input::placeholder { color: var(--muted); }
+    .table-count { font-size: 0.75rem; color: var(--muted); font-weight: 600; }
+    table { width: 100%; border-collapse: collapse; }
+    thead th { background: var(--bg); padding: 12px 16px; text-align: left; font-size: 0.68rem; font-weight: 800; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; border-bottom: 1px solid var(--border); }
+    tbody tr { border-bottom: 1px solid var(--border); transition: background 0.1s; }
+    tbody tr:last-child { border-bottom: none; }
+    tbody tr:hover { background: var(--blue-soft); }
+    tbody td { padding: 13px 16px; font-size: 0.83rem; color: var(--text); font-weight: 600; vertical-align: middle; }
+    .td-muted { color: var(--muted); font-weight: 400; }
+    .badge-admin { display: inline-block; padding: 3px 10px; background: var(--blue-light); color: var(--blue-dark); border-radius: 20px; font-size: 0.68rem; font-weight: 800; letter-spacing: 0.06em; }
+    .badge-initial { display: inline-block; padding: 3px 10px; background: #fff8e8; color: var(--warn); border: 1px solid rgba(224,160,64,0.3); border-radius: 20px; font-size: 0.68rem; font-weight: 800; letter-spacing: 0.06em; }
+    .td-actions { display: flex; gap: 6px; align-items: center; }
 
     /* ══ EMPTY STATE ══ */
-    .empty-state {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 80px 40px;
-      background: var(--surface);
-      border: 1.5px dashed var(--border);
-      border-radius: 16px;
-      text-align: center;
-      min-height: 340px;
-    }
+    .empty-state { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 60px 40px; text-align: center; }
+    .empty-icon { width: 56px; height: 56px; background: var(--blue-soft); border: 1.5px solid var(--border); border-radius: 14px; display: flex; align-items: center; justify-content: center; margin-bottom: 16px; }
+    .empty-icon svg { width: 24px; height: 24px; fill: none; stroke: var(--blue); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+    .empty-title { font-size: 0.95rem; font-weight: 800; color: var(--text); margin-bottom: 6px; }
+    .empty-text { font-size: 0.8rem; color: var(--muted); max-width: 260px; line-height: 1.6; }
 
-    .empty-icon {
-      width: 60px; height: 60px;
-      background: var(--blue-soft);
-      border: 1.5px solid var(--border);
-      border-radius: 16px;
-      display: flex; align-items: center; justify-content: center;
-      margin-bottom: 20px;
-    }
+    /* ══ MODAL ══ */
+    .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(30,58,95,0.35); backdrop-filter: blur(3px); z-index: 100; align-items: center; justify-content: center; padding: 20px; }
+    .modal-overlay.open { display: flex; animation: fadeIn 0.2s ease; }
+    .modal { background: var(--surface); border-radius: 16px; width: 100%; max-width: 480px; box-shadow: 0 20px 60px rgba(30,58,95,0.2); overflow: hidden; animation: slideUp 0.25s cubic-bezier(0.22,1,0.36,1); }
+    @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    .modal-header { display: flex; align-items: center; justify-content: space-between; padding: 20px 24px; border-bottom: 1.5px solid var(--border); }
+    .modal-title { font-size: 1rem; font-weight: 800; color: var(--text); }
+    .modal-close { width: 30px; height: 30px; border: none; background: var(--bg); border-radius: 8px; cursor: pointer; display: flex; align-items: center; justify-content: center; color: var(--muted); transition: all 0.15s; }
+    .modal-close:hover { background: var(--blue-light); color: var(--blue-dark); }
+    .modal-close svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 2.5; stroke-linecap: round; }
+    .modal-body { padding: 24px; display: flex; flex-direction: column; gap: 16px; }
+    .modal-footer { padding: 16px 24px; border-top: 1.5px solid var(--border); display: flex; justify-content: flex-end; gap: 10px; }
 
-    .empty-icon svg { width: 26px; height: 26px; fill: none; stroke: var(--blue); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+    /* ══ FORM FIELDS ══ */
+    .field { display: flex; flex-direction: column; gap: 6px; }
+    .field label { font-size: 0.72rem; font-weight: 800; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; }
+    .field input { padding: 10px 14px; border: 1.5px solid var(--border); border-radius: 8px; font-family: 'Nunito', sans-serif; font-size: 0.85rem; color: var(--text); font-weight: 600; outline: none; transition: border-color 0.15s, box-shadow 0.15s; background: var(--bg); }
+    .field input:focus { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(91,155,213,0.15); background: var(--surface); }
+    .field input::placeholder { color: var(--muted); font-weight: 400; }
+    .field input:disabled { opacity: 0.5; cursor: not-allowed; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
 
-    .empty-title { font-family: 'Nunito', sans-serif; font-size: 1rem; font-weight: 800; color: var(--text); margin-bottom: 8px; }
-    .empty-text { font-size: 0.82rem; color: var(--muted); max-width: 280px; line-height: 1.6; }
+    /* ══ ALERT inline ══ */
+    .alert-box { display: none; align-items: center; gap: 10px; padding: 10px 14px; border-radius: 8px; font-size: 0.8rem; font-weight: 600; }
+    .alert-box.error { display: flex; background: var(--danger-bg); border: 1px solid rgba(224,112,112,0.3); color: var(--danger); }
+    .alert-box.success { display: flex; background: var(--success-bg); border: 1px solid rgba(76,175,125,0.3); color: var(--success); }
+    .alert-box svg { width: 15px; height: 15px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; flex-shrink: 0; }
 
-    .coming-soon {
-      margin-top: 20px;
-      font-size: 0.68rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      font-weight: 700;
-      color: var(--blue-dark);
-      background: var(--blue-light);
-      border: 1px solid rgba(91,155,213,0.2);
-      padding: 4px 14px;
-      border-radius: 20px;
-    }
+    /* ══ CONFIRM MODAL ══ */
+    .confirm-modal { background: var(--surface); border-radius: 16px; width: 100%; max-width: 360px; box-shadow: 0 20px 60px rgba(30,58,95,0.2); padding: 28px 24px; text-align: center; animation: slideUp 0.25s cubic-bezier(0.22,1,0.36,1); }
+    .confirm-icon { width: 52px; height: 52px; background: var(--danger-bg); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; }
+    .confirm-icon svg { width: 22px; height: 22px; fill: none; stroke: var(--danger); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .confirm-title { font-size: 1rem; font-weight: 800; color: var(--text); margin-bottom: 8px; }
+    .confirm-text { font-size: 0.82rem; color: var(--muted); line-height: 1.6; margin-bottom: 24px; }
+    .confirm-actions { display: flex; gap: 10px; justify-content: center; }
 
-    /* ══ HOME — bienvenida ══ */
-    .welcome-wrap {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      min-height: calc(100vh - 126px);
-      text-align: center;
-      padding: 40px;
-      animation: fadeIn 0.5s ease both;
-    }
+    /* ══ LOADING ══ */
+    .spinner { display: inline-block; width: 16px; height: 16px; border: 2px solid rgba(255,255,255,0.3); border-top-color: #fff; border-radius: 50%; animation: spin 0.7s linear infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
 
-    .welcome-icon {
-      width: 80px; height: 80px;
-      border-radius: 22px;
-      background: var(--blue-light);
-      border: 2px solid rgba(91,155,213,0.2);
-      display: flex; align-items: center; justify-content: center;
-      margin-bottom: 28px;
-    }
-
+    /* ══ HOME ══ */
+    .welcome-wrap { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: calc(100vh - 126px); text-align: center; padding: 40px; animation: fadeIn 0.5s ease both; }
+    .welcome-icon { width: 80px; height: 80px; border-radius: 22px; background: var(--blue-light); border: 2px solid rgba(91,155,213,0.2); display: flex; align-items: center; justify-content: center; margin-bottom: 28px; }
     .welcome-icon svg { width: 36px; height: 36px; fill: none; stroke: var(--blue-dark); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
-
-    .welcome-title {
-      font-family: 'Pacifico', cursive;
-      font-size: 2.2rem;
-      color: var(--blue-dark);
-      margin-bottom: 12px;
-      line-height: 1.2;
-    }
-
-    .welcome-sub {
-      font-size: 0.9rem;
-      color: var(--muted);
-      max-width: 340px;
-      line-height: 1.7;
-      font-weight: 400;
-      margin-bottom: 36px;
-    }
-
-    .welcome-modules {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      justify-content: center;
-      max-width: 500px;
-    }
-
-    .module-chip {
-      display: flex;
-      align-items: center;
-      gap: 7px;
-      padding: 9px 16px;
-      background: var(--surface);
-      border: 1.5px solid var(--border);
-      border-radius: 20px;
-      font-size: 0.78rem;
-      font-weight: 700;
-      color: var(--muted);
-      cursor: pointer;
-      transition: all 0.15s;
-    }
-
+    .welcome-title { font-family: 'Pacifico', cursive; font-size: 2.2rem; color: var(--blue-dark); margin-bottom: 12px; line-height: 1.2; }
+    .welcome-sub { font-size: 0.9rem; color: var(--muted); max-width: 340px; line-height: 1.7; margin-bottom: 36px; }
+    .welcome-modules { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; max-width: 500px; }
+    .module-chip { display: flex; align-items: center; gap: 7px; padding: 9px 16px; background: var(--surface); border: 1.5px solid var(--border); border-radius: 20px; font-size: 0.78rem; font-weight: 700; color: var(--muted); cursor: pointer; transition: all 0.15s; }
     .module-chip svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .module-chip:hover { background: var(--blue-light); border-color: rgba(91,155,213,0.4); color: var(--blue-dark); }
 
-    .module-chip:hover {
-      background: var(--blue-light);
-      border-color: rgba(91,155,213,0.4);
-      color: var(--blue-dark);
-    }
+    /* ══ EMPTY MODULE ══ */
+    .empty-module { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 80px 40px; background: var(--surface); border: 1.5px dashed var(--border); border-radius: 16px; text-align: center; min-height: 340px; }
+    .coming-soon { margin-top: 20px; font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 700; color: var(--blue-dark); background: var(--blue-light); border: 1px solid rgba(91,155,213,0.2); padding: 4px 14px; border-radius: 20px; }
 
-    /* Scrollbar */
     ::-webkit-scrollbar { width: 5px; }
     ::-webkit-scrollbar-track { background: transparent; }
     ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 10px; }
 
     @media (max-width: 768px) {
       .sidebar { width: 56px; }
-      .sidebar .brand-name, .sidebar .brand-sub,
-      .sidebar .user-info, .sidebar-user,
-      .nav-item span, .nav-section-label,
-      .btn-logout span { display: none; }
+      .sidebar .brand-name, .sidebar .brand-sub, .sidebar .user-info, .sidebar-user, .nav-item span, .nav-section-label, .btn-logout span { display: none; }
       .sidebar-brand { padding: 20px 12px; }
       .nav-item { justify-content: center; padding: 12px; }
       .btn-logout { justify-content: center; }
-      .content { padding: 20px; }
-      .topbar { padding: 0 20px; }
+      .content { padding: 16px; }
+      .topbar { padding: 0 16px; }
+      .form-row { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
-
 <div class="shell">
 
-  <!-- ═══════════ SIDEBAR ═══════════ -->
+  <!-- ═══ SIDEBAR ═══ -->
   <aside class="sidebar">
-
     <div class="sidebar-brand">
       <div class="brand-logo">
         <div class="brand-icon">
-          <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <svg viewBox="0 0 32 32" fill="none">
             <path d="M4 8h24l-2.5 12H6.5L4 8z" fill="rgba(168,204,239,0.3)" stroke="#a8ccef" stroke-width="1.5" stroke-linejoin="round"/>
             <circle cx="11" cy="26" r="2" fill="#a8ccef"/>
             <circle cx="21" cy="26" r="2" fill="#a8ccef"/>
@@ -469,13 +217,11 @@
     </div>
 
     <nav class="sidebar-nav">
-
       <div class="nav-section-label">General</div>
       <button class="nav-item active" data-panel="home">
         <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
         <span>Inicio</span>
       </button>
-
       <div class="nav-section-label">Personas</div>
       <button class="nav-item" data-panel="usuarios">
         <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
@@ -489,7 +235,6 @@
         <svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13" rx="1"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
         <span>Proveedores</span>
       </button>
-
       <div class="nav-section-label">Inventario & Ventas</div>
       <button class="nav-item" data-panel="productos">
         <svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
@@ -499,13 +244,11 @@
         <svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
         <span>Ventas</span>
       </button>
-
       <div class="nav-section-label">Análisis</div>
       <button class="nav-item" data-panel="reportes">
         <svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
         <span>Reportes</span>
       </button>
-
     </nav>
 
     <div class="sidebar-footer">
@@ -514,202 +257,212 @@
         <span>Cerrar sesión</span>
       </button>
     </div>
-
   </aside>
 
-  <!-- ═══════════ MAIN ═══════════ -->
+  <!-- ═══ MAIN ═══ -->
   <div class="main">
-
     <header class="topbar">
       <div class="topbar-left">
         <span class="page-title" id="pageTitle">Dashboard</span>
         <span class="page-badge" id="pageBadge">Inicio</span>
       </div>
-      <div class="topbar-right">
-        <span class="topbar-date" id="topbarDate"></span>
-      </div>
+      <span class="topbar-date" id="topbarDate"></span>
     </header>
 
     <div class="content">
 
-      <!-- ── HOME ── -->
+      <!-- HOME -->
       <div class="panel active" id="panel-home">
         <div class="welcome-wrap">
           <div class="welcome-icon">
-            <svg viewBox="0 0 32 32" fill="none">
-              <path d="M4 8h24l-2.5 12H6.5L4 8z" fill="rgba(91,155,213,0.15)" stroke="#3a7abf" stroke-width="1.5" stroke-linejoin="round"/>
-              <circle cx="11" cy="26" r="2" fill="#3a7abf"/>
-              <circle cx="21" cy="26" r="2" fill="#3a7abf"/>
-              <path d="M2 4h3l2 4" stroke="#3a7abf" stroke-width="1.5" stroke-linecap="round"/>
-            </svg>
+            <svg viewBox="0 0 32 32" fill="none"><path d="M4 8h24l-2.5 12H6.5L4 8z" fill="rgba(91,155,213,0.15)" stroke="#3a7abf" stroke-width="1.5" stroke-linejoin="round"/><circle cx="11" cy="26" r="2" fill="#3a7abf"/><circle cx="21" cy="26" r="2" fill="#3a7abf"/><path d="M2 4h3l2 4" stroke="#3a7abf" stroke-width="1.5" stroke-linecap="round"/></svg>
           </div>
           <h2 class="welcome-title">¡Bienvenido a Tienda!</h2>
           <p class="welcome-sub">Selecciona un módulo del menú lateral para comenzar a gestionar tu tienda.</p>
           <div class="welcome-modules">
-            <div class="module-chip" onclick="activarPanel('usuarios')">
-              <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
-              Usuarios
-            </div>
-            <div class="module-chip" onclick="activarPanel('clientes')">
-              <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-              Clientes
-            </div>
-            <div class="module-chip" onclick="activarPanel('proveedores')">
-              <svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13" rx="1"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
-              Proveedores
-            </div>
-            <div class="module-chip" onclick="activarPanel('productos')">
-              <svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
-              Productos
-            </div>
-            <div class="module-chip" onclick="activarPanel('ventas')">
-              <svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-              Ventas
-            </div>
-            <div class="module-chip" onclick="activarPanel('reportes')">
-              <svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
-              Reportes
-            </div>
+            <div class="module-chip" onclick="activarPanel('usuarios')"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>Usuarios</div>
+            <div class="module-chip" onclick="activarPanel('clientes')"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Clientes</div>
+            <div class="module-chip" onclick="activarPanel('proveedores')"><svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13" rx="1"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>Proveedores</div>
+            <div class="module-chip" onclick="activarPanel('productos')"><svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>Productos</div>
+            <div class="module-chip" onclick="activarPanel('ventas')"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>Ventas</div>
+            <div class="module-chip" onclick="activarPanel('reportes')"><svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>Reportes</div>
           </div>
         </div>
       </div>
 
-      <!-- ── USUARIOS ── -->
+      <!-- USUARIOS -->
       <div class="panel" id="panel-usuarios">
         <div class="module-header">
           <div>
             <div class="module-title">Usuarios</div>
-            <div class="module-desc">Gestión de cuentas y permisos del sistema</div>
+            <div class="module-desc">Gestión de cuentas con rol administrador</div>
           </div>
-          <button class="btn-primary">
+          <button class="btn-primary" onclick="abrirModalCrear()">
             <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
             Nuevo usuario
           </button>
         </div>
-        <div class="empty-state">
-          <div class="empty-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
-          <div class="empty-title">Módulo en construcción</div>
-          <div class="empty-text">La gestión de usuarios estará disponible próximamente. Aquí podrás crear, editar y administrar permisos.</div>
-          <span class="coming-soon">Próximamente</span>
+
+        <div class="table-wrap">
+          <div class="table-toolbar">
+            <div class="table-search">
+              <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+              <input type="text" id="buscarUsuario" placeholder="Buscar por nombre, usuario o cédula..." oninput="filtrarTabla()" />
+            </div>
+            <span class="table-count" id="contadorUsuarios">Cargando...</span>
+          </div>
+
+          <div id="tablaContenido">
+            <div class="empty-state" style="padding:48px">
+              <div class="empty-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+              <div class="empty-title">Cargando usuarios...</div>
+            </div>
+          </div>
         </div>
       </div>
 
-      <!-- ── CLIENTES ── -->
+      <!-- CLIENTES -->
       <div class="panel" id="panel-clientes">
         <div class="module-header">
-          <div>
-            <div class="module-title">Clientes</div>
-            <div class="module-desc">Registro y seguimiento de clientes</div>
-          </div>
-          <button class="btn-primary">
-            <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-            Nuevo cliente
-          </button>
+          <div><div class="module-title">Clientes</div><div class="module-desc">Registro y seguimiento de clientes</div></div>
+          <button class="btn-primary"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Nuevo cliente</button>
         </div>
-        <div class="empty-state">
-          <div class="empty-icon"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
-          <div class="empty-title">Módulo en construcción</div>
-          <div class="empty-text">Aquí podrás registrar y gestionar la información de todos tus clientes y su historial de compras.</div>
-          <span class="coming-soon">Próximamente</span>
-        </div>
+        <div class="empty-module"><div class="empty-icon"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div><div class="empty-title">Módulo en construcción</div><div class="empty-text">Aquí podrás registrar y gestionar la información de todos tus clientes.</div><span class="coming-soon">Próximamente</span></div>
       </div>
 
-      <!-- ── PROVEEDORES ── -->
+      <!-- PROVEEDORES -->
       <div class="panel" id="panel-proveedores">
         <div class="module-header">
-          <div>
-            <div class="module-title">Proveedores</div>
-            <div class="module-desc">Administración de proveedores y compras</div>
-          </div>
-          <button class="btn-primary">
-            <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-            Nuevo proveedor
-          </button>
+          <div><div class="module-title">Proveedores</div><div class="module-desc">Administración de proveedores y compras</div></div>
+          <button class="btn-primary"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Nuevo proveedor</button>
         </div>
-        <div class="empty-state">
-          <div class="empty-icon"><svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13" rx="1"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div>
-          <div class="empty-title">Módulo en construcción</div>
-          <div class="empty-text">Registra y gestiona proveedores, órdenes de compra y condiciones de pago desde este módulo.</div>
-          <span class="coming-soon">Próximamente</span>
-        </div>
+        <div class="empty-module"><div class="empty-icon"><svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13" rx="1"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div><div class="empty-title">Módulo en construcción</div><div class="empty-text">Registra y gestiona proveedores, órdenes de compra y condiciones de pago.</div><span class="coming-soon">Próximamente</span></div>
       </div>
 
-      <!-- ── PRODUCTOS ── -->
+      <!-- PRODUCTOS -->
       <div class="panel" id="panel-productos">
         <div class="module-header">
-          <div>
-            <div class="module-title">Productos</div>
-            <div class="module-desc">Inventario y catálogo de productos</div>
-          </div>
-          <button class="btn-primary">
-            <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-            Nuevo producto
-          </button>
+          <div><div class="module-title">Productos</div><div class="module-desc">Inventario y catálogo de productos</div></div>
+          <button class="btn-primary"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Nuevo producto</button>
         </div>
-        <div class="empty-state">
-          <div class="empty-icon"><svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg></div>
-          <div class="empty-title">Módulo en construcción</div>
-          <div class="empty-text">Administra tu catálogo de productos, precios, stock y categorías desde aquí.</div>
-          <span class="coming-soon">Próximamente</span>
-        </div>
+        <div class="empty-module"><div class="empty-icon"><svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg></div><div class="empty-title">Módulo en construcción</div><div class="empty-text">Administra tu catálogo de productos, precios, stock y categorías.</div><span class="coming-soon">Próximamente</span></div>
       </div>
 
-      <!-- ── VENTAS ── -->
+      <!-- VENTAS -->
       <div class="panel" id="panel-ventas">
         <div class="module-header">
-          <div>
-            <div class="module-title">Ventas</div>
-            <div class="module-desc">Registro y gestión de transacciones</div>
-          </div>
-          <button class="btn-primary">
-            <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-            Nueva venta
-          </button>
+          <div><div class="module-title">Ventas</div><div class="module-desc">Registro y gestión de transacciones</div></div>
+          <button class="btn-primary"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Nueva venta</button>
         </div>
-        <div class="empty-state">
-          <div class="empty-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
-          <div class="empty-title">Módulo en construcción</div>
-          <div class="empty-text">Registra ventas, gestiona facturas y consulta el historial de transacciones de la tienda.</div>
-          <span class="coming-soon">Próximamente</span>
-        </div>
+        <div class="empty-module"><div class="empty-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div><div class="empty-title">Módulo en construcción</div><div class="empty-text">Registra ventas y consulta el historial de transacciones de la tienda.</div><span class="coming-soon">Próximamente</span></div>
       </div>
 
-      <!-- ── REPORTES ── -->
+      <!-- REPORTES -->
       <div class="panel" id="panel-reportes">
         <div class="module-header">
-          <div>
-            <div class="module-title">Reportes</div>
-            <div class="module-desc">Análisis y estadísticas del negocio</div>
-          </div>
-          <button class="btn-primary">
-            <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-            Exportar
-          </button>
+          <div><div class="module-title">Reportes</div><div class="module-desc">Análisis y estadísticas del negocio</div></div>
+          <button class="btn-primary"><svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Exportar</button>
         </div>
-        <div class="empty-state">
-          <div class="empty-icon"><svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div>
-          <div class="empty-title">Módulo en construcción</div>
-          <div class="empty-text">Visualiza reportes de ventas, inventario, clientes y rendimiento del negocio en tiempo real.</div>
-          <span class="coming-soon">Próximamente</span>
-        </div>
+        <div class="empty-module"><div class="empty-icon"><svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div><div class="empty-title">Módulo en construcción</div><div class="empty-text">Visualiza reportes de ventas, inventario y rendimiento del negocio.</div><span class="coming-soon">Próximamente</span></div>
       </div>
 
     </div>
   </div>
 </div>
 
+<!-- ═══ MODAL CREAR/EDITAR ═══ -->
+<div class="modal-overlay" id="modalUsuario">
+  <div class="modal">
+    <div class="modal-header">
+      <span class="modal-title" id="modalTitulo">Nuevo usuario</span>
+      <button class="modal-close" onclick="cerrarModal()">
+        <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="alert-box" id="modalAlert">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        <span id="modalAlertMsg"></span>
+      </div>
+      <div class="form-row">
+        <div class="field">
+          <label>Cédula</label>
+          <input type="text" id="fCedula" placeholder="Ej: 1234567890" maxlength="20" />
+        </div>
+        <div class="field">
+          <label>Nombre completo</label>
+          <input type="text" id="fNombreCompleto" placeholder="Nombre y apellidos" />
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="field">
+          <label>Nombre de usuario</label>
+          <input type="text" id="fNombreUsuario" placeholder="usuario123" />
+        </div>
+        <div class="field">
+          <label>Correo electrónico</label>
+          <input type="email" id="fCorreo" placeholder="correo@ejemplo.com" />
+        </div>
+      </div>
+      <div class="field" id="campoContrasena">
+        <label>Contraseña</label>
+        <input type="password" id="fContrasena" placeholder="Mínimo 6 caracteres" />
+      </div>
+      <div class="field">
+        <label>Rol</label>
+        <input type="text" value="ADMIN" disabled style="cursor:not-allowed" />
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-secondary" onclick="cerrarModal()">Cancelar</button>
+      <button class="btn-primary" id="btnGuardar" onclick="guardarUsuario()">
+        <span id="btnGuardarText">Crear usuario</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ MODAL CONFIRMAR ELIMINAR ═══ -->
+<div class="modal-overlay" id="modalConfirmar">
+  <div class="confirm-modal">
+    <div class="confirm-icon">
+      <svg viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4h6v2"/></svg>
+    </div>
+    <div class="confirm-title">¿Eliminar usuario?</div>
+    <div class="confirm-text" id="confirmTexto">Esta acción no se puede deshacer.</div>
+    <div class="confirm-actions">
+      <button class="btn-secondary" onclick="cerrarConfirmar()">Cancelar</button>
+      <button class="btn-danger" id="btnConfirmarEliminar" onclick="ejecutarEliminar()">
+        <svg viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/></svg>
+        Eliminar
+      </button>
+    </div>
+  </div>
+</div>
+
 <script>
-  // ── Fecha ──
+  // ═══════════════════════════════════════
+  //  ESTADO
+  // ═══════════════════════════════════════
+  let todosLosUsuarios = [];
+  let modoEdicion = false;
+  let idEditando = null;
+  let idEliminando = null;
+
+  // ═══════════════════════════════════════
+  //  INIT
+  // ═══════════════════════════════════════
   document.getElementById('topbarDate').textContent = new Date().toLocaleDateString('es-CO', {
     weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
   });
 
-  // ── Navegación ──
+  if (!localStorage.getItem('token')) window.location.href = '/login';
+
+  // ═══════════════════════════════════════
+  //  NAVEGACIÓN
+  // ═══════════════════════════════════════
   const navItems  = document.querySelectorAll('.nav-item');
   const panels    = document.querySelectorAll('.panel');
-  const pageTitle = document.getElementById('pageTitle');
-  const pageBadge = document.getElementById('pageBadge');
-
   const titulos = {
     home:        { title: 'Dashboard',   badge: 'Inicio' },
     usuarios:    { title: 'Usuarios',    badge: 'Gestión' },
@@ -724,21 +477,282 @@
     navItems.forEach(i => i.classList.toggle('active', i.dataset.panel === panelId));
     panels.forEach(p => p.classList.toggle('active', p.id === `panel-${panelId}`));
     const info = titulos[panelId] || { title: panelId, badge: '' };
-    pageTitle.textContent = info.title;
-    pageBadge.textContent = info.badge;
+    document.getElementById('pageTitle').textContent = info.title;
+    document.getElementById('pageBadge').textContent = info.badge;
+    if (panelId === 'usuarios') cargarUsuarios();
   }
 
   navItems.forEach(item => item.addEventListener('click', () => activarPanel(item.dataset.panel)));
 
-  // ── Logout ──
   document.getElementById('btnLogout').addEventListener('click', () => {
     localStorage.removeItem('token');
     window.location.href = '/login';
   });
 
-  // ── Proteger ruta ──
-  // if (!localStorage.getItem('token')) window.location.href = '/login';
-</script>
+  // ═══════════════════════════════════════
+  //  API HELPERS
+  // ═══════════════════════════════════════
+  function getHeaders() {
+    return {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${localStorage.getItem('token')}`
+    };
+  }
 
+  // ═══════════════════════════════════════
+  //  CARGAR USUARIOS
+  // ═══════════════════════════════════════
+  async function cargarUsuarios() {
+    document.getElementById('tablaContenido').innerHTML = `
+      <div class="empty-state" style="padding:48px">
+        <div class="empty-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+        <div class="empty-title">Cargando...</div>
+      </div>`;
+
+    try {
+      const res = await fetch('/api/usuarios', { headers: getHeaders() });
+      const data = await res.json();
+
+      if (!res.ok) throw new Error(data.error || 'Error al cargar usuarios');
+
+      todosLosUsuarios = data;
+      renderTabla(todosLosUsuarios);
+
+    } catch (err) {
+      document.getElementById('tablaContenido').innerHTML = `
+        <div class="empty-state" style="padding:48px">
+          <div class="empty-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--danger)" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+          <div class="empty-title">Error al cargar</div>
+          <div class="empty-text">${err.message}</div>
+        </div>`;
+    }
+  }
+
+  function renderTabla(lista) {
+    document.getElementById('contadorUsuarios').textContent =
+            `${lista.length} usuario${lista.length !== 1 ? 's' : ''}`;
+
+    if (lista.length === 0) {
+      document.getElementById('tablaContenido').innerHTML = `
+        <div class="empty-state" style="padding:56px">
+          <div class="empty-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="1.8" stroke-linecap="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+          <div class="empty-title">No hay usuarios registrados</div>
+          <div class="empty-text">Crea el primer usuario con el botón "Nuevo usuario".</div>
+        </div>`;
+      return;
+    }
+
+    const filas = lista.map(u => {
+      const esInicial = u.nombre_usuario === 'admininicial';
+      const badge = esInicial
+              ? `<span class="badge-initial">Admin Inicial</span>`
+              : `<span class="badge-admin">Admin</span>`;
+      const acciones = esInicial
+              ? `<span style="font-size:0.72rem;color:var(--muted);font-style:italic">Protegido</span>`
+              : `<button class="btn-edit" onclick="abrirModalEditar(${u.id})">
+             <svg viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+             Editar
+           </button>
+           <button class="btn-danger" onclick="confirmarEliminar(${u.id}, '${u.nombre_completo || u.nombre_usuario}')">
+             <svg viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/></svg>
+             Eliminar
+           </button>`;
+      return `<tr>
+        <td>${u.cedula || '<span class="td-muted">—</span>'}</td>
+        <td><strong>${u.nombre_completo || '<span class="td-muted">—</span>'}</strong></td>
+        <td>${u.nombre_usuario}</td>
+        <td class="td-muted">${u.correo || '—'}</td>
+        <td>${badge}</td>
+        <td><div class="td-actions">${acciones}</div></td>
+      </tr>`;
+    }).join('');
+
+    document.getElementById('tablaContenido').innerHTML = `
+      <table>
+        <thead>
+          <tr>
+            <th>Cédula</th>
+            <th>Nombre completo</th>
+            <th>Usuario</th>
+            <th>Correo</th>
+            <th>Rol</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>${filas}</tbody>
+      </table>`;
+  }
+
+  function filtrarTabla() {
+    const q = document.getElementById('buscarUsuario').value.toLowerCase();
+    const filtrados = todosLosUsuarios.filter(u =>
+            (u.nombre_completo || '').toLowerCase().includes(q) ||
+            (u.nombre_usuario || '').toLowerCase().includes(q) ||
+            (u.cedula || '').toLowerCase().includes(q) ||
+            (u.correo || '').toLowerCase().includes(q)
+    );
+    renderTabla(filtrados);
+  }
+
+  // ═══════════════════════════════════════
+  //  MODAL CREAR
+  // ═══════════════════════════════════════
+  function abrirModalCrear() {
+    modoEdicion = false;
+    idEditando = null;
+    document.getElementById('modalTitulo').textContent = 'Nuevo usuario';
+    document.getElementById('btnGuardarText').textContent = 'Crear usuario';
+    document.getElementById('campoContrasena').style.display = 'flex';
+    limpiarModal();
+    document.getElementById('modalUsuario').classList.add('open');
+    setTimeout(() => document.getElementById('fCedula').focus(), 100);
+  }
+
+  function abrirModalEditar(id) {
+    const u = todosLosUsuarios.find(x => x.id === id);
+    if (!u) return;
+    modoEdicion = true;
+    idEditando = id;
+    document.getElementById('modalTitulo').textContent = 'Editar usuario';
+    document.getElementById('btnGuardarText').textContent = 'Guardar cambios';
+    document.getElementById('campoContrasena').style.display = 'none';
+    limpiarModal();
+    document.getElementById('fCedula').value = u.cedula || '';
+    document.getElementById('fNombreCompleto').value = u.nombre_completo || '';
+    document.getElementById('fNombreUsuario').value = u.nombre_usuario || '';
+    document.getElementById('fCorreo').value = u.correo || '';
+    document.getElementById('modalUsuario').classList.add('open');
+    setTimeout(() => document.getElementById('fCedula').focus(), 100);
+  }
+
+  function cerrarModal() {
+    document.getElementById('modalUsuario').classList.remove('open');
+    limpiarModal();
+  }
+
+  function limpiarModal() {
+    ['fCedula','fNombreCompleto','fNombreUsuario','fCorreo','fContrasena'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.value = '';
+    });
+    const alert = document.getElementById('modalAlert');
+    alert.className = 'alert-box';
+  }
+
+  function mostrarAlertaModal(tipo, msg) {
+    const box = document.getElementById('modalAlert');
+    box.className = `alert-box ${tipo}`;
+    document.getElementById('modalAlertMsg').textContent = msg;
+  }
+
+  // ═══════════════════════════════════════
+  //  GUARDAR (crear o editar)
+  // ═══════════════════════════════════════
+  async function guardarUsuario() {
+    const cedula         = document.getElementById('fCedula').value.trim();
+    const nombreCompleto = document.getElementById('fNombreCompleto').value.trim();
+    const nombreUsuario  = document.getElementById('fNombreUsuario').value.trim();
+    const correo         = document.getElementById('fCorreo').value.trim();
+    const contrasena     = document.getElementById('fContrasena').value;
+
+    if (!cedula || !nombreCompleto || !nombreUsuario || !correo) {
+      mostrarAlertaModal('error', 'Todos los campos son requeridos.');
+      return;
+    }
+
+    if (!modoEdicion && contrasena.length < 6) {
+      mostrarAlertaModal('error', 'La contraseña debe tener al menos 6 caracteres.');
+      return;
+    }
+
+    const btn = document.getElementById('btnGuardar');
+    const btnText = document.getElementById('btnGuardarText');
+    btn.disabled = true;
+    btnText.innerHTML = '<span class="spinner"></span>';
+
+    try {
+      let res, data;
+
+      if (!modoEdicion) {
+        res = await fetch('/api/usuarios', {
+          method: 'POST',
+          headers: getHeaders(),
+          body: JSON.stringify({ cedula, nombreCompleto, nombreUsuario, correo, contrasena })
+        });
+      } else {
+        res = await fetch(`/api/usuarios/${idEditando}`, {
+          method: 'PUT',
+          headers: getHeaders(),
+          body: JSON.stringify({ cedula, nombreCompleto, nombreUsuario, correo })
+        });
+      }
+
+      data = await res.json();
+
+      if (!res.ok) throw new Error(data.error || 'Error al guardar');
+
+      cerrarModal();
+      await cargarUsuarios();
+
+    } catch (err) {
+      mostrarAlertaModal('error', err.message);
+    } finally {
+      btn.disabled = false;
+      btnText.textContent = modoEdicion ? 'Guardar cambios' : 'Crear usuario';
+    }
+  }
+
+  // ═══════════════════════════════════════
+  //  ELIMINAR
+  // ═══════════════════════════════════════
+  function confirmarEliminar(id, nombre) {
+    idEliminando = id;
+    document.getElementById('confirmTexto').textContent =
+            `¿Seguro que deseas eliminar a "${nombre}"? Esta acción no se puede deshacer.`;
+    document.getElementById('modalConfirmar').classList.add('open');
+  }
+
+  function cerrarConfirmar() {
+    idEliminando = null;
+    document.getElementById('modalConfirmar').classList.remove('open');
+  }
+
+  async function ejecutarEliminar() {
+    if (!idEliminando) return;
+    const btn = document.getElementById('btnConfirmarEliminar');
+    btn.disabled = true;
+    btn.innerHTML = '<span class="spinner" style="border-top-color:#e07070"></span> Eliminando...';
+
+    try {
+      const res = await fetch(`/api/usuarios/${idEliminando}`, {
+        method: 'DELETE',
+        headers: getHeaders()
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || 'Error al eliminar');
+      cerrarConfirmar();
+      await cargarUsuarios();
+    } catch (err) {
+      cerrarConfirmar();
+      alert('Error: ' + err.message);
+    } finally {
+      btn.disabled = false;
+      btn.innerHTML = '<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/></svg> Eliminar';
+    }
+  }
+
+  // Cerrar modales al click fuera
+  document.getElementById('modalUsuario').addEventListener('click', e => {
+    if (e.target === e.currentTarget) cerrarModal();
+  });
+  document.getElementById('modalConfirmar').addEventListener('click', e => {
+    if (e.target === e.currentTarget) cerrarConfirmar();
+  });
+
+  // Enter en el formulario
+  document.querySelectorAll('#modalUsuario input').forEach(input => {
+    input.addEventListener('keydown', e => { if (e.key === 'Enter') guardarUsuario(); });
+  });
+</script>
 </body>
 </html>
