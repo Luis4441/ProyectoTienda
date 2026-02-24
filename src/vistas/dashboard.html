@@ -40,19 +40,23 @@
     .brand-icon svg { width: 18px; height: 18px; }
     .brand-name { font-family: 'Pacifico', cursive; font-size: 1.1rem; color: #e8f3fd; line-height: 1; }
     .brand-sub { font-size: 0.62rem; color: rgba(255,255,255,0.35); letter-spacing: 0.12em; text-transform: uppercase; margin-top: 3px; font-weight: 400; }
+
     .sidebar-user { display: flex; align-items: center; gap: 10px; padding: 12px 16px; margin: 16px 12px 0; background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; }
     .user-avatar { width: 30px; height: 30px; border-radius: 50%; background: var(--blue-mid); display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 800; color: var(--sidebar-bg); flex-shrink: 0; }
     .user-info { flex: 1; min-width: 0; }
     .user-name { font-size: 0.78rem; font-weight: 700; color: #e8f3fd; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
     .user-role { font-size: 0.62rem; color: var(--blue-mid); letter-spacing: 0.06em; text-transform: uppercase; font-weight: 600; }
+
     .sidebar-nav { flex: 1; padding: 20px 12px; overflow-y: auto; }
     .nav-section-label { font-size: 0.6rem; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.25); padding: 0 8px; margin-bottom: 6px; margin-top: 20px; font-weight: 700; }
     .nav-section-label:first-child { margin-top: 0; }
+
     .nav-item { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: 10px; cursor: pointer; transition: background 0.15s; color: rgba(255,255,255,0.5); font-size: 0.83rem; font-weight: 600; border: none; background: none; width: 100%; text-align: left; position: relative; margin-bottom: 2px; }
     .nav-item svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
     .nav-item:hover { background: rgba(255,255,255,0.07); color: rgba(255,255,255,0.85); }
     .nav-item.active { background: rgba(168,204,239,0.18); color: #c8e4f8; }
     .nav-item.active::before { content: ''; position: absolute; left: 0; top: 25%; bottom: 25%; width: 3px; background: var(--blue-mid); border-radius: 3px; }
+
     .sidebar-footer { padding: 16px 12px; border-top: 1px solid rgba(255,255,255,0.08); }
     .btn-logout { display: flex; align-items: center; gap: 10px; width: 100%; padding: 10px 12px; background: none; border: 1px solid rgba(224,112,112,0.25); border-radius: 10px; color: rgba(224,112,112,0.65); font-family: 'Nunito', sans-serif; font-size: 0.78rem; font-weight: 700; cursor: pointer; transition: all 0.15s; }
     .btn-logout svg { width: 15px; height: 15px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
@@ -65,6 +69,7 @@
     .page-title { font-size: 1.05rem; font-weight: 800; color: var(--text); }
     .page-badge { font-size: 0.65rem; background: var(--blue-light); color: var(--blue-dark); border: 1px solid rgba(91,155,213,0.2); padding: 3px 10px; border-radius: 20px; letter-spacing: 0.06em; text-transform: uppercase; font-weight: 700; }
     .topbar-date { font-size: 0.75rem; color: var(--muted); font-weight: 600; }
+
     .content { flex: 1; overflow-y: auto; padding: 32px; }
 
     @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
@@ -108,12 +113,14 @@
     .badge-initial { display: inline-block; padding: 3px 10px; background: #fff8e8; color: var(--warn); border: 1px solid rgba(224,160,64,0.3); border-radius: 20px; font-size: 0.68rem; font-weight: 800; letter-spacing: 0.06em; }
     .td-actions { display: flex; gap: 6px; align-items: center; }
 
-    /* ══ EMPTY STATE ══ */
+    /* ══ EMPTY STATES ══ */
     .empty-state { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 60px 40px; text-align: center; }
     .empty-icon { width: 56px; height: 56px; background: var(--blue-soft); border: 1.5px solid var(--border); border-radius: 14px; display: flex; align-items: center; justify-content: center; margin-bottom: 16px; }
     .empty-icon svg { width: 24px; height: 24px; fill: none; stroke: var(--blue); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
     .empty-title { font-size: 0.95rem; font-weight: 800; color: var(--text); margin-bottom: 6px; }
     .empty-text { font-size: 0.8rem; color: var(--muted); max-width: 260px; line-height: 1.6; }
+    .empty-module { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 80px 40px; background: var(--surface); border: 1.5px dashed var(--border); border-radius: 16px; text-align: center; min-height: 340px; }
+    .coming-soon { margin-top: 20px; font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 700; color: var(--blue-dark); background: var(--blue-light); border: 1px solid rgba(91,155,213,0.2); padding: 4px 14px; border-radius: 20px; }
 
     /* ══ MODAL ══ */
     .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(30,58,95,0.35); backdrop-filter: blur(3px); z-index: 100; align-items: center; justify-content: center; padding: 20px; }
@@ -128,7 +135,7 @@
     .modal-body { padding: 24px; display: flex; flex-direction: column; gap: 16px; }
     .modal-footer { padding: 16px 24px; border-top: 1.5px solid var(--border); display: flex; justify-content: flex-end; gap: 10px; }
 
-    /* ══ FORM FIELDS ══ */
+    /* ══ FORM ══ */
     .field { display: flex; flex-direction: column; gap: 6px; }
     .field label { font-size: 0.72rem; font-weight: 800; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; }
     .field input { padding: 10px 14px; border: 1.5px solid var(--border); border-radius: 8px; font-family: 'Nunito', sans-serif; font-size: 0.85rem; color: var(--text); font-weight: 600; outline: none; transition: border-color 0.15s, box-shadow 0.15s; background: var(--bg); }
@@ -137,13 +144,13 @@
     .field input:disabled { opacity: 0.5; cursor: not-allowed; }
     .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
 
-    /* ══ ALERT inline ══ */
+    /* ══ ALERT ══ */
     .alert-box { display: none; align-items: center; gap: 10px; padding: 10px 14px; border-radius: 8px; font-size: 0.8rem; font-weight: 600; }
     .alert-box.error { display: flex; background: var(--danger-bg); border: 1px solid rgba(224,112,112,0.3); color: var(--danger); }
     .alert-box.success { display: flex; background: var(--success-bg); border: 1px solid rgba(76,175,125,0.3); color: var(--success); }
     .alert-box svg { width: 15px; height: 15px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; flex-shrink: 0; }
 
-    /* ══ CONFIRM MODAL ══ */
+    /* ══ CONFIRM ══ */
     .confirm-modal { background: var(--surface); border-radius: 16px; width: 100%; max-width: 360px; box-shadow: 0 20px 60px rgba(30,58,95,0.2); padding: 28px 24px; text-align: center; animation: slideUp 0.25s cubic-bezier(0.22,1,0.36,1); }
     .confirm-icon { width: 52px; height: 52px; background: var(--danger-bg); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; }
     .confirm-icon svg { width: 22px; height: 22px; fill: none; stroke: var(--danger); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
@@ -151,7 +158,7 @@
     .confirm-text { font-size: 0.82rem; color: var(--muted); line-height: 1.6; margin-bottom: 24px; }
     .confirm-actions { display: flex; gap: 10px; justify-content: center; }
 
-    /* ══ LOADING ══ */
+    /* ══ SPINNER ══ */
     .spinner { display: inline-block; width: 16px; height: 16px; border: 2px solid rgba(255,255,255,0.3); border-top-color: #fff; border-radius: 50%; animation: spin 0.7s linear infinite; }
     @keyframes spin { to { transform: rotate(360deg); } }
 
@@ -166,17 +173,14 @@
     .module-chip svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
     .module-chip:hover { background: var(--blue-light); border-color: rgba(91,155,213,0.4); color: var(--blue-dark); }
 
-    /* ══ EMPTY MODULE ══ */
-    .empty-module { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 80px 40px; background: var(--surface); border: 1.5px dashed var(--border); border-radius: 16px; text-align: center; min-height: 340px; }
-    .coming-soon { margin-top: 20px; font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 700; color: var(--blue-dark); background: var(--blue-light); border: 1px solid rgba(91,155,213,0.2); padding: 4px 14px; border-radius: 20px; }
-
     ::-webkit-scrollbar { width: 5px; }
     ::-webkit-scrollbar-track { background: transparent; }
     ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 10px; }
 
     @media (max-width: 768px) {
       .sidebar { width: 56px; }
-      .sidebar .brand-name, .sidebar .brand-sub, .sidebar .user-info, .sidebar-user, .nav-item span, .nav-section-label, .btn-logout span { display: none; }
+      .sidebar .brand-name, .sidebar .brand-sub, .sidebar .user-info, .sidebar-user,
+      .nav-item span, .nav-section-label, .btn-logout span { display: none; }
       .sidebar-brand { padding: 20px 12px; }
       .nav-item { justify-content: center; padding: 12px; }
       .btn-logout { justify-content: center; }
@@ -211,8 +215,8 @@
     <div class="sidebar-user">
       <div class="user-avatar" id="userInitial">A</div>
       <div class="user-info">
-        <div class="user-name" id="userName">admininicial</div>
-        <div class="user-role">Administrador</div>
+        <div class="user-name" id="userName">Cargando...</div>
+        <div class="user-role" id="userRoleLabel">Administrador</div>
       </div>
     </div>
 
@@ -222,8 +226,10 @@
         <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
         <span>Inicio</span>
       </button>
+
+      <!-- Sección Personas: el ítem Usuarios solo lo ve admininicial -->
       <div class="nav-section-label">Personas</div>
-      <button class="nav-item" data-panel="usuarios">
+      <button class="nav-item" data-panel="usuarios" id="navUsuarios" style="display:none">
         <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
         <span>Usuarios</span>
       </button>
@@ -235,6 +241,7 @@
         <svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13" rx="1"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
         <span>Proveedores</span>
       </button>
+
       <div class="nav-section-label">Inventario & Ventas</div>
       <button class="nav-item" data-panel="productos">
         <svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
@@ -244,6 +251,7 @@
         <svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
         <span>Ventas</span>
       </button>
+
       <div class="nav-section-label">Análisis</div>
       <button class="nav-item" data-panel="reportes">
         <svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
@@ -277,20 +285,14 @@
           <div class="welcome-icon">
             <svg viewBox="0 0 32 32" fill="none"><path d="M4 8h24l-2.5 12H6.5L4 8z" fill="rgba(91,155,213,0.15)" stroke="#3a7abf" stroke-width="1.5" stroke-linejoin="round"/><circle cx="11" cy="26" r="2" fill="#3a7abf"/><circle cx="21" cy="26" r="2" fill="#3a7abf"/><path d="M2 4h3l2 4" stroke="#3a7abf" stroke-width="1.5" stroke-linecap="round"/></svg>
           </div>
-          <h2 class="welcome-title">¡Bienvenido a Tienda!</h2>
+          <h2 class="welcome-title" id="welcomeTitle">¡Bienvenido a Tienda!</h2>
           <p class="welcome-sub">Selecciona un módulo del menú lateral para comenzar a gestionar tu tienda.</p>
-          <div class="welcome-modules">
-            <div class="module-chip" onclick="activarPanel('usuarios')"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>Usuarios</div>
-            <div class="module-chip" onclick="activarPanel('clientes')"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Clientes</div>
-            <div class="module-chip" onclick="activarPanel('proveedores')"><svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13" rx="1"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>Proveedores</div>
-            <div class="module-chip" onclick="activarPanel('productos')"><svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>Productos</div>
-            <div class="module-chip" onclick="activarPanel('ventas')"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>Ventas</div>
-            <div class="module-chip" onclick="activarPanel('reportes')"><svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>Reportes</div>
-          </div>
+          <!-- Los chips se generan según el rol -->
+          <div class="welcome-modules" id="welcomeChips"></div>
         </div>
       </div>
 
-      <!-- USUARIOS -->
+      <!-- USUARIOS (solo admininicial lo ve funcional) -->
       <div class="panel" id="panel-usuarios">
         <div class="module-header">
           <div>
@@ -302,7 +304,6 @@
             Nuevo usuario
           </button>
         </div>
-
         <div class="table-wrap">
           <div class="table-toolbar">
             <div class="table-search">
@@ -311,7 +312,6 @@
             </div>
             <span class="table-count" id="contadorUsuarios">Cargando...</span>
           </div>
-
           <div id="tablaContenido">
             <div class="empty-state" style="padding:48px">
               <div class="empty-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
@@ -385,33 +385,18 @@
         <span id="modalAlertMsg"></span>
       </div>
       <div class="form-row">
-        <div class="field">
-          <label>Cédula</label>
-          <input type="text" id="fCedula" placeholder="Ej: 1234567890" maxlength="20" />
-        </div>
-        <div class="field">
-          <label>Nombre completo</label>
-          <input type="text" id="fNombreCompleto" placeholder="Nombre y apellidos" />
-        </div>
+        <div class="field"><label>Cédula</label><input type="text" id="fCedula" placeholder="Ej: 1234567890" maxlength="20" /></div>
+        <div class="field"><label>Nombre completo</label><input type="text" id="fNombreCompleto" placeholder="Nombre y apellidos" /></div>
       </div>
       <div class="form-row">
-        <div class="field">
-          <label>Nombre de usuario</label>
-          <input type="text" id="fNombreUsuario" placeholder="usuario123" />
-        </div>
-        <div class="field">
-          <label>Correo electrónico</label>
-          <input type="email" id="fCorreo" placeholder="correo@ejemplo.com" />
-        </div>
+        <div class="field"><label>Nombre de usuario</label><input type="text" id="fNombreUsuario" placeholder="usuario123" /></div>
+        <div class="field"><label>Correo electrónico</label><input type="email" id="fCorreo" placeholder="correo@ejemplo.com" /></div>
       </div>
       <div class="field" id="campoContrasena">
         <label>Contraseña</label>
         <input type="password" id="fContrasena" placeholder="Mínimo 6 caracteres" />
       </div>
-      <div class="field">
-        <label>Rol</label>
-        <input type="text" value="ADMIN" disabled style="cursor:not-allowed" />
-      </div>
+      <div class="field"><label>Rol</label><input type="text" value="ADMIN" disabled /></div>
     </div>
     <div class="modal-footer">
       <button class="btn-secondary" onclick="cerrarModal()">Cancelar</button>
@@ -441,29 +426,89 @@
 </div>
 
 <script>
-  // ═══════════════════════════════════════
-  //  ESTADO
-  // ═══════════════════════════════════════
-  let todosLosUsuarios = [];
-  let modoEdicion = false;
-  let idEditando = null;
-  let idEliminando = null;
+  // ═══════════════════════════════════════════════
+  //  1. LEER TOKEN — extraer nombreUsuario del JWT
+  //     El backend (UsuarioServicio) firma el token
+  //     con { id, rol, nombreUsuario }
+  // ═══════════════════════════════════════════════
+  const token = localStorage.getItem('token');
+  if (!token) window.location.href = '/login';
 
-  // ═══════════════════════════════════════
-  //  INIT
-  // ═══════════════════════════════════════
-  document.getElementById('topbarDate').textContent = new Date().toLocaleDateString('es-CO', {
-    weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
-  });
+  let payload = null;
+  try {
+    payload = JSON.parse(atob(token.split('.')[1]));
+  } catch {
+    localStorage.removeItem('token');
+    window.location.href = '/login';
+  }
 
-  if (!localStorage.getItem('token')) window.location.href = '/login';
+  // ¿Es el superadmin? Solo depende del nombreUsuario en el token.
+  const esSuperAdmin = payload.nombreUsuario === 'admininicial';
 
-  // ═══════════════════════════════════════
-  //  NAVEGACIÓN
-  // ═══════════════════════════════════════
-  const navItems  = document.querySelectorAll('.nav-item');
-  const panels    = document.querySelectorAll('.panel');
-  const titulos = {
+  // ═══════════════════════════════════════════════
+  //  2. APLICAR PERMISOS AL CARGAR
+  // ═══════════════════════════════════════════════
+  (function init() {
+    // Fecha en topbar
+    document.getElementById('topbarDate').textContent = new Date().toLocaleDateString('es-CO', {
+      weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
+    });
+
+    // Avatar y nombre
+    const nombre = payload.nombreUsuario || 'Usuario';
+    document.getElementById('userInitial').textContent = nombre.charAt(0).toUpperCase();
+    document.getElementById('userName').textContent    = nombre;
+
+    if (esSuperAdmin) {
+      // Admin principal: mostrar ítem Usuarios en sidebar
+      document.getElementById('navUsuarios').style.display = 'flex';
+      document.getElementById('userRoleLabel').textContent  = 'Admin Principal';
+
+      // Chips del home CON Usuarios
+      document.getElementById('welcomeTitle').textContent = '¡Bienvenido, Admin!';
+      document.getElementById('welcomeChips').innerHTML   = chipUsuarios() + chipsComunes();
+
+    } else {
+      // Usuario creado: sin ítem Usuarios (ya está oculto por defecto con display:none)
+      document.getElementById('userRoleLabel').textContent = 'Administrador';
+
+      // Chips del home SIN Usuarios
+      document.getElementById('welcomeTitle').textContent = `¡Bienvenido, ${nombre}!`;
+      document.getElementById('welcomeChips').innerHTML   = chipsComunes();
+    }
+  })();
+
+  function chipUsuarios() {
+    return `<div class="module-chip" onclick="activarPanel('usuarios')">
+      <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>Usuarios
+    </div>`;
+  }
+
+  function chipsComunes() {
+    return `
+      <div class="module-chip" onclick="activarPanel('clientes')">
+        <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Clientes
+      </div>
+      <div class="module-chip" onclick="activarPanel('proveedores')">
+        <svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13" rx="1"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>Proveedores
+      </div>
+      <div class="module-chip" onclick="activarPanel('productos')">
+        <svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>Productos
+      </div>
+      <div class="module-chip" onclick="activarPanel('ventas')">
+        <svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>Ventas
+      </div>
+      <div class="module-chip" onclick="activarPanel('reportes')">
+        <svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>Reportes
+      </div>`;
+  }
+
+  // ═══════════════════════════════════════════════
+  //  3. NAVEGACIÓN
+  // ═══════════════════════════════════════════════
+  const navItems = document.querySelectorAll('.nav-item');
+  const panels   = document.querySelectorAll('.panel');
+  const titulos  = {
     home:        { title: 'Dashboard',   badge: 'Inicio' },
     usuarios:    { title: 'Usuarios',    badge: 'Gestión' },
     clientes:    { title: 'Clientes',    badge: 'Gestión' },
@@ -474,6 +519,9 @@
   };
 
   function activarPanel(panelId) {
+    // Bloqueo adicional: si alguien intenta navegar a usuarios sin permiso
+    if (panelId === 'usuarios' && !esSuperAdmin) return;
+
     navItems.forEach(i => i.classList.toggle('active', i.dataset.panel === panelId));
     panels.forEach(p => p.classList.toggle('active', p.id === `panel-${panelId}`));
     const info = titulos[panelId] || { title: panelId, badge: '' };
@@ -489,35 +537,30 @@
     window.location.href = '/login';
   });
 
-  // ═══════════════════════════════════════
-  //  API HELPERS
-  // ═══════════════════════════════════════
+  // ═══════════════════════════════════════════════
+  //  4. API HELPERS
+  // ═══════════════════════════════════════════════
   function getHeaders() {
-    return {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${localStorage.getItem('token')}`
-    };
+    return { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` };
   }
 
-  // ═══════════════════════════════════════
-  //  CARGAR USUARIOS
-  // ═══════════════════════════════════════
+  // ═══════════════════════════════════════════════
+  //  5. CARGAR Y RENDERIZAR USUARIOS
+  // ═══════════════════════════════════════════════
+  let todosLosUsuarios = [];
+
   async function cargarUsuarios() {
     document.getElementById('tablaContenido').innerHTML = `
       <div class="empty-state" style="padding:48px">
         <div class="empty-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
         <div class="empty-title">Cargando...</div>
       </div>`;
-
     try {
-      const res = await fetch('/api/usuarios', { headers: getHeaders() });
+      const res  = await fetch('/api/usuarios', { headers: getHeaders() });
       const data = await res.json();
-
       if (!res.ok) throw new Error(data.error || 'Error al cargar usuarios');
-
       todosLosUsuarios = data;
       renderTabla(todosLosUsuarios);
-
     } catch (err) {
       document.getElementById('tablaContenido').innerHTML = `
         <div class="empty-state" style="padding:48px">
@@ -535,7 +578,7 @@
     if (lista.length === 0) {
       document.getElementById('tablaContenido').innerHTML = `
         <div class="empty-state" style="padding:56px">
-          <div class="empty-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="1.8" stroke-linecap="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+          <div class="empty-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="1.8" stroke-linecap="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div>
           <div class="empty-title">No hay usuarios registrados</div>
           <div class="empty-text">Crea el primer usuario con el botón "Nuevo usuario".</div>
         </div>`;
@@ -550,12 +593,10 @@
       const acciones = esInicial
               ? `<span style="font-size:0.72rem;color:var(--muted);font-style:italic">Protegido</span>`
               : `<button class="btn-edit" onclick="abrirModalEditar(${u.id})">
-             <svg viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
-             Editar
+             <svg viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>Editar
            </button>
-           <button class="btn-danger" onclick="confirmarEliminar(${u.id}, '${u.nombre_completo || u.nombre_usuario}')">
-             <svg viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/></svg>
-             Eliminar
+           <button class="btn-danger" onclick="confirmarEliminar(${u.id}, '${(u.nombre_completo || u.nombre_usuario).replace(/'/g,"\\'")}')">
+             <svg viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/></svg>Eliminar
            </button>`;
       return `<tr>
         <td>${u.cedula || '<span class="td-muted">—</span>'}</td>
@@ -569,38 +610,29 @@
 
     document.getElementById('tablaContenido').innerHTML = `
       <table>
-        <thead>
-          <tr>
-            <th>Cédula</th>
-            <th>Nombre completo</th>
-            <th>Usuario</th>
-            <th>Correo</th>
-            <th>Rol</th>
-            <th>Acciones</th>
-          </tr>
-        </thead>
+        <thead><tr><th>Cédula</th><th>Nombre completo</th><th>Usuario</th><th>Correo</th><th>Rol</th><th>Acciones</th></tr></thead>
         <tbody>${filas}</tbody>
       </table>`;
   }
 
   function filtrarTabla() {
     const q = document.getElementById('buscarUsuario').value.toLowerCase();
-    const filtrados = todosLosUsuarios.filter(u =>
+    renderTabla(todosLosUsuarios.filter(u =>
             (u.nombre_completo || '').toLowerCase().includes(q) ||
-            (u.nombre_usuario || '').toLowerCase().includes(q) ||
-            (u.cedula || '').toLowerCase().includes(q) ||
-            (u.correo || '').toLowerCase().includes(q)
-    );
-    renderTabla(filtrados);
+            (u.nombre_usuario  || '').toLowerCase().includes(q) ||
+            (u.cedula          || '').toLowerCase().includes(q) ||
+            (u.correo          || '').toLowerCase().includes(q)
+    ));
   }
 
-  // ═══════════════════════════════════════
-  //  MODAL CREAR
-  // ═══════════════════════════════════════
+  // ═══════════════════════════════════════════════
+  //  6. MODAL CREAR / EDITAR
+  // ═══════════════════════════════════════════════
+  let modoEdicion = false, idEditando = null, idEliminando = null;
+
   function abrirModalCrear() {
-    modoEdicion = false;
-    idEditando = null;
-    document.getElementById('modalTitulo').textContent = 'Nuevo usuario';
+    modoEdicion = false; idEditando = null;
+    document.getElementById('modalTitulo').textContent    = 'Nuevo usuario';
     document.getElementById('btnGuardarText').textContent = 'Crear usuario';
     document.getElementById('campoContrasena').style.display = 'flex';
     limpiarModal();
@@ -611,16 +643,15 @@
   function abrirModalEditar(id) {
     const u = todosLosUsuarios.find(x => x.id === id);
     if (!u) return;
-    modoEdicion = true;
-    idEditando = id;
-    document.getElementById('modalTitulo').textContent = 'Editar usuario';
+    modoEdicion = true; idEditando = id;
+    document.getElementById('modalTitulo').textContent    = 'Editar usuario';
     document.getElementById('btnGuardarText').textContent = 'Guardar cambios';
     document.getElementById('campoContrasena').style.display = 'none';
     limpiarModal();
-    document.getElementById('fCedula').value = u.cedula || '';
+    document.getElementById('fCedula').value         = u.cedula || '';
     document.getElementById('fNombreCompleto').value = u.nombre_completo || '';
-    document.getElementById('fNombreUsuario').value = u.nombre_usuario || '';
-    document.getElementById('fCorreo').value = u.correo || '';
+    document.getElementById('fNombreUsuario').value  = u.nombre_usuario || '';
+    document.getElementById('fCorreo').value         = u.correo || '';
     document.getElementById('modalUsuario').classList.add('open');
     setTimeout(() => document.getElementById('fCedula').focus(), 100);
   }
@@ -631,12 +662,9 @@
   }
 
   function limpiarModal() {
-    ['fCedula','fNombreCompleto','fNombreUsuario','fCorreo','fContrasena'].forEach(id => {
-      const el = document.getElementById(id);
-      if (el) el.value = '';
-    });
-    const alert = document.getElementById('modalAlert');
-    alert.className = 'alert-box';
+    ['fCedula','fNombreCompleto','fNombreUsuario','fCorreo','fContrasena']
+            .forEach(id => { const el = document.getElementById(id); if (el) el.value = ''; });
+    document.getElementById('modalAlert').className = 'alert-box';
   }
 
   function mostrarAlertaModal(tipo, msg) {
@@ -645,9 +673,9 @@
     document.getElementById('modalAlertMsg').textContent = msg;
   }
 
-  // ═══════════════════════════════════════
-  //  GUARDAR (crear o editar)
-  // ═══════════════════════════════════════
+  // ═══════════════════════════════════════════════
+  //  7. GUARDAR (crear o editar)
+  // ═══════════════════════════════════════════════
   async function guardarUsuario() {
     const cedula         = document.getElementById('fCedula').value.trim();
     const nombreCompleto = document.getElementById('fNombreCompleto').value.trim();
@@ -656,13 +684,10 @@
     const contrasena     = document.getElementById('fContrasena').value;
 
     if (!cedula || !nombreCompleto || !nombreUsuario || !correo) {
-      mostrarAlertaModal('error', 'Todos los campos son requeridos.');
-      return;
+      mostrarAlertaModal('error', 'Todos los campos son requeridos.'); return;
     }
-
     if (!modoEdicion && contrasena.length < 6) {
-      mostrarAlertaModal('error', 'La contraseña debe tener al menos 6 caracteres.');
-      return;
+      mostrarAlertaModal('error', 'La contraseña debe tener al menos 6 caracteres.'); return;
     }
 
     const btn = document.getElementById('btnGuardar');
@@ -671,29 +696,18 @@
     btnText.innerHTML = '<span class="spinner"></span>';
 
     try {
-      let res, data;
+      const url    = modoEdicion ? `/api/usuarios/${idEditando}` : '/api/usuarios';
+      const method = modoEdicion ? 'PUT' : 'POST';
+      const body   = modoEdicion
+              ? { cedula, nombreCompleto, nombreUsuario, correo }
+              : { cedula, nombreCompleto, nombreUsuario, correo, contrasena };
 
-      if (!modoEdicion) {
-        res = await fetch('/api/usuarios', {
-          method: 'POST',
-          headers: getHeaders(),
-          body: JSON.stringify({ cedula, nombreCompleto, nombreUsuario, correo, contrasena })
-        });
-      } else {
-        res = await fetch(`/api/usuarios/${idEditando}`, {
-          method: 'PUT',
-          headers: getHeaders(),
-          body: JSON.stringify({ cedula, nombreCompleto, nombreUsuario, correo })
-        });
-      }
-
-      data = await res.json();
-
+      const res  = await fetch(url, { method, headers: getHeaders(), body: JSON.stringify(body) });
+      const data = await res.json();
       if (!res.ok) throw new Error(data.error || 'Error al guardar');
 
       cerrarModal();
       await cargarUsuarios();
-
     } catch (err) {
       mostrarAlertaModal('error', err.message);
     } finally {
@@ -702,9 +716,9 @@
     }
   }
 
-  // ═══════════════════════════════════════
-  //  ELIMINAR
-  // ═══════════════════════════════════════
+  // ═══════════════════════════════════════════════
+  //  8. ELIMINAR
+  // ═══════════════════════════════════════════════
   function confirmarEliminar(id, nombre) {
     idEliminando = id;
     document.getElementById('confirmTexto').textContent =
@@ -722,12 +736,8 @@
     const btn = document.getElementById('btnConfirmarEliminar');
     btn.disabled = true;
     btn.innerHTML = '<span class="spinner" style="border-top-color:#e07070"></span> Eliminando...';
-
     try {
-      const res = await fetch(`/api/usuarios/${idEliminando}`, {
-        method: 'DELETE',
-        headers: getHeaders()
-      });
+      const res  = await fetch(`/api/usuarios/${idEliminando}`, { method: 'DELETE', headers: getHeaders() });
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || 'Error al eliminar');
       cerrarConfirmar();
@@ -741,15 +751,11 @@
     }
   }
 
-  // Cerrar modales al click fuera
-  document.getElementById('modalUsuario').addEventListener('click', e => {
-    if (e.target === e.currentTarget) cerrarModal();
-  });
-  document.getElementById('modalConfirmar').addEventListener('click', e => {
-    if (e.target === e.currentTarget) cerrarConfirmar();
-  });
+  // Cerrar modales al hacer click fuera
+  document.getElementById('modalUsuario').addEventListener('click',  e => { if (e.target === e.currentTarget) cerrarModal(); });
+  document.getElementById('modalConfirmar').addEventListener('click', e => { if (e.target === e.currentTarget) cerrarConfirmar(); });
 
-  // Enter en el formulario
+  // Enter para guardar en el formulario
   document.querySelectorAll('#modalUsuario input').forEach(input => {
     input.addEventListener('keydown', e => { if (e.key === 'Enter') guardarUsuario(); });
   });
