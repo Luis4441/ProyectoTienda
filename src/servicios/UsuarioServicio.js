@@ -17,9 +17,9 @@ class UsuarioServicio {
             {
                 id:            usuario.id,
                 rol:           usuario.rol,
-                nombreUsuario: usuario.nombreUsuario   // ← AÑADIDO: para leer el rol en el frontend
+                nombreUsuario: usuario.nombreUsuario
             },
-            "CLAVE_SECRETA",
+            process.env.JWT_SECRET || "secreto",  // ✅ CORREGIDO: mismo secreto que el middleware
             { expiresIn: "2h" }
         );
 
