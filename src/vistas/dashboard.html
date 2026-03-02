@@ -398,10 +398,41 @@
       <!-- PRODUCTOS -->
       <div class="panel" id="panel-productos">
         <div class="module-header">
-          <div><div class="module-title">Productos</div><div class="module-desc">Inventario y catálogo de productos</div></div>
-          <button class="btn-primary"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Nuevo producto</button>
+          <div>
+            <div class="module-title">Productos</div>
+            <div class="module-desc">Inventario y catálogo de productos</div>
+          </div>
+
+          <!-- Botón que redirige -->
+          <button class="btn-primary" onclick="window.location.href='/productos'">
+            <svg viewBox="0 0 24 24">
+              <line x1="12" y1="5" x2="12" y2="19"/>
+              <line x1="5" y1="12" x2="19" y2="12"/>
+            </svg>
+            Ir a Productos
+          </button>
         </div>
-        <div class="empty-module"><div class="empty-icon"><svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg></div><div class="empty-title">Módulo en construcción</div><div class="empty-text">Administra tu catálogo de productos, precios, stock y categorías.</div><span class="coming-soon">Próximamente</span></div>
+
+        <!-- Tarjeta completa que redirige -->
+        <div class="module-card" onclick="window.location.href='/productos'">
+          <div class="empty-icon">
+            <svg viewBox="0 0 24 24">
+              <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+            </svg>
+          </div>
+
+          <div class="empty-title">Gestión de Productos</div>
+          <div class="empty-text">
+            Administra tu catálogo de productos, precios, stock y categorías.
+          </div>
+
+          <span class="module-card-badge">
+      <svg viewBox="0 0 24 24">
+        <polyline points="9 18 15 12 9 6"/>
+      </svg>
+      Abrir módulo
+    </span>
+        </div>
       </div>
 
       <!-- VENTAS -->
