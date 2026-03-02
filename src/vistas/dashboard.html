@@ -357,12 +357,42 @@
       </div>
 
       <!-- PROVEEDORES -->
+      <!-- PROVEEDORES → redirige a página dedicada -->
       <div class="panel" id="panel-proveedores">
         <div class="module-header">
-          <div><div class="module-title">Proveedores</div><div class="module-desc">Administración de proveedores y compras</div></div>
-          <button class="btn-primary"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Nuevo proveedor</button>
+          <div>
+            <div class="module-title">Proveedores</div>
+            <div class="module-desc">Registro y gestión de proveedores</div>
+          </div>
+          <button class="btn-primary" onclick="window.location.href='/proveedores'">
+            <svg viewBox="0 0 24 24">
+              <line x1="12" y1="5" x2="12" y2="19"/>
+              <line x1="5" y1="12" x2="19" y2="12"/>
+            </svg>
+            Ir a Proveedores
+          </button>
         </div>
-        <div class="empty-module"><div class="empty-icon"><svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13" rx="1"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div><div class="empty-title">Módulo en construcción</div><div class="empty-text">Registra y gestiona proveedores, órdenes de compra y condiciones de pago.</div><span class="coming-soon">Próximamente</span></div>
+
+        <div class="module-card" onclick="window.location.href='/proveedores'">
+          <div class="empty-icon">
+            <svg viewBox="0 0 24 24">
+              <path d="M3 7h18v13H3z"/>
+              <path d="M16 3h-8v4h8z"/>
+            </svg>
+          </div>
+
+          <div class="empty-title">Gestión de Proveedores</div>
+          <div class="empty-text">
+            Registra, consulta, actualiza y elimina proveedores del sistema.
+          </div>
+
+          <span class="module-card-badge">
+      <svg viewBox="0 0 24 24">
+        <polyline points="9 18 15 12 9 6"/>
+      </svg>
+      Abrir módulo
+    </span>
+        </div>
       </div>
 
       <!-- PRODUCTOS -->

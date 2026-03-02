@@ -4,7 +4,7 @@ const authRutas = require("./rutas/authRutas");
 const usuarioRutas = require("./rutas/usuarioRutas");
 const inicializarBD = require("./config/inicializarBD");
 const clienteRutas = require('./rutas/clienteRutas');
-
+const proveedorRutas = require('./rutas/proveedorRutas');
 
 const app = express();
 
@@ -18,14 +18,16 @@ app.use(express.static(path.join(__dirname, "publico")));
 
 // ── Vistas ──
 app.get("/", (req, res) => res.redirect("/login"));
-app.get("/login",     (req, res) => res.sendFile(path.join(__dirname, "vistas", "login.html")));
-app.get("/dashboard", (req, res) => res.sendFile(path.join(__dirname, "vistas", "dashboard.html")));
-app.get("/clientes", (req, res) => res.sendFile(path.join(__dirname, "vistas", "clientes.html")));
+app.get("/login",       (req, res) => res.sendFile(path.join(__dirname, "vistas", "login.html")));
+app.get("/dashboard",   (req, res) => res.sendFile(path.join(__dirname, "vistas", "dashboard.html")));
+app.get("/clientes",    (req, res) => res.sendFile(path.join(__dirname, "vistas", "clientes.html")));
+app.get("/proveedores", (req, res) => res.sendFile(path.join(__dirname, "vistas", "proveedores.html")));
 
 // ── Rutas API ──
-app.use("/api/auth",     authRutas);
-app.use("/api/usuarios", usuarioRutas);
-app.use('/api/clientes', verificarToken, clienteRutas);
+app.use("/api/auth",        authRutas);
+app.use("/api/usuarios",    usuarioRutas);
+app.use("/api/clientes",    verificarToken, clienteRutas);
+app.use("/api/proveedores", verificarToken, proveedorRutas);
 
 // ── 404 ──
 app.use((req, res) => res.status(404).json({ error: "Ruta no encontrada" }));
@@ -35,7 +37,6 @@ app.use((err, req, res, next) => {
     console.error("Error no controlado:", err.stack);
     res.status(500).json({ error: "Error interno del servidor" });
 });
-
 
 // ── Inicializar BD y arrancar ──
 const PUERTO = process.env.PORT || 3000;
