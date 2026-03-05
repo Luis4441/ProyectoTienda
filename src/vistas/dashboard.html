@@ -26,6 +26,8 @@
       --success:     #4caf7d;
       --success-bg:  #f0fdf6;
       --warn:        #e0a040;
+      --field-ok:    #4caf7d;
+      --field-error: #e05858;
     }
 
     html, body { height: 100%; font-family: 'Nunito', sans-serif; background: var(--bg); color: var(--text); overflow: hidden; }
@@ -40,23 +42,19 @@
     .brand-icon svg { width: 18px; height: 18px; }
     .brand-name { font-family: 'Pacifico', cursive; font-size: 1.1rem; color: #e8f3fd; line-height: 1; }
     .brand-sub { font-size: 0.62rem; color: rgba(255,255,255,0.35); letter-spacing: 0.12em; text-transform: uppercase; margin-top: 3px; font-weight: 400; }
-
     .sidebar-user { display: flex; align-items: center; gap: 10px; padding: 12px 16px; margin: 16px 12px 0; background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; }
     .user-avatar { width: 30px; height: 30px; border-radius: 50%; background: var(--blue-mid); display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 800; color: var(--sidebar-bg); flex-shrink: 0; }
     .user-info { flex: 1; min-width: 0; }
     .user-name { font-size: 0.78rem; font-weight: 700; color: #e8f3fd; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
     .user-role { font-size: 0.62rem; color: var(--blue-mid); letter-spacing: 0.06em; text-transform: uppercase; font-weight: 600; }
-
     .sidebar-nav { flex: 1; padding: 20px 12px; overflow-y: auto; }
     .nav-section-label { font-size: 0.6rem; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.25); padding: 0 8px; margin-bottom: 6px; margin-top: 20px; font-weight: 700; }
     .nav-section-label:first-child { margin-top: 0; }
-
     .nav-item { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: 10px; cursor: pointer; transition: background 0.15s; color: rgba(255,255,255,0.5); font-size: 0.83rem; font-weight: 600; border: none; background: none; width: 100%; text-align: left; position: relative; margin-bottom: 2px; }
     .nav-item svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
     .nav-item:hover { background: rgba(255,255,255,0.07); color: rgba(255,255,255,0.85); }
     .nav-item.active { background: rgba(168,204,239,0.18); color: #c8e4f8; }
     .nav-item.active::before { content: ''; position: absolute; left: 0; top: 25%; bottom: 25%; width: 3px; background: var(--blue-mid); border-radius: 3px; }
-
     .sidebar-footer { padding: 16px 12px; border-top: 1px solid rgba(255,255,255,0.08); }
     .btn-logout { display: flex; align-items: center; gap: 10px; width: 100%; padding: 10px 12px; background: none; border: 1px solid rgba(224,112,112,0.25); border-radius: 10px; color: rgba(224,112,112,0.65); font-family: 'Nunito', sans-serif; font-size: 0.78rem; font-weight: 700; cursor: pointer; transition: all 0.15s; }
     .btn-logout svg { width: 15px; height: 15px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
@@ -69,7 +67,6 @@
     .page-title { font-size: 1.05rem; font-weight: 800; color: var(--text); }
     .page-badge { font-size: 0.65rem; background: var(--blue-light); color: var(--blue-dark); border: 1px solid rgba(91,155,213,0.2); padding: 3px 10px; border-radius: 20px; letter-spacing: 0.06em; text-transform: uppercase; font-weight: 700; }
     .topbar-date { font-size: 0.75rem; color: var(--muted); font-weight: 600; }
-
     .content { flex: 1; overflow-y: auto; padding: 32px; }
 
     @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
@@ -85,10 +82,12 @@
     .btn-primary { display: inline-flex; align-items: center; gap: 7px; padding: 10px 18px; background: linear-gradient(135deg, var(--blue) 0%, var(--blue-dark) 100%); border: none; border-radius: 10px; color: #fff; font-family: 'Nunito', sans-serif; font-size: 0.82rem; font-weight: 700; cursor: pointer; transition: opacity 0.15s, box-shadow 0.15s; box-shadow: 0 3px 12px rgba(58,122,191,0.25); }
     .btn-primary svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
     .btn-primary:hover { opacity: 0.9; box-shadow: 0 5px 16px rgba(58,122,191,0.35); }
+    .btn-primary:disabled { opacity: 0.6; cursor: not-allowed; }
     .btn-secondary { display: inline-flex; align-items: center; gap: 7px; padding: 8px 14px; background: var(--surface); border: 1.5px solid var(--border); border-radius: 8px; color: var(--muted); font-family: 'Nunito', sans-serif; font-size: 0.8rem; font-weight: 700; cursor: pointer; transition: all 0.15s; }
     .btn-secondary:hover { border-color: var(--blue-mid); color: var(--blue-dark); }
     .btn-danger { display: inline-flex; align-items: center; gap: 7px; padding: 7px 12px; background: var(--danger-bg); border: 1.5px solid rgba(224,112,112,0.3); border-radius: 8px; color: var(--danger); font-family: 'Nunito', sans-serif; font-size: 0.78rem; font-weight: 700; cursor: pointer; transition: all 0.15s; }
     .btn-danger:hover { background: #fbe0e0; border-color: var(--danger); }
+    .btn-danger:disabled { opacity: 0.6; cursor: not-allowed; }
     .btn-edit { display: inline-flex; align-items: center; gap: 6px; padding: 7px 12px; background: var(--blue-soft); border: 1.5px solid rgba(91,155,213,0.25); border-radius: 8px; color: var(--blue-dark); font-family: 'Nunito', sans-serif; font-size: 0.78rem; font-weight: 700; cursor: pointer; transition: all 0.15s; }
     .btn-edit:hover { background: var(--blue-light); }
     .btn-danger svg, .btn-edit svg { width: 13px; height: 13px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
@@ -119,13 +118,24 @@
     .empty-icon svg { width: 24px; height: 24px; fill: none; stroke: var(--blue); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
     .empty-title { font-size: 0.95rem; font-weight: 800; color: var(--text); margin-bottom: 6px; }
     .empty-text { font-size: 0.8rem; color: var(--muted); max-width: 260px; line-height: 1.6; }
+
+    /* ══ MODULE CARD ══ */
+    .module-card { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 60px 40px; background: var(--surface); border: 1.5px solid var(--border); border-radius: 16px; text-align: center; min-height: 340px; cursor: pointer; transition: border-color 0.2s, box-shadow 0.2s, transform 0.15s; }
+    .module-card:hover { border-color: var(--blue-mid); box-shadow: 0 8px 28px rgba(91,155,213,0.14); transform: translateY(-2px); }
+    .module-card .empty-icon { background: var(--blue-light); border-color: rgba(91,155,213,0.25); }
+    .module-card .empty-icon svg { stroke: var(--blue-dark); }
+    .module-card .empty-title { color: var(--blue-dark); }
+    .module-card-badge { margin-top: 20px; font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 700; color: var(--blue-dark); background: var(--blue-light); border: 1px solid rgba(91,155,213,0.2); padding: 4px 14px; border-radius: 20px; display: inline-flex; align-items: center; gap: 6px; }
+    .module-card-badge svg { width: 11px; height: 11px; fill: none; stroke: currentColor; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+
+    /* ══ EMPTY MODULE ══ */
     .empty-module { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 80px 40px; background: var(--surface); border: 1.5px dashed var(--border); border-radius: 16px; text-align: center; min-height: 340px; }
     .coming-soon { margin-top: 20px; font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 700; color: var(--blue-dark); background: var(--blue-light); border: 1px solid rgba(91,155,213,0.2); padding: 4px 14px; border-radius: 20px; }
 
     /* ══ MODAL ══ */
     .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(30,58,95,0.35); backdrop-filter: blur(3px); z-index: 100; align-items: center; justify-content: center; padding: 20px; }
     .modal-overlay.open { display: flex; animation: fadeIn 0.2s ease; }
-    .modal { background: var(--surface); border-radius: 16px; width: 100%; max-width: 480px; box-shadow: 0 20px 60px rgba(30,58,95,0.2); overflow: hidden; animation: slideUp 0.25s cubic-bezier(0.22,1,0.36,1); }
+    .modal { background: var(--surface); border-radius: 16px; width: 100%; max-width: 500px; box-shadow: 0 20px 60px rgba(30,58,95,0.2); overflow: hidden; animation: slideUp 0.25s cubic-bezier(0.22,1,0.36,1); }
     @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
     .modal-header { display: flex; align-items: center; justify-content: space-between; padding: 20px 24px; border-bottom: 1.5px solid var(--border); }
     .modal-title { font-size: 1rem; font-weight: 800; color: var(--text); }
@@ -135,18 +145,34 @@
     .modal-body { padding: 24px; display: flex; flex-direction: column; gap: 16px; }
     .modal-footer { padding: 16px 24px; border-top: 1.5px solid var(--border); display: flex; justify-content: flex-end; gap: 10px; }
 
-    /* ══ FORM ══ */
-    .field { display: flex; flex-direction: column; gap: 6px; }
+    /* ══ FORM + VALIDACIÓN ══ */
+    .field { display: flex; flex-direction: column; gap: 4px; }
     .field label { font-size: 0.72rem; font-weight: 800; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; }
-    .field input { padding: 10px 14px; border: 1.5px solid var(--border); border-radius: 8px; font-family: 'Nunito', sans-serif; font-size: 0.85rem; color: var(--text); font-weight: 600; outline: none; transition: border-color 0.15s, box-shadow 0.15s; background: var(--bg); }
+    .field .input-wrap { position: relative; }
+    .field input {
+      width: 100%; padding: 10px 36px 10px 14px;
+      border: 1.5px solid var(--border); border-radius: 8px;
+      font-family: 'Nunito', sans-serif; font-size: 0.85rem;
+      color: var(--text); font-weight: 600; outline: none;
+      transition: border-color 0.15s, box-shadow 0.15s; background: var(--bg);
+    }
     .field input:focus { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(91,155,213,0.15); background: var(--surface); }
     .field input::placeholder { color: var(--muted); font-weight: 400; }
-    .field input:disabled { opacity: 0.5; cursor: not-allowed; }
+    .field input:disabled { opacity: 0.5; cursor: not-allowed; background: var(--bg); padding: 10px 14px; }
+    .field input.is-valid   { border-color: var(--field-ok);    background: var(--surface); }
+    .field input.is-invalid { border-color: var(--field-error); background: #fff8f8; }
+    .field input.is-valid:focus   { box-shadow: 0 0 0 3px rgba(76,175,125,0.15); }
+    .field input.is-invalid:focus { box-shadow: 0 0 0 3px rgba(224,88,88,0.15); }
+    .input-icon { position: absolute; right: 11px; top: 50%; transform: translateY(-50%); width: 15px; height: 15px; pointer-events: none; display: none; }
+    .field input.is-valid   + .input-icon.ok  { display: block; }
+    .field input.is-invalid ~ .input-icon.err { display: block; }
+    .field-msg { font-size: 0.7rem; font-weight: 700; min-height: 16px; }
+    .field-msg.error { color: var(--field-error); }
     .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
 
     /* ══ ALERT ══ */
     .alert-box { display: none; align-items: center; gap: 10px; padding: 10px 14px; border-radius: 8px; font-size: 0.8rem; font-weight: 600; }
-    .alert-box.error { display: flex; background: var(--danger-bg); border: 1px solid rgba(224,112,112,0.3); color: var(--danger); }
+    .alert-box.error   { display: flex; background: var(--danger-bg); border: 1px solid rgba(224,112,112,0.3); color: var(--danger); }
     .alert-box.success { display: flex; background: var(--success-bg); border: 1px solid rgba(76,175,125,0.3); color: var(--success); }
     .alert-box svg { width: 15px; height: 15px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; flex-shrink: 0; }
 
@@ -159,7 +185,7 @@
     .confirm-actions { display: flex; gap: 10px; justify-content: center; }
 
     /* ══ SPINNER ══ */
-    .spinner { display: inline-block; width: 16px; height: 16px; border: 2px solid rgba(255,255,255,0.3); border-top-color: #fff; border-radius: 50%; animation: spin 0.7s linear infinite; }
+    .spinner { display: inline-block; width: 16px; height: 16px; border: 2px solid rgba(255,255,255,0.3); border-top-color: #fff; border-radius: 50%; animation: spin 0.7s linear infinite; flex-shrink: 0; }
     @keyframes spin { to { transform: rotate(360deg); } }
 
     /* ══ HOME ══ */
@@ -227,13 +253,12 @@
         <span>Inicio</span>
       </button>
 
-      <!-- Sección Personas: el ítem Usuarios solo lo ve admininicial -->
       <div class="nav-section-label">Personas</div>
       <button class="nav-item" data-panel="usuarios" id="navUsuarios" style="display:none">
         <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
         <span>Usuarios</span>
       </button>
-      <button class="nav-item" data-panel="clientes">
+      <button class="nav-item" id="navClientes" onclick="window.location.href='/clientes'">
         <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
         <span>Clientes</span>
       </button>
@@ -242,7 +267,7 @@
         <span>Proveedores</span>
       </button>
 
-      <div class="nav-section-label">Inventario & Ventas</div>
+      <div class="nav-section-label">Inventario &amp; Ventas</div>
       <button class="nav-item" data-panel="productos">
         <svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
         <span>Productos</span>
@@ -287,12 +312,11 @@
           </div>
           <h2 class="welcome-title" id="welcomeTitle">¡Bienvenido a Tienda!</h2>
           <p class="welcome-sub">Selecciona un módulo del menú lateral para comenzar a gestionar tu tienda.</p>
-          <!-- Los chips se generan según el rol -->
           <div class="welcome-modules" id="welcomeChips"></div>
         </div>
       </div>
 
-      <!-- USUARIOS (solo admininicial lo ve funcional) -->
+      <!-- USUARIOS -->
       <div class="panel" id="panel-usuarios">
         <div class="module-header">
           <div>
@@ -325,27 +349,48 @@
       <div class="panel" id="panel-clientes">
         <div class="module-header">
           <div><div class="module-title">Clientes</div><div class="module-desc">Registro y seguimiento de clientes</div></div>
-          <button class="btn-primary"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Nuevo cliente</button>
+          <button class="btn-primary" onclick="window.location.href='/clientes'">
+            <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Ir a Clientes
+          </button>
         </div>
-        <div class="empty-module"><div class="empty-icon"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div><div class="empty-title">Módulo en construcción</div><div class="empty-text">Aquí podrás registrar y gestionar la información de todos tus clientes.</div><span class="coming-soon">Próximamente</span></div>
+        <div class="module-card" onclick="window.location.href='/clientes'">
+          <div class="empty-icon"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+          <div class="empty-title">Gestión de Clientes</div>
+          <div class="empty-text">Registra, consulta, actualiza y elimina clientes de la tienda por cédula.</div>
+          <span class="module-card-badge"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>Abrir módulo</span>
+        </div>
       </div>
 
       <!-- PROVEEDORES -->
       <div class="panel" id="panel-proveedores">
         <div class="module-header">
-          <div><div class="module-title">Proveedores</div><div class="module-desc">Administración de proveedores y compras</div></div>
-          <button class="btn-primary"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Nuevo proveedor</button>
+          <div><div class="module-title">Proveedores</div><div class="module-desc">Registro y gestión de proveedores</div></div>
+          <button class="btn-primary" onclick="window.location.href='/proveedores'">
+            <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Ir a Proveedores
+          </button>
         </div>
-        <div class="empty-module"><div class="empty-icon"><svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13" rx="1"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div><div class="empty-title">Módulo en construcción</div><div class="empty-text">Registra y gestiona proveedores, órdenes de compra y condiciones de pago.</div><span class="coming-soon">Próximamente</span></div>
+        <div class="module-card" onclick="window.location.href='/proveedores'">
+          <div class="empty-icon"><svg viewBox="0 0 24 24"><path d="M3 7h18v13H3z"/><path d="M16 3h-8v4h8z"/></svg></div>
+          <div class="empty-title">Gestión de Proveedores</div>
+          <div class="empty-text">Registra, consulta, actualiza y elimina proveedores del sistema.</div>
+          <span class="module-card-badge"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>Abrir módulo</span>
+        </div>
       </div>
 
       <!-- PRODUCTOS -->
       <div class="panel" id="panel-productos">
         <div class="module-header">
           <div><div class="module-title">Productos</div><div class="module-desc">Inventario y catálogo de productos</div></div>
-          <button class="btn-primary"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Nuevo producto</button>
+          <button class="btn-primary" onclick="window.location.href='/productos'">
+            <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Ir a Productos
+          </button>
         </div>
-        <div class="empty-module"><div class="empty-icon"><svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg></div><div class="empty-title">Módulo en construcción</div><div class="empty-text">Administra tu catálogo de productos, precios, stock y categorías.</div><span class="coming-soon">Próximamente</span></div>
+        <div class="module-card" onclick="window.location.href='/productos'">
+          <div class="empty-icon"><svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg></div>
+          <div class="empty-title">Gestión de Productos</div>
+          <div class="empty-text">Administra tu catálogo de productos, precios, stock y categorías.</div>
+          <span class="module-card-badge"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>Abrir módulo</span>
+        </div>
       </div>
 
       <!-- VENTAS -->
@@ -370,7 +415,7 @@
   </div>
 </div>
 
-<!-- ═══ MODAL CREAR/EDITAR ═══ -->
+<!-- ═══ MODAL CREAR / EDITAR USUARIO ═══ -->
 <div class="modal-overlay" id="modalUsuario">
   <div class="modal">
     <div class="modal-header">
@@ -380,23 +425,82 @@
       </button>
     </div>
     <div class="modal-body">
+
       <div class="alert-box" id="modalAlert">
         <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
         <span id="modalAlertMsg"></span>
       </div>
+
       <div class="form-row">
-        <div class="field"><label>Cédula</label><input type="text" id="fCedula" placeholder="Ej: 1234567890" maxlength="20" /></div>
-        <div class="field"><label>Nombre completo</label><input type="text" id="fNombreCompleto" placeholder="Nombre y apellidos" /></div>
+        <!-- CÉDULA -->
+        <div class="field">
+          <label>Cédula <span style="color:var(--danger)">*</span></label>
+          <div class="input-wrap">
+            <input type="text" id="fCedula" placeholder="Ej: 1234567890" maxlength="15"
+                   oninput="vcCedula()" onblur="vcCedula(true)" />
+            <svg class="input-icon ok" viewBox="0 0 24 24" fill="none" stroke="#4caf7d" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+            <svg class="input-icon err" viewBox="0 0 24 24" fill="none" stroke="#e05858" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </div>
+          <span class="field-msg" id="msgCedula"></span>
+        </div>
+        <!-- NOMBRE COMPLETO -->
+        <div class="field">
+          <label>Nombre completo <span style="color:var(--danger)">*</span></label>
+          <div class="input-wrap">
+            <input type="text" id="fNombreCompleto" placeholder="Nombre y apellidos" maxlength="150"
+                   oninput="vcNombre()" onblur="vcNombre(true)" />
+            <svg class="input-icon ok" viewBox="0 0 24 24" fill="none" stroke="#4caf7d" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+            <svg class="input-icon err" viewBox="0 0 24 24" fill="none" stroke="#e05858" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </div>
+          <span class="field-msg" id="msgNombre"></span>
+        </div>
       </div>
+
       <div class="form-row">
-        <div class="field"><label>Nombre de usuario</label><input type="text" id="fNombreUsuario" placeholder="usuario123" /></div>
-        <div class="field"><label>Correo electrónico</label><input type="email" id="fCorreo" placeholder="correo@ejemplo.com" /></div>
+        <!-- NOMBRE DE USUARIO -->
+        <div class="field">
+          <label>Nombre de usuario <span style="color:var(--danger)">*</span></label>
+          <div class="input-wrap">
+            <input type="text" id="fNombreUsuario" placeholder="usuario123" maxlength="30"
+                   oninput="vcUsername()" onblur="vcUsername(true)" />
+            <svg class="input-icon ok" viewBox="0 0 24 24" fill="none" stroke="#4caf7d" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+            <svg class="input-icon err" viewBox="0 0 24 24" fill="none" stroke="#e05858" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </div>
+          <span class="field-msg" id="msgUsername"></span>
+        </div>
+        <!-- CORREO -->
+        <div class="field">
+          <label>Correo electrónico <span style="color:var(--danger)">*</span></label>
+          <div class="input-wrap">
+            <input type="text" id="fCorreo" placeholder="correo@ejemplo.com" maxlength="254"
+                   oninput="vcCorreo()" onblur="vcCorreo(true)" />
+            <svg class="input-icon ok" viewBox="0 0 24 24" fill="none" stroke="#4caf7d" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+            <svg class="input-icon err" viewBox="0 0 24 24" fill="none" stroke="#e05858" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </div>
+          <span class="field-msg" id="msgCorreo"></span>
+        </div>
       </div>
+
+      <!-- CONTRASEÑA (solo en crear) -->
       <div class="field" id="campoContrasena">
-        <label>Contraseña</label>
-        <input type="password" id="fContrasena" placeholder="Mínimo 6 caracteres" />
+        <label>Contraseña <span style="color:var(--danger)">*</span></label>
+        <div class="input-wrap">
+          <input type="password" id="fContrasena" placeholder="Mínimo 6 caracteres" maxlength="100"
+                 oninput="vcContrasena()" onblur="vcContrasena(true)" />
+          <svg class="input-icon ok" viewBox="0 0 24 24" fill="none" stroke="#4caf7d" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+          <svg class="input-icon err" viewBox="0 0 24 24" fill="none" stroke="#e05858" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </div>
+        <span class="field-msg" id="msgContrasena"></span>
       </div>
-      <div class="field"><label>Rol</label><input type="text" value="ADMIN" disabled /></div>
+
+      <!-- ROL (solo display) -->
+      <div class="field">
+        <label>Rol</label>
+        <div class="input-wrap">
+          <input type="text" value="ADMIN" disabled />
+        </div>
+      </div>
+
     </div>
     <div class="modal-footer">
       <button class="btn-secondary" onclick="cerrarModal()">Cancelar</button>
@@ -426,103 +530,87 @@
 </div>
 
 <script>
-  // ═══════════════════════════════════════════════
-  //  1. LEER TOKEN — extraer nombreUsuario del JWT
-  //     El backend (UsuarioServicio) firma el token
-  //     con { id, rol, nombreUsuario }
-  // ═══════════════════════════════════════════════
+  // ════════════════════════════════════════
+  //  1. AUTH
+  // ════════════════════════════════════════
   const token = localStorage.getItem('token');
   if (!token) window.location.href = '/login';
 
   let payload = null;
-  try {
-    payload = JSON.parse(atob(token.split('.')[1]));
-  } catch {
-    localStorage.removeItem('token');
-    window.location.href = '/login';
-  }
+  try { payload = JSON.parse(atob(token.split('.')[1])); }
+  catch { localStorage.removeItem('token'); window.location.href = '/login'; }
 
-  // ¿Es el superadmin? Solo depende del nombreUsuario en el token.
   const esSuperAdmin = payload.nombreUsuario === 'admininicial';
 
-  // ═══════════════════════════════════════════════
-  //  2. APLICAR PERMISOS AL CARGAR
-  // ═══════════════════════════════════════════════
+  // ════════════════════════════════════════
+  //  2. INIT
+  // ════════════════════════════════════════
   (function init() {
-    // Fecha en topbar
     document.getElementById('topbarDate').textContent = new Date().toLocaleDateString('es-CO', {
       weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
     });
-
-    // Avatar y nombre
     const nombre = payload.nombreUsuario || 'Usuario';
     document.getElementById('userInitial').textContent = nombre.charAt(0).toUpperCase();
     document.getElementById('userName').textContent    = nombre;
 
     if (esSuperAdmin) {
-      // Admin principal: mostrar ítem Usuarios en sidebar
       document.getElementById('navUsuarios').style.display = 'flex';
       document.getElementById('userRoleLabel').textContent  = 'Admin Principal';
-
-      // Chips del home CON Usuarios
-      document.getElementById('welcomeTitle').textContent = '¡Bienvenido, Admin!';
-      document.getElementById('welcomeChips').innerHTML   = chipUsuarios() + chipsComunes();
-
+      document.getElementById('welcomeTitle').textContent   = '¡Bienvenido, Admin!';
+      document.getElementById('welcomeChips').innerHTML     = chipUsuarios() + chipsComunes();
     } else {
-      // Usuario creado: sin ítem Usuarios (ya está oculto por defecto con display:none)
       document.getElementById('userRoleLabel').textContent = 'Administrador';
-
-      // Chips del home SIN Usuarios
-      document.getElementById('welcomeTitle').textContent = `¡Bienvenido, ${nombre}!`;
-      document.getElementById('welcomeChips').innerHTML   = chipsComunes();
+      document.getElementById('welcomeTitle').textContent  = `¡Bienvenido, ${nombre}!`;
+      document.getElementById('welcomeChips').innerHTML    = chipsComunes();
     }
   })();
 
   function chipUsuarios() {
     return `<div class="module-chip" onclick="activarPanel('usuarios')">
-      <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>Usuarios
-    </div>`;
+    <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>Usuarios
+  </div>`;
   }
 
   function chipsComunes() {
     return `
-      <div class="module-chip" onclick="activarPanel('clientes')">
-        <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Clientes
-      </div>
-      <div class="module-chip" onclick="activarPanel('proveedores')">
-        <svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13" rx="1"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>Proveedores
-      </div>
-      <div class="module-chip" onclick="activarPanel('productos')">
-        <svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>Productos
-      </div>
-      <div class="module-chip" onclick="activarPanel('ventas')">
-        <svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>Ventas
-      </div>
-      <div class="module-chip" onclick="activarPanel('reportes')">
-        <svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>Reportes
-      </div>`;
+    <div class="module-chip" onclick="window.location.href='/clientes'">
+      <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Clientes
+    </div>
+    <div class="module-chip" onclick="activarPanel('proveedores')">
+      <svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13" rx="1"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>Proveedores
+    </div>
+    <div class="module-chip" onclick="activarPanel('productos')">
+      <svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>Productos
+    </div>
+    <div class="module-chip" onclick="activarPanel('ventas')">
+      <svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>Ventas
+    </div>
+    <div class="module-chip" onclick="activarPanel('reportes')">
+      <svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>Reportes
+    </div>`;
   }
 
-  // ═══════════════════════════════════════════════
+  // ════════════════════════════════════════
   //  3. NAVEGACIÓN
-  // ═══════════════════════════════════════════════
-  const navItems = document.querySelectorAll('.nav-item');
+  // ════════════════════════════════════════
+  const navItems = document.querySelectorAll('.nav-item[data-panel]');
   const panels   = document.querySelectorAll('.panel');
   const titulos  = {
-    home:        { title: 'Dashboard',   badge: 'Inicio' },
-    usuarios:    { title: 'Usuarios',    badge: 'Gestión' },
-    clientes:    { title: 'Clientes',    badge: 'Gestión' },
-    proveedores: { title: 'Proveedores', badge: 'Gestión' },
-    productos:   { title: 'Productos',   badge: 'Inventario' },
-    ventas:      { title: 'Ventas',      badge: 'Transacciones' },
-    reportes:    { title: 'Reportes',    badge: 'Análisis' },
+    home:        { title: 'Dashboard',    badge: 'Inicio' },
+    usuarios:    { title: 'Usuarios',     badge: 'Gestión' },
+    clientes:    { title: 'Clientes',     badge: 'Gestión' },
+    proveedores: { title: 'Proveedores',  badge: 'Gestión' },
+    productos:   { title: 'Productos',    badge: 'Inventario' },
+    ventas:      { title: 'Ventas',       badge: 'Transacciones' },
+    reportes:    { title: 'Reportes',     badge: 'Análisis' },
   };
 
   function activarPanel(panelId) {
-    // Bloqueo adicional: si alguien intenta navegar a usuarios sin permiso
+    if (panelId === 'clientes') { window.location.href = '/clientes'; return; }
     if (panelId === 'usuarios' && !esSuperAdmin) return;
 
     navItems.forEach(i => i.classList.toggle('active', i.dataset.panel === panelId));
+    document.getElementById('navClientes').classList.remove('active');
     panels.forEach(p => p.classList.toggle('active', p.id === `panel-${panelId}`));
     const info = titulos[panelId] || { title: panelId, badge: '' };
     document.getElementById('pageTitle').textContent = info.title;
@@ -537,24 +625,99 @@
     window.location.href = '/login';
   });
 
-  // ═══════════════════════════════════════════════
+  // ════════════════════════════════════════
   //  4. API HELPERS
-  // ═══════════════════════════════════════════════
+  // ════════════════════════════════════════
   function getHeaders() {
     return { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` };
   }
 
-  // ═══════════════════════════════════════════════
-  //  5. CARGAR Y RENDERIZAR USUARIOS
-  // ═══════════════════════════════════════════════
+  // ════════════════════════════════════════
+  //  5. REGLAS DE VALIDACIÓN (espejo exacto del backend)
+  // ════════════════════════════════════════
+  const RX_CEDULA   = /^[0-9]{5,15}$/;
+  const RX_USERNAME = /^[a-zA-Z0-9_.\-]{3,30}$/;
+  const RX_CORREO   = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+  const RX_NOMBRE   = /^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\s\-'.]+$/;
+
+  const REGLAS = {
+    cedula:   v => !v ? "La cédula es requerida"
+            : !RX_CEDULA.test(v) ? "Solo dígitos, entre 5 y 15 números" : null,
+    nombre:   v => !v ? "El nombre completo es requerido"
+            : v.length < 3   ? "Mínimo 3 caracteres"
+                    : v.length > 150 ? "Máximo 150 caracteres"
+                            : !RX_NOMBRE.test(v) ? "Solo letras, espacios, guiones y apóstrofes" : null,
+    username: v => !v ? "El nombre de usuario es requerido"
+            : v.length < 3   ? "Mínimo 3 caracteres"
+                    : v.length > 30  ? "Máximo 30 caracteres"
+                            : !RX_USERNAME.test(v) ? "Solo letras, números, puntos, guiones y guión bajo" : null,
+    correo:   v => !v ? "El correo electrónico es requerido"
+            : v.length > 254 ? "Máximo 254 caracteres"
+                    : !RX_CORREO.test(v) ? "Formato inválido (ej: nombre@dominio.com)" : null,
+    contrasena: v => !v ? "La contraseña es requerida"
+            : v.length < 6   ? "Mínimo 6 caracteres"
+                    : v.length > 100 ? "Máximo 100 caracteres" : null
+  };
+
+  // Aplica estado visual a un campo
+  function setField(inputId, msgId, error) {
+    const inp = document.getElementById(inputId);
+    const msg = document.getElementById(msgId);
+    if (!inp || !msg) return;
+    inp.classList.remove('is-valid', 'is-invalid');
+    msg.className = 'field-msg';
+    msg.textContent = '';
+    if (error) {
+      inp.classList.add('is-invalid');
+      msg.classList.add('error');
+      msg.textContent = error;
+    } else if (inp.value.trim()) {
+      inp.classList.add('is-valid');
+    }
+  }
+
+  // Validadores individuales (oninput / onblur)
+  function vcCedula(b=false)    { const v=document.getElementById('fCedula').value.trim();        if(!b&&!v)return; setField('fCedula',        'msgCedula',    REGLAS.cedula(v));    }
+  function vcNombre(b=false)    { const v=document.getElementById('fNombreCompleto').value.trim();if(!b&&!v)return; setField('fNombreCompleto','msgNombre',    REGLAS.nombre(v));    }
+  function vcUsername(b=false)  { const v=document.getElementById('fNombreUsuario').value.trim(); if(!b&&!v)return; setField('fNombreUsuario', 'msgUsername',  REGLAS.username(v));  }
+  function vcCorreo(b=false)    { const v=document.getElementById('fCorreo').value.trim();        if(!b&&!v)return; setField('fCorreo',        'msgCorreo',    REGLAS.correo(v));    }
+  function vcContrasena(b=false){ const v=document.getElementById('fContrasena').value;           if(!b&&!v)return; setField('fContrasena',    'msgContrasena',REGLAS.contrasena(v));}
+
+  // Valida todos los campos visibles y devuelve lista de errores
+  function validarFormulario() {
+    const errores = [];
+    const eC = REGLAS.cedula(document.getElementById('fCedula').value.trim());
+    setField('fCedula','msgCedula',eC); if(eC) errores.push(eC);
+
+    const eN = REGLAS.nombre(document.getElementById('fNombreCompleto').value.trim());
+    setField('fNombreCompleto','msgNombre',eN); if(eN) errores.push(eN);
+
+    const eU = REGLAS.username(document.getElementById('fNombreUsuario').value.trim());
+    setField('fNombreUsuario','msgUsername',eU); if(eU) errores.push(eU);
+
+    const eCo = REGLAS.correo(document.getElementById('fCorreo').value.trim());
+    setField('fCorreo','msgCorreo',eCo); if(eCo) errores.push(eCo);
+
+    // Contraseña solo se valida en modo crear
+    if (!modoEdicion) {
+      const ePw = REGLAS.contrasena(document.getElementById('fContrasena').value);
+      setField('fContrasena','msgContrasena',ePw); if(ePw) errores.push(ePw);
+    }
+
+    return errores;
+  }
+
+  // ════════════════════════════════════════
+  //  6. CARGAR Y RENDERIZAR USUARIOS
+  // ════════════════════════════════════════
   let todosLosUsuarios = [];
 
   async function cargarUsuarios() {
     document.getElementById('tablaContenido').innerHTML = `
-      <div class="empty-state" style="padding:48px">
-        <div class="empty-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
-        <div class="empty-title">Cargando...</div>
-      </div>`;
+    <div class="empty-state" style="padding:48px">
+      <div class="empty-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="10"/></svg></div>
+      <div class="empty-title">Cargando...</div>
+    </div>`;
     try {
       const res  = await fetch('/api/usuarios', { headers: getHeaders() });
       const data = await res.json();
@@ -563,11 +726,11 @@
       renderTabla(todosLosUsuarios);
     } catch (err) {
       document.getElementById('tablaContenido').innerHTML = `
-        <div class="empty-state" style="padding:48px">
-          <div class="empty-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--danger)" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
-          <div class="empty-title">Error al cargar</div>
-          <div class="empty-text">${err.message}</div>
-        </div>`;
+      <div class="empty-state" style="padding:48px">
+        <div class="empty-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--danger)" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+        <div class="empty-title">Error al cargar</div>
+        <div class="empty-text">${err.message}</div>
+      </div>`;
     }
   }
 
@@ -577,11 +740,11 @@
 
     if (lista.length === 0) {
       document.getElementById('tablaContenido').innerHTML = `
-        <div class="empty-state" style="padding:56px">
-          <div class="empty-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="1.8" stroke-linecap="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div>
-          <div class="empty-title">No hay usuarios registrados</div>
-          <div class="empty-text">Crea el primer usuario con el botón "Nuevo usuario".</div>
-        </div>`;
+      <div class="empty-state" style="padding:56px">
+        <div class="empty-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="1.8" stroke-linecap="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div>
+        <div class="empty-title">No hay usuarios registrados</div>
+        <div class="empty-text">Crea el primer usuario con el botón "Nuevo usuario".</div>
+      </div>`;
       return;
     }
 
@@ -593,26 +756,26 @@
       const acciones = esInicial
               ? `<span style="font-size:0.72rem;color:var(--muted);font-style:italic">Protegido</span>`
               : `<button class="btn-edit" onclick="abrirModalEditar(${u.id})">
-             <svg viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>Editar
-           </button>
-           <button class="btn-danger" onclick="confirmarEliminar(${u.id}, '${(u.nombre_completo || u.nombre_usuario).replace(/'/g,"\\'")}')">
-             <svg viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/></svg>Eliminar
-           </button>`;
+           <svg viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>Editar
+         </button>
+         <button class="btn-danger" onclick="confirmarEliminar(${u.id},'${(u.nombre_completo||u.nombre_usuario).replace(/'/g,"\\'")}')">
+           <svg viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/></svg>Eliminar
+         </button>`;
       return `<tr>
-        <td>${u.cedula || '<span class="td-muted">—</span>'}</td>
-        <td><strong>${u.nombre_completo || '<span class="td-muted">—</span>'}</strong></td>
-        <td>${u.nombre_usuario}</td>
-        <td class="td-muted">${u.correo || '—'}</td>
-        <td>${badge}</td>
-        <td><div class="td-actions">${acciones}</div></td>
-      </tr>`;
+      <td>${u.cedula || '<span class="td-muted">—</span>'}</td>
+      <td><strong>${u.nombre_completo || '<span class="td-muted">—</span>'}</strong></td>
+      <td>${u.nombre_usuario}</td>
+      <td class="td-muted">${u.correo || '—'}</td>
+      <td>${badge}</td>
+      <td><div class="td-actions">${acciones}</div></td>
+    </tr>`;
     }).join('');
 
     document.getElementById('tablaContenido').innerHTML = `
-      <table>
-        <thead><tr><th>Cédula</th><th>Nombre completo</th><th>Usuario</th><th>Correo</th><th>Rol</th><th>Acciones</th></tr></thead>
-        <tbody>${filas}</tbody>
-      </table>`;
+    <table>
+      <thead><tr><th>Cédula</th><th>Nombre completo</th><th>Usuario</th><th>Correo</th><th>Rol</th><th>Acciones</th></tr></thead>
+      <tbody>${filas}</tbody>
+    </table>`;
   }
 
   function filtrarTabla() {
@@ -625,17 +788,29 @@
     ));
   }
 
-  // ═══════════════════════════════════════════════
-  //  6. MODAL CREAR / EDITAR
-  // ═══════════════════════════════════════════════
+  // ════════════════════════════════════════
+  //  7. MODAL CREAR / EDITAR
+  // ════════════════════════════════════════
   let modoEdicion = false, idEditando = null, idEliminando = null;
+
+  function limpiarEstados() {
+    ['fCedula','fNombreCompleto','fNombreUsuario','fCorreo','fContrasena'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) { el.value = ''; el.classList.remove('is-valid','is-invalid'); }
+    });
+    ['msgCedula','msgNombre','msgUsername','msgCorreo','msgContrasena'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) { el.textContent = ''; el.className = 'field-msg'; }
+    });
+    document.getElementById('modalAlert').className = 'alert-box';
+  }
 
   function abrirModalCrear() {
     modoEdicion = false; idEditando = null;
     document.getElementById('modalTitulo').textContent    = 'Nuevo usuario';
     document.getElementById('btnGuardarText').textContent = 'Crear usuario';
     document.getElementById('campoContrasena').style.display = 'flex';
-    limpiarModal();
+    limpiarEstados();
     document.getElementById('modalUsuario').classList.add('open');
     setTimeout(() => document.getElementById('fCedula').focus(), 100);
   }
@@ -643,28 +818,31 @@
   function abrirModalEditar(id) {
     const u = todosLosUsuarios.find(x => x.id === id);
     if (!u) return;
+
     modoEdicion = true; idEditando = id;
     document.getElementById('modalTitulo').textContent    = 'Editar usuario';
     document.getElementById('btnGuardarText').textContent = 'Guardar cambios';
     document.getElementById('campoContrasena').style.display = 'none';
-    limpiarModal();
+    limpiarEstados();
+
     document.getElementById('fCedula').value         = u.cedula || '';
-    document.getElementById('fNombreCompleto').value = u.nombre_completo || '';
-    document.getElementById('fNombreUsuario').value  = u.nombre_usuario || '';
-    document.getElementById('fCorreo').value         = u.correo || '';
+    document.getElementById('fNombreCompleto').value  = u.nombre_completo || '';
+    document.getElementById('fNombreUsuario').value   = u.nombre_usuario || '';
+    document.getElementById('fCorreo').value          = u.correo || '';
+
+    // Marcar campos precargados como válidos
+    ['fCedula','fNombreCompleto','fNombreUsuario','fCorreo'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el && el.value) el.classList.add('is-valid');
+    });
+
     document.getElementById('modalUsuario').classList.add('open');
     setTimeout(() => document.getElementById('fCedula').focus(), 100);
   }
 
   function cerrarModal() {
     document.getElementById('modalUsuario').classList.remove('open');
-    limpiarModal();
-  }
-
-  function limpiarModal() {
-    ['fCedula','fNombreCompleto','fNombreUsuario','fCorreo','fContrasena']
-            .forEach(id => { const el = document.getElementById(id); if (el) el.value = ''; });
-    document.getElementById('modalAlert').className = 'alert-box';
+    limpiarEstados();
   }
 
   function mostrarAlertaModal(tipo, msg) {
@@ -673,24 +851,26 @@
     document.getElementById('modalAlertMsg').textContent = msg;
   }
 
-  // ═══════════════════════════════════════════════
-  //  7. GUARDAR (crear o editar)
-  // ═══════════════════════════════════════════════
+  // ════════════════════════════════════════
+  //  8. GUARDAR
+  // ════════════════════════════════════════
   async function guardarUsuario() {
+    // 1. Validación frontend completa antes de cualquier request
+    const errores = validarFormulario();
+    if (errores.length > 0) {
+      mostrarAlertaModal('error', errores.length === 1
+              ? errores[0]
+              : `Corrige ${errores.length} errores en el formulario`);
+      return;
+    }
+
     const cedula         = document.getElementById('fCedula').value.trim();
     const nombreCompleto = document.getElementById('fNombreCompleto').value.trim();
     const nombreUsuario  = document.getElementById('fNombreUsuario').value.trim();
     const correo         = document.getElementById('fCorreo').value.trim();
     const contrasena     = document.getElementById('fContrasena').value;
 
-    if (!cedula || !nombreCompleto || !nombreUsuario || !correo) {
-      mostrarAlertaModal('error', 'Todos los campos son requeridos.'); return;
-    }
-    if (!modoEdicion && contrasena.length < 6) {
-      mostrarAlertaModal('error', 'La contraseña debe tener al menos 6 caracteres.'); return;
-    }
-
-    const btn = document.getElementById('btnGuardar');
+    const btn     = document.getElementById('btnGuardar');
     const btnText = document.getElementById('btnGuardarText');
     btn.disabled = true;
     btnText.innerHTML = '<span class="spinner"></span>';
@@ -709,16 +889,20 @@
       cerrarModal();
       await cargarUsuarios();
     } catch (err) {
-      mostrarAlertaModal('error', err.message);
+      // El backend puede enviar múltiples errores separados por " | "
+      const msgs = err.message.split(' | ');
+      mostrarAlertaModal('error', msgs.length > 1
+              ? `${msgs.length} errores: ${msgs[0]}...`
+              : err.message);
     } finally {
       btn.disabled = false;
       btnText.textContent = modoEdicion ? 'Guardar cambios' : 'Crear usuario';
     }
   }
 
-  // ═══════════════════════════════════════════════
-  //  8. ELIMINAR
-  // ═══════════════════════════════════════════════
+  // ════════════════════════════════════════
+  //  9. ELIMINAR
+  // ════════════════════════════════════════
   function confirmarEliminar(id, nombre) {
     idEliminando = id;
     document.getElementById('confirmTexto').textContent =
@@ -751,12 +935,10 @@
     }
   }
 
-  // Cerrar modales al hacer click fuera
-  document.getElementById('modalUsuario').addEventListener('click',  e => { if (e.target === e.currentTarget) cerrarModal(); });
+  document.getElementById('modalUsuario').addEventListener('click',   e => { if (e.target === e.currentTarget) cerrarModal(); });
   document.getElementById('modalConfirmar').addEventListener('click', e => { if (e.target === e.currentTarget) cerrarConfirmar(); });
 
-  // Enter para guardar en el formulario
-  document.querySelectorAll('#modalUsuario input').forEach(input => {
+  document.querySelectorAll('#modalUsuario input:not([disabled])').forEach(input => {
     input.addEventListener('keydown', e => { if (e.key === 'Enter') guardarUsuario(); });
   });
 </script>
