@@ -26,6 +26,8 @@
       --success:     #4caf7d;
       --success-bg:  #f0fdf6;
       --warn:        #e0a040;
+      --field-ok:    #4caf7d;
+      --field-error: #e05858;
     }
 
     html, body { height: 100%; font-family: 'Nunito', sans-serif; background: var(--bg); color: var(--text); overflow: hidden; }
@@ -40,13 +42,11 @@
     .brand-icon svg { width: 18px; height: 18px; }
     .brand-name { font-family: 'Pacifico', cursive; font-size: 1.1rem; color: #e8f3fd; line-height: 1; }
     .brand-sub { font-size: 0.62rem; color: rgba(255,255,255,0.35); letter-spacing: 0.12em; text-transform: uppercase; margin-top: 3px; font-weight: 400; }
-
     .sidebar-user { display: flex; align-items: center; gap: 10px; padding: 12px 16px; margin: 16px 12px 0; background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; }
     .user-avatar { width: 30px; height: 30px; border-radius: 50%; background: var(--blue-mid); display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 800; color: var(--sidebar-bg); flex-shrink: 0; }
     .user-info { flex: 1; min-width: 0; }
     .user-name { font-size: 0.78rem; font-weight: 700; color: #e8f3fd; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
     .user-role { font-size: 0.62rem; color: var(--blue-mid); letter-spacing: 0.06em; text-transform: uppercase; font-weight: 600; }
-
     .sidebar-nav { flex: 1; padding: 20px 12px; overflow-y: auto; }
     .nav-section-label { font-size: 0.6rem; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.25); padding: 0 8px; margin-bottom: 6px; margin-top: 20px; font-weight: 700; }
     .nav-section-label:first-child { margin-top: 0; }
@@ -55,7 +55,6 @@
     .nav-item:hover { background: rgba(255,255,255,0.07); color: rgba(255,255,255,0.85); }
     .nav-item.active { background: rgba(168,204,239,0.18); color: #c8e4f8; }
     .nav-item.active::before { content: ''; position: absolute; left: 0; top: 25%; bottom: 25%; width: 3px; background: var(--blue-mid); border-radius: 3px; }
-
     .sidebar-footer { padding: 16px 12px; border-top: 1px solid rgba(255,255,255,0.08); }
     .btn-logout { display: flex; align-items: center; gap: 10px; width: 100%; padding: 10px 12px; background: none; border: 1px solid rgba(224,112,112,0.25); border-radius: 10px; color: rgba(224,112,112,0.65); font-family: 'Nunito', sans-serif; font-size: 0.78rem; font-weight: 700; cursor: pointer; transition: all 0.15s; }
     .btn-logout svg { width: 15px; height: 15px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
@@ -68,7 +67,6 @@
     .page-title { font-size: 1.05rem; font-weight: 800; color: var(--text); }
     .page-badge { font-size: 0.65rem; background: var(--blue-light); color: var(--blue-dark); border: 1px solid rgba(91,155,213,0.2); padding: 3px 10px; border-radius: 20px; letter-spacing: 0.06em; text-transform: uppercase; font-weight: 700; }
     .topbar-date { font-size: 0.75rem; color: var(--muted); font-weight: 600; }
-
     .content { flex: 1; overflow-y: auto; padding: 32px; }
 
     /* ══ MODULE HEADER ══ */
@@ -77,7 +75,7 @@
     .module-desc { font-size: 0.82rem; color: var(--muted); margin-top: 5px; font-weight: 400; }
     .header-actions { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
 
-    /* ══ BÚSQUEDA POR CÉDULA (HU-007 flujo principal) ══ */
+    /* ══ BÚSQUEDA POR CÉDULA ══ */
     .cedula-search-bar { background: var(--surface); border: 1.5px solid var(--border); border-radius: 14px; padding: 20px 24px; margin-bottom: 24px; box-shadow: 0 2px 10px rgba(91,155,213,0.06); display: flex; align-items: flex-end; gap: 14px; flex-wrap: wrap; }
     .cedula-search-bar .field { flex: 1; min-width: 200px; }
     .cedula-search-bar label { display: block; font-size: 0.72rem; font-weight: 800; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 6px; }
@@ -86,7 +84,7 @@
     .cedula-search-bar input::placeholder { color: var(--muted); font-weight: 400; }
     .search-hint { font-size: 0.73rem; color: var(--muted); margin-top: 4px; }
 
-    /* Resultado de búsqueda por cédula */
+    /* ══ CARD RESULTADO ══ */
     .cliente-card { display: none; background: var(--blue-soft); border: 1.5px solid rgba(91,155,213,0.25); border-radius: 12px; padding: 20px 24px; margin-bottom: 24px; animation: fadeIn 0.3s ease; }
     .cliente-card.visible { display: block; }
     .cliente-card-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; flex-wrap: wrap; gap: 8px; }
@@ -155,18 +153,34 @@
     .modal-body { padding: 24px; display: flex; flex-direction: column; gap: 16px; }
     .modal-footer { padding: 16px 24px; border-top: 1.5px solid var(--border); display: flex; justify-content: flex-end; gap: 10px; }
 
-    /* ══ FORM ══ */
-    .field { display: flex; flex-direction: column; gap: 6px; }
+    /* ══ FORM + VALIDACIÓN ══ */
+    .field { display: flex; flex-direction: column; gap: 4px; }
     .field label { font-size: 0.72rem; font-weight: 800; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; }
-    .field input { padding: 10px 14px; border: 1.5px solid var(--border); border-radius: 8px; font-family: 'Nunito', sans-serif; font-size: 0.85rem; color: var(--text); font-weight: 600; outline: none; transition: border-color 0.15s, box-shadow 0.15s; background: var(--bg); }
+    .field .input-wrap { position: relative; }
+    .field input {
+      width: 100%; padding: 10px 36px 10px 14px;
+      border: 1.5px solid var(--border); border-radius: 8px;
+      font-family: 'Nunito', sans-serif; font-size: 0.85rem;
+      color: var(--text); font-weight: 600; outline: none;
+      transition: border-color 0.15s, box-shadow 0.15s; background: var(--bg);
+    }
     .field input:focus { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(91,155,213,0.15); background: var(--surface); }
     .field input::placeholder { color: var(--muted); font-weight: 400; }
     .field input:disabled { opacity: 0.55; cursor: not-allowed; background: var(--bg); }
+    .field input.is-valid   { border-color: var(--field-ok);    background: var(--surface); }
+    .field input.is-invalid { border-color: var(--field-error); background: #fff8f8; }
+    .field input.is-valid:focus   { box-shadow: 0 0 0 3px rgba(76,175,125,0.15); }
+    .field input.is-invalid:focus { box-shadow: 0 0 0 3px rgba(224,88,88,0.15); }
+    .input-icon { position: absolute; right: 11px; top: 50%; transform: translateY(-50%); width: 15px; height: 15px; pointer-events: none; display: none; }
+    .field input.is-valid   + .input-icon.ok  { display: block; }
+    .field input.is-invalid ~ .input-icon.err { display: block; }
+    .field-msg { font-size: 0.7rem; font-weight: 700; min-height: 16px; }
+    .field-msg.error { color: var(--field-error); }
     .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
 
     /* ══ ALERT ══ */
     .alert-box { display: none; align-items: center; gap: 10px; padding: 10px 14px; border-radius: 8px; font-size: 0.8rem; font-weight: 600; }
-    .alert-box.error { display: flex; background: var(--danger-bg); border: 1px solid rgba(224,112,112,0.3); color: var(--danger); }
+    .alert-box.error   { display: flex; background: var(--danger-bg); border: 1px solid rgba(224,112,112,0.3); color: var(--danger); }
     .alert-box.success { display: flex; background: var(--success-bg); border: 1px solid rgba(76,175,125,0.3); color: var(--success); }
     .alert-box svg { width: 15px; height: 15px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; flex-shrink: 0; }
 
@@ -253,12 +267,12 @@
         <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
         <span>Clientes</span>
       </button>
-      <button class="nav-item" onclick="window.location.href='/dashboard'">
+      <button class="nav-item" onclick="window.location.href='/proveedores'">
         <svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13" rx="1"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
         <span>Proveedores</span>
       </button>
 
-      <div class="nav-section-label">Inventario & Ventas</div>
+      <div class="nav-section-label">Inventario &amp; Ventas</div>
       <button class="nav-item" onclick="window.location.href='/dashboard'">
         <svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
         <span>Productos</span>
@@ -309,13 +323,14 @@
         </div>
       </div>
 
-      <!-- BÚSQUEDA POR CÉDULA (HU-007) -->
+      <!-- BÚSQUEDA POR CÉDULA -->
       <div class="cedula-search-bar">
         <div class="field">
           <label>Consultar por cédula</label>
-          <input type="text" id="inputCedulaBuscar" placeholder="Ingresa la cédula del cliente..." maxlength="20"
+          <input type="text" id="inputCedulaBuscar"
+                 placeholder="Ej: 1234567890" maxlength="15"
                  onkeydown="if(event.key==='Enter') buscarPorCedula()" />
-          <span class="search-hint">Pulsa Enter o el botón para buscar · También puedes ver todos en la tabla</span>
+          <span class="search-hint">Cédula: 5–15 dígitos numéricos · Pulsa Enter o el botón para buscar</span>
         </div>
         <button class="btn-search" onclick="buscarPorCedula()" id="btnBuscarCedula">
           <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
@@ -342,9 +357,7 @@
             </button>
           </div>
         </div>
-        <div class="cliente-grid" id="clienteCardGrid">
-          <!-- Contenido dinámico -->
-        </div>
+        <div class="cliente-grid" id="clienteCardGrid"></div>
       </div>
 
       <!-- TABLA LISTADO GENERAL -->
@@ -352,7 +365,7 @@
         <div class="table-toolbar">
           <div class="table-search">
             <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-            <input type="text" id="buscarTabla" placeholder="Filtrar por nombre, cédula, teléfono..." oninput="filtrarTabla()" />
+            <input type="text" id="buscarTabla" placeholder="Filtrar por nombre, cédula, correo..." oninput="filtrarTabla()" />
           </div>
           <span class="table-count" id="contadorClientes">Cargando...</span>
         </div>
@@ -378,34 +391,75 @@
       </button>
     </div>
     <div class="modal-body">
+
+      <!-- Alerta general del modal -->
       <div class="alert-box" id="modalAlert">
         <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
         <span id="modalAlertMsg"></span>
       </div>
+
       <div class="form-row">
+        <!-- CÉDULA -->
         <div class="field">
-          <label>Cédula</label>
-          <input type="text" id="fCedula" placeholder="Ej: 1234567890" maxlength="20" />
+          <label>Cédula <span style="color:var(--danger)">*</span></label>
+          <div class="input-wrap">
+            <input type="text" id="fCedula" placeholder="Ej: 1234567890" maxlength="15"
+                   oninput="vcCedula()" onblur="vcCedula(true)" />
+            <svg class="input-icon ok" viewBox="0 0 24 24" fill="none" stroke="#4caf7d" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+            <svg class="input-icon err" viewBox="0 0 24 24" fill="none" stroke="#e05858" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </div>
+          <span class="field-msg" id="msgCedula"></span>
         </div>
+        <!-- NOMBRE -->
         <div class="field">
-          <label>Nombre completo</label>
-          <input type="text" id="fNombreCompleto" placeholder="Nombre y apellidos" />
+          <label>Nombre completo <span style="color:var(--danger)">*</span></label>
+          <div class="input-wrap">
+            <input type="text" id="fNombreCompleto" placeholder="Nombre y apellidos" maxlength="150"
+                   oninput="vcNombre()" onblur="vcNombre(true)" />
+            <svg class="input-icon ok" viewBox="0 0 24 24" fill="none" stroke="#4caf7d" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+            <svg class="input-icon err" viewBox="0 0 24 24" fill="none" stroke="#e05858" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </div>
+          <span class="field-msg" id="msgNombre"></span>
         </div>
       </div>
+
+      <!-- DIRECCIÓN -->
       <div class="field">
-        <label>Dirección</label>
-        <input type="text" id="fDireccion" placeholder="Calle, barrio, ciudad..." />
+        <label>Dirección <span style="color:var(--danger)">*</span></label>
+        <div class="input-wrap">
+          <input type="text" id="fDireccion" placeholder="Calle, barrio, ciudad..." maxlength="200"
+                 oninput="vcDir()" onblur="vcDir(true)" />
+          <svg class="input-icon ok" viewBox="0 0 24 24" fill="none" stroke="#4caf7d" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+          <svg class="input-icon err" viewBox="0 0 24 24" fill="none" stroke="#e05858" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </div>
+        <span class="field-msg" id="msgDireccion"></span>
       </div>
+
       <div class="form-row">
+        <!-- TELÉFONO -->
         <div class="field">
-          <label>Teléfono</label>
-          <input type="text" id="fTelefono" placeholder="Ej: 3001234567" maxlength="20" />
+          <label>Teléfono <span style="color:var(--danger)">*</span></label>
+          <div class="input-wrap">
+            <input type="text" id="fTelefono" placeholder="Ej: 3001234567" maxlength="20"
+                   oninput="vcTel()" onblur="vcTel(true)" />
+            <svg class="input-icon ok" viewBox="0 0 24 24" fill="none" stroke="#4caf7d" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+            <svg class="input-icon err" viewBox="0 0 24 24" fill="none" stroke="#e05858" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </div>
+          <span class="field-msg" id="msgTelefono"></span>
         </div>
+        <!-- CORREO -->
         <div class="field">
-          <label>Correo electrónico</label>
-          <input type="email" id="fCorreo" placeholder="correo@ejemplo.com" />
+          <label>Correo electrónico <span style="color:var(--danger)">*</span></label>
+          <div class="input-wrap">
+            <input type="text" id="fCorreo" placeholder="correo@ejemplo.com" maxlength="254"
+                   oninput="vcCorreo()" onblur="vcCorreo(true)" />
+            <svg class="input-icon ok" viewBox="0 0 24 24" fill="none" stroke="#4caf7d" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+            <svg class="input-icon err" viewBox="0 0 24 24" fill="none" stroke="#e05858" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </div>
+          <span class="field-msg" id="msgCorreo"></span>
         </div>
       </div>
+
     </div>
     <div class="modal-footer">
       <button class="btn-secondary" onclick="cerrarModal()">Cancelar</button>
@@ -441,9 +495,9 @@
 </div>
 
 <script>
-  // ═══════════════════════════════════════
+  // ════════════════════════════════════════
   //  AUTH
-  // ═══════════════════════════════════════
+  // ════════════════════════════════════════
   const token = localStorage.getItem('token');
   if (!token) window.location.href = '/login';
 
@@ -453,9 +507,9 @@
 
   const esSuperAdmin = payload.nombreUsuario === 'admininicial';
 
-  // ═══════════════════════════════════════
+  // ════════════════════════════════════════
   //  INIT
-  // ═══════════════════════════════════════
+  // ════════════════════════════════════════
   (function init() {
     document.getElementById('topbarDate').textContent = new Date().toLocaleDateString('es-CO', {
       weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
@@ -465,7 +519,6 @@
     document.getElementById('userName').textContent    = nombre;
     document.getElementById('userRoleLabel').textContent = esSuperAdmin ? 'Admin Principal' : 'Administrador';
     if (esSuperAdmin) document.getElementById('navUsuarios').style.display = 'flex';
-
     cargarClientes();
   })();
 
@@ -474,19 +527,81 @@
     window.location.href = '/login';
   });
 
-  // ═══════════════════════════════════════
+  // ════════════════════════════════════════
   //  API HELPERS
-  // ═══════════════════════════════════════
+  // ════════════════════════════════════════
   function headers() {
     return { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` };
   }
 
-  // ═══════════════════════════════════════
+  // ════════════════════════════════════════
+  //  REGLAS DE VALIDACIÓN (espejo exacto del backend)
+  // ════════════════════════════════════════
+  const RX_CEDULA   = /^[0-9]{5,15}$/;
+  const RX_TELEFONO = /^[0-9+\-\s()]{7,20}$/;
+  const RX_CORREO   = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+  const RX_NOMBRE   = /^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\s\-'.]+$/;
+
+  const REGLAS = {
+    cedula:  v => !v ? "La cédula es requerida"
+            : !RX_CEDULA.test(v) ? "Solo dígitos, entre 5 y 15 números" : null,
+    nombre:  v => !v ? "El nombre completo es requerido"
+            : v.length < 3   ? "Mínimo 3 caracteres"
+                    : v.length > 150 ? "Máximo 150 caracteres"
+                            : !RX_NOMBRE.test(v) ? "Solo letras, espacios, guiones y apóstrofes" : null,
+    dir:     v => !v ? "La dirección es requerida"
+            : v.length < 5   ? "Mínimo 5 caracteres"
+                    : v.length > 200 ? "Máximo 200 caracteres" : null,
+    tel:     v => !v ? "El teléfono es requerido"
+            : !RX_TELEFONO.test(v) ? "Solo números, +, -, paréntesis y espacios (7–20 caracteres)" : null,
+    correo:  v => !v ? "El correo electrónico es requerido"
+            : v.length > 254 ? "Máximo 254 caracteres"
+                    : !RX_CORREO.test(v) ? "Formato inválido (ej: nombre@dominio.com)" : null
+  };
+
+  // Aplica estado visual (borde + ícono + mensaje) a un campo
+  function setField(inputId, msgId, error) {
+    const inp = document.getElementById(inputId);
+    const msg = document.getElementById(msgId);
+    inp.classList.remove('is-valid', 'is-invalid');
+    msg.className = 'field-msg';
+    msg.textContent = '';
+    if (error) {
+      inp.classList.add('is-invalid');
+      msg.classList.add('error');
+      msg.textContent = error;
+    } else if (inp.value.trim()) {
+      inp.classList.add('is-valid');
+    }
+  }
+
+  // Validadores individuales por campo (oninput / onblur)
+  function vcCedula(b=false)  { const v=document.getElementById('fCedula').value.trim();         if(!b&&!v) return; setField('fCedula',        'msgCedula',   REGLAS.cedula(v));  }
+  function vcNombre(b=false)  { const v=document.getElementById('fNombreCompleto').value.trim(); if(!b&&!v) return; setField('fNombreCompleto','msgNombre',   REGLAS.nombre(v));  }
+  function vcDir(b=false)     { const v=document.getElementById('fDireccion').value.trim();      if(!b&&!v) return; setField('fDireccion',     'msgDireccion',REGLAS.dir(v));     }
+  function vcTel(b=false)     { const v=document.getElementById('fTelefono').value.trim();       if(!b&&!v) return; setField('fTelefono',      'msgTelefono', REGLAS.tel(v));     }
+  function vcCorreo(b=false)  { const v=document.getElementById('fCorreo').value.trim();         if(!b&&!v) return; setField('fCorreo',        'msgCorreo',   REGLAS.correo(v));  }
+
+  // Valida todos los campos y devuelve lista de errores
+  function validarFormulario(incluirCedula) {
+    const errores = [];
+    if (incluirCedula) {
+      const e = REGLAS.cedula(document.getElementById('fCedula').value.trim());
+      setField('fCedula','msgCedula',e); if(e) errores.push(e);
+    }
+    const eN=REGLAS.nombre(document.getElementById('fNombreCompleto').value.trim()); setField('fNombreCompleto','msgNombre',   eN); if(eN) errores.push(eN);
+    const eD=REGLAS.dir(document.getElementById('fDireccion').value.trim());         setField('fDireccion',     'msgDireccion',eD); if(eD) errores.push(eD);
+    const eT=REGLAS.tel(document.getElementById('fTelefono').value.trim());          setField('fTelefono',      'msgTelefono', eT); if(eT) errores.push(eT);
+    const eC=REGLAS.correo(document.getElementById('fCorreo').value.trim());         setField('fCorreo',        'msgCorreo',   eC); if(eC) errores.push(eC);
+    return errores;
+  }
+
+  // ════════════════════════════════════════
   //  TOAST
-  // ═══════════════════════════════════════
+  // ════════════════════════════════════════
   let toastTimer = null;
   function mostrarToast(msg, tipo = 'success') {
-    const t = document.getElementById('toast');
+    const t    = document.getElementById('toast');
     const icon = document.getElementById('toastIcon');
     document.getElementById('toastMsg').textContent = msg;
     t.className = `toast toast-${tipo} visible`;
@@ -497,17 +612,17 @@
     toastTimer = setTimeout(() => t.classList.remove('visible'), 3200);
   }
 
-  // ═══════════════════════════════════════
+  // ════════════════════════════════════════
   //  CARGAR Y RENDERIZAR TABLA
-  // ═══════════════════════════════════════
+  // ════════════════════════════════════════
   let todosLosClientes = [];
 
   async function cargarClientes() {
     document.getElementById('tablaContenido').innerHTML = `
-      <div class="empty-state">
-        <div class="empty-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
-        <div class="empty-title">Cargando...</div>
-      </div>`;
+    <div class="empty-state">
+      <div class="empty-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="10"/></svg></div>
+      <div class="empty-title">Cargando...</div>
+    </div>`;
     try {
       const res  = await fetch('/api/clientes', { headers: headers() });
       const data = await res.json();
@@ -516,11 +631,11 @@
       renderTabla(todosLosClientes);
     } catch (err) {
       document.getElementById('tablaContenido').innerHTML = `
-        <div class="empty-state">
-          <div class="empty-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--danger)" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
-          <div class="empty-title">Error al cargar</div>
-          <div class="empty-text">${err.message}</div>
-        </div>`;
+      <div class="empty-state">
+        <div class="empty-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--danger)" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+        <div class="empty-title">Error al cargar</div>
+        <div class="empty-text">${err.message}</div>
+      </div>`;
     }
   }
 
@@ -530,49 +645,49 @@
 
     if (lista.length === 0) {
       document.getElementById('tablaContenido').innerHTML = `
-        <div class="empty-state">
-          <div class="empty-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="1.8" stroke-linecap="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
-          <div class="empty-title">No hay clientes registrados</div>
-          <div class="empty-text">Crea el primer cliente con el botón "Nuevo cliente".</div>
-        </div>`;
+      <div class="empty-state">
+        <div class="empty-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="1.8" stroke-linecap="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+        <div class="empty-title">No hay clientes registrados</div>
+        <div class="empty-text">Crea el primer cliente con el botón "Nuevo cliente".</div>
+      </div>`;
       return;
     }
 
     const filas = lista.map(c => `
-      <tr>
-        <td><strong>${c.cedula}</strong></td>
-        <td>${c.nombre_completo}</td>
-        <td class="td-muted">${c.direccion || '—'}</td>
-        <td class="td-muted">${c.telefono || '—'}</td>
-        <td class="td-muted">${c.correo || '—'}</td>
-        <td>
-          <div class="td-actions">
-            <button class="btn-edit" onclick="abrirModalEditar('${c.cedula}')">
-              <svg viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
-              Editar
-            </button>
-            <button class="btn-danger" onclick="confirmarEliminar('${c.cedula}', '${(c.nombre_completo||'').replace(/'/g,"\\'")}')">
-              <svg viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/></svg>
-              Eliminar
-            </button>
-          </div>
-        </td>
-      </tr>`).join('');
+    <tr>
+      <td><strong>${c.cedula}</strong></td>
+      <td>${c.nombre_completo}</td>
+      <td class="td-muted">${c.direccion || '—'}</td>
+      <td class="td-muted">${c.telefono  || '—'}</td>
+      <td class="td-muted">${c.correo    || '—'}</td>
+      <td>
+        <div class="td-actions">
+          <button class="btn-edit" onclick="abrirModalEditar('${c.cedula}')">
+            <svg viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+            Editar
+          </button>
+          <button class="btn-danger" onclick="confirmarEliminar('${c.cedula}','${(c.nombre_completo||'').replace(/'/g,"\\'")}')">
+            <svg viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/></svg>
+            Eliminar
+          </button>
+        </div>
+      </td>
+    </tr>`).join('');
 
     document.getElementById('tablaContenido').innerHTML = `
-      <table>
-        <thead>
-          <tr>
-            <th>Cédula</th>
-            <th>Nombre completo</th>
-            <th>Dirección</th>
-            <th>Teléfono</th>
-            <th>Correo</th>
-            <th>Acciones</th>
-          </tr>
-        </thead>
-        <tbody>${filas}</tbody>
-      </table>`;
+    <table>
+      <thead>
+        <tr>
+          <th>Cédula</th>
+          <th>Nombre completo</th>
+          <th>Dirección</th>
+          <th>Teléfono</th>
+          <th>Correo</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>${filas}</tbody>
+    </table>`;
   }
 
   function filtrarTabla() {
@@ -586,15 +701,19 @@
     ));
   }
 
-  // ═══════════════════════════════════════
-  //  BÚSQUEDA POR CÉDULA (HU-007)
-  // ═══════════════════════════════════════
-  let clienteActual = null;
+  // ════════════════════════════════════════
+  //  BÚSQUEDA POR CÉDULA
+  // ════════════════════════════════════════
+  let clienteActual    = null;
   let cedulaEliminando = null;
 
   async function buscarPorCedula() {
     const cedula = document.getElementById('inputCedulaBuscar').value.trim();
     if (!cedula) { mostrarToast('Ingresa una cédula para buscar', 'error'); return; }
+
+    // Validar formato ANTES de llamar al servidor
+    const errCedula = REGLAS.cedula(cedula);
+    if (errCedula) { mostrarToast(errCedula, 'error'); return; }
 
     const btn = document.getElementById('btnBuscarCedula');
     btn.disabled = true;
@@ -618,11 +737,11 @@
 
   function mostrarCard(c) {
     document.getElementById('clienteCardGrid').innerHTML = `
-      <div class="cliente-field"><div class="cliente-field-label">Cédula</div><div class="cliente-field-value">${c.cedula}</div></div>
-      <div class="cliente-field"><div class="cliente-field-label">Nombre completo</div><div class="cliente-field-value">${c.nombre_completo}</div></div>
-      <div class="cliente-field"><div class="cliente-field-label">Dirección</div><div class="cliente-field-value">${c.direccion || '—'}</div></div>
-      <div class="cliente-field"><div class="cliente-field-label">Teléfono</div><div class="cliente-field-value">${c.telefono || '—'}</div></div>
-      <div class="cliente-field"><div class="cliente-field-label">Correo</div><div class="cliente-field-value">${c.correo || '—'}</div></div>`;
+    <div class="cliente-field"><div class="cliente-field-label">Cédula</div><div class="cliente-field-value">${c.cedula}</div></div>
+    <div class="cliente-field"><div class="cliente-field-label">Nombre completo</div><div class="cliente-field-value">${c.nombre_completo}</div></div>
+    <div class="cliente-field"><div class="cliente-field-label">Dirección</div><div class="cliente-field-value">${c.direccion || '—'}</div></div>
+    <div class="cliente-field"><div class="cliente-field-label">Teléfono</div><div class="cliente-field-value">${c.telefono || '—'}</div></div>
+    <div class="cliente-field"><div class="cliente-field-label">Correo</div><div class="cliente-field-value">${c.correo || '—'}</div></div>`;
     document.getElementById('clienteCard').classList.add('visible');
   }
 
@@ -636,24 +755,35 @@
     ocultarCard();
   }
 
-  // ═══════════════════════════════════════
+  // ════════════════════════════════════════
   //  MODAL CREAR / EDITAR
-  // ═══════════════════════════════════════
-  let modoEdicion = false;
+  // ════════════════════════════════════════
+  let modoEdicion    = false;
   let cedulaEditando = null;
+
+  function limpiarEstados() {
+    ['fCedula','fNombreCompleto','fDireccion','fTelefono','fCorreo'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) { el.value = ''; el.classList.remove('is-valid','is-invalid'); }
+    });
+    ['msgCedula','msgNombre','msgDireccion','msgTelefono','msgCorreo'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) { el.textContent = ''; el.className = 'field-msg'; }
+    });
+    document.getElementById('modalAlert').className = 'alert-box';
+  }
 
   function abrirModalCrear() {
     modoEdicion = false; cedulaEditando = null;
-    document.getElementById('modalTitulo').textContent = 'Nuevo cliente';
+    document.getElementById('modalTitulo').textContent       = 'Nuevo cliente';
     document.getElementById('btnGuardarContent').textContent = 'Crear cliente';
     document.getElementById('fCedula').disabled = false;
-    limpiarModal();
+    limpiarEstados();
     document.getElementById('modalCliente').classList.add('open');
     setTimeout(() => document.getElementById('fCedula').focus(), 100);
   }
 
   async function abrirModalEditar(cedula) {
-    // Buscar en la lista local primero, si no ir a la API
     let c = todosLosClientes.find(x => x.cedula === cedula) || clienteActual;
     if (!c || c.cedula !== cedula) {
       try {
@@ -663,16 +793,22 @@
     }
 
     modoEdicion = true; cedulaEditando = cedula;
-    document.getElementById('modalTitulo').textContent = 'Editar cliente';
+    document.getElementById('modalTitulo').textContent       = 'Editar cliente';
     document.getElementById('btnGuardarContent').textContent = 'Guardar cambios';
     document.getElementById('fCedula').disabled = true;
-    limpiarModal();
+    limpiarEstados();
 
-    document.getElementById('fCedula').value         = c.cedula || '';
-    document.getElementById('fNombreCompleto').value = c.nombre_completo || '';
-    document.getElementById('fDireccion').value      = c.direccion || '';
-    document.getElementById('fTelefono').value       = c.telefono || '';
-    document.getElementById('fCorreo').value         = c.correo || '';
+    document.getElementById('fCedula').value          = c.cedula || '';
+    document.getElementById('fNombreCompleto').value   = c.nombre_completo || '';
+    document.getElementById('fDireccion').value        = c.direccion || '';
+    document.getElementById('fTelefono').value         = c.telefono || '';
+    document.getElementById('fCorreo').value           = c.correo || '';
+
+    // Marcar campos precargados como válidos visualmente
+    ['fNombreCompleto','fDireccion','fTelefono','fCorreo'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el && el.value) el.classList.add('is-valid');
+    });
 
     document.getElementById('modalCliente').classList.add('open');
     setTimeout(() => document.getElementById('fNombreCompleto').focus(), 100);
@@ -680,15 +816,7 @@
 
   function cerrarModal() {
     document.getElementById('modalCliente').classList.remove('open');
-    limpiarModal();
-  }
-
-  function limpiarModal() {
-    ['fCedula','fNombreCompleto','fDireccion','fTelefono','fCorreo'].forEach(id => {
-      const el = document.getElementById(id);
-      if (el) el.value = '';
-    });
-    document.getElementById('modalAlert').className = 'alert-box';
+    limpiarEstados();
   }
 
   function mostrarAlertaModal(tipo, msg) {
@@ -697,19 +825,24 @@
     document.getElementById('modalAlertMsg').textContent = msg;
   }
 
-  // ═══════════════════════════════════════
-  //  GUARDAR (HU-006 crear / HU-008 editar)
-  // ═══════════════════════════════════════
+  // ════════════════════════════════════════
+  //  GUARDAR (crear / editar)
+  // ════════════════════════════════════════
   async function guardarCliente() {
+    // 1. Validación frontend completa antes de cualquier request
+    const errores = validarFormulario(!modoEdicion);
+    if (errores.length > 0) {
+      mostrarAlertaModal('error', errores.length === 1
+              ? errores[0]
+              : `Corrige ${errores.length} errores en el formulario`);
+      return;
+    }
+
     const cedula         = document.getElementById('fCedula').value.trim();
     const nombreCompleto = document.getElementById('fNombreCompleto').value.trim();
     const direccion      = document.getElementById('fDireccion').value.trim();
     const telefono       = document.getElementById('fTelefono').value.trim();
     const correo         = document.getElementById('fCorreo').value.trim();
-
-    if (!cedula || !nombreCompleto || !direccion || !telefono || !correo) {
-      mostrarAlertaModal('error', 'Todos los campos son requeridos.'); return;
-    }
 
     const btn = document.getElementById('btnGuardar');
     btn.disabled = true;
@@ -730,22 +863,26 @@
       mostrarToast(modoEdicion ? 'Cliente actualizado correctamente' : 'Cliente creado correctamente');
       await cargarClientes();
 
-      // Si había un resultado en la card, actualizarlo
       if (clienteActual && clienteActual.cedula === (cedulaEditando || cedula)) {
         clienteActual = data.cliente;
         mostrarCard(data.cliente);
       }
     } catch (err) {
-      mostrarAlertaModal('error', err.message);
+      // El backend puede enviar múltiples errores separados por " | "
+      const msgs = err.message.split(' | ');
+      mostrarAlertaModal('error', msgs.length > 1
+              ? `${msgs.length} errores: ${msgs[0]}...`
+              : err.message);
     } finally {
       btn.disabled = false;
-      document.getElementById('btnGuardarContent').textContent = modoEdicion ? 'Guardar cambios' : 'Crear cliente';
+      document.getElementById('btnGuardarContent').textContent =
+              modoEdicion ? 'Guardar cambios' : 'Crear cliente';
     }
   }
 
-  // ═══════════════════════════════════════
-  //  ELIMINAR (HU-009)
-  // ═══════════════════════════════════════
+  // ════════════════════════════════════════
+  //  ELIMINAR
+  // ════════════════════════════════════════
   function confirmarEliminar(cedula, nombre) {
     cedulaEliminando = cedula;
     document.getElementById('confirmTexto').textContent =
@@ -788,11 +925,11 @@
     }
   }
 
-  // Cerrar modales al click fuera
-  document.getElementById('modalCliente').addEventListener('click',  e => { if (e.target === e.currentTarget) cerrarModal(); });
+  // Cerrar modales al click fuera del contenido
+  document.getElementById('modalCliente').addEventListener('click',   e => { if (e.target === e.currentTarget) cerrarModal(); });
   document.getElementById('modalConfirmar').addEventListener('click', e => { if (e.target === e.currentTarget) cerrarConfirmar(); });
 
-  // Enter en formulario
+  // Enter en formulario dispara guardar
   document.querySelectorAll('#modalCliente input').forEach(input => {
     input.addEventListener('keydown', e => { if (e.key === 'Enter') guardarCliente(); });
   });

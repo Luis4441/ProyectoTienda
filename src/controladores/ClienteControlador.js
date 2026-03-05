@@ -1,5 +1,19 @@
 const clienteServicio = require("../servicios/ClienteServicio");
 
+function esValidacion(mensaje) {
+    if (!mensaje) return false;
+    if (mensaje.includes(" | ")) return true;
+    const patrones = [
+        "La cédula es requerida", "La cédula debe contener",
+        "El nombre completo", "La dirección", "El teléfono",
+        "Teléfono inválido", "El correo", "debe tener",
+        "no puede superar", "solo puede contener",
+        "no tiene un formato válido", "Ya existe un cliente",
+        "ya está en uso"
+    ];
+    return patrones.some(p => mensaje.includes(p));
+}
+
 class ClienteControlador {
 
     async listar(req, res) {
@@ -19,11 +33,10 @@ class ClienteControlador {
             res.json(cliente);
         } catch (error) {
             console.error("❌ Error al buscar cliente:", error.message);
-            const esValidacion = [
-                "La cédula es requerida",
-                "Cliente no encontrado"
-            ].includes(error.message);
-            res.status(esValidacion ? 404 : 500).json({ error: error.message });
+            const status = error.message === "Cliente no encontrado" ? 404
+                : esValidacion(error.message) ? 400
+                    : 500;
+            res.status(status).json({ error: error.message });
         }
     }
 
@@ -33,12 +46,8 @@ class ClienteControlador {
             res.status(201).json({ mensaje: "Cliente creado exitosamente", cliente });
         } catch (error) {
             console.error("❌ Error al crear cliente:", error.message);
-            const esValidacion = [
-                "Todos los campos son requeridos",
-                "Ya existe un cliente con esa cédula",
-                "El correo electrónico ya está en uso"
-            ].includes(error.message);
-            res.status(esValidacion ? 400 : 500).json({ error: error.message });
+            res.status(esValidacion(error.message) ? 400 : 500)
+                .json({ error: error.message });
         }
     }
 
@@ -49,13 +58,10 @@ class ClienteControlador {
             res.json({ mensaje: "Cliente actualizado exitosamente", cliente });
         } catch (error) {
             console.error("❌ Error al actualizar cliente:", error.message);
-            const esValidacion = [
-                "La cédula es requerida",
-                "Todos los campos son requeridos",
-                "Cliente no encontrado",
-                "El correo electrónico ya está en uso por otro cliente"
-            ].includes(error.message);
-            res.status(esValidacion ? 400 : 500).json({ error: error.message });
+            const status = error.message === "Cliente no encontrado" ? 404
+                : esValidacion(error.message) ? 400
+                    : 500;
+            res.status(status).json({ error: error.message });
         }
     }
 
@@ -66,11 +72,10 @@ class ClienteControlador {
             res.json({ mensaje: "Cliente eliminado exitosamente" });
         } catch (error) {
             console.error("❌ Error al eliminar cliente:", error.message);
-            const esValidacion = [
-                "La cédula es requerida",
-                "Cliente no encontrado"
-            ].includes(error.message);
-            res.status(esValidacion ? 404 : 500).json({ error: error.message });
+            const status = error.message === "Cliente no encontrado" ? 404
+                : esValidacion(error.message) ? 400
+                    : 500;
+            res.status(status).json({ error: error.message });
         }
     }
 }
