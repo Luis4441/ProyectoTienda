@@ -6,6 +6,7 @@ const inicializarBD = require("./config/inicializarBD");
 const clienteRutas = require('./rutas/clienteRutas');
 const proveedorRutas = require('./rutas/proveedorRutas');
 const productoRutas  = require('./rutas/productoRutas');
+const ventaRutas = require('./rutas/ventaRutas');
 
 const app = express();
 
@@ -32,6 +33,7 @@ app.use("/api/usuarios",    usuarioRutas);
 app.use("/api/clientes",    verificarToken, clienteRutas);
 app.use("/api/proveedores", verificarToken, proveedorRutas);
 app.use("/api/productos",   verificarToken, productoRutas);
+app.use("/api/ventas", verificarToken, ventaRutas);
 
 // ── 404 ──
 app.use((req, res) => res.status(404).json({ error: "Ruta no encontrada" }));

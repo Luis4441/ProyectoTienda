@@ -31,7 +31,7 @@ class ClienteRepositorio {
     async buscarPorCedula(cedula) {
         const resultado = await pool.query(
             "SELECT * FROM clientes WHERE cedula = $1",
-            [cedula]
+            [cedula.toString().trim()]
         );
         if (resultado.rows.length === 0) return null;
         return this._mapear(resultado.rows[0]);

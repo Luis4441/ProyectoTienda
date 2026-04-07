@@ -92,7 +92,7 @@ class UsuarioServicio {
         if (!coincide) throw new Error("Contraseña incorrecta");
 
         const token = jwt.sign(
-            { id: usuario.id, rol: usuario.rol, nombreUsuario: usuario.nombreUsuario },
+            { id: usuario.id, rol: usuario.rol, nombreUsuario: usuario.nombreUsuario,  cedula: usuario.cedula, },
             process.env.JWT_SECRET || "secreto",
             { expiresIn: "2h" }
         );

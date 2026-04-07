@@ -836,7 +836,9 @@
         document.getElementById('resultCliente').classList.remove('visible');
 
         try {
-            const res  = await fetch(`/api/ventas/cliente/${cedula}`, { headers: getHeaders() });
+            const res = await fetch(`http://localhost:3000/api/ventas/cliente/${cedula}`, {
+                headers: getHeaders()
+            });
             const data = await res.json();
             if (!res.ok) throw new Error(data.error || 'No encontrado');
 
@@ -1017,8 +1019,32 @@
         limpiarAlerta();
 
         // La cédula del usuario viene del JWT
-        const cedulaUsuario = payload.cedula || payload.cedulaUsuario || payload.sub || '';
+        function obtenerCedulaUsuario() {
+            const token = localStorage.getItem("token");
 
+            if (!token) {
+                console.error("❌ No hay token");
+                return "";
+            }
+
+            try {
+                const payload = JSON.parse(atob(token.split('.')[1]));
+                console.log("🧪 PAYLOAD:", payload);
+
+                if (!payload.cedula) {
+                    console.error("❌ El token no tiene cedula");
+                    return "";
+                }
+
+                return payload.cedula;
+
+            } catch (error) {
+                console.error("❌ Error leyendo token:", error);
+                return "";
+            }
+        }
+
+        const cedulaUsuario = obtenerCedulaUsuario();
         const body = {
             cedulaCliente: clienteActual.cedula,
             cedulaUsuario,
