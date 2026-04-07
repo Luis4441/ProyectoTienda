@@ -7,6 +7,7 @@ const clienteRutas = require('./rutas/clienteRutas');
 const proveedorRutas = require('./rutas/proveedorRutas');
 const productoRutas  = require('./rutas/productoRutas');
 const ventaRutas = require('./rutas/ventaRutas');
+const reporteRutas = require('./rutas/reporteRutas');
 
 const app = express();
 
@@ -26,6 +27,7 @@ app.get("/clientes",    (req, res) => res.sendFile(path.join(__dirname, "vistas"
 app.get("/proveedores", (req, res) => res.sendFile(path.join(__dirname, "vistas", "proveedores.html")));
 app.get("/productos",   (req, res) => res.sendFile(path.join(__dirname, "vistas", "productos.html")));
 app.get("/ventas",      (req, res) =>  res.sendFile(path.join(__dirname, "vistas", "ventas.html")));
+app.get("/reportes", (req, res) => res.sendFile(path.join(__dirname, "vistas", "reportes.html")));
 
 // ── Rutas API ──
 app.use("/api/auth",        authRutas);
@@ -34,6 +36,7 @@ app.use("/api/clientes",    verificarToken, clienteRutas);
 app.use("/api/proveedores", verificarToken, proveedorRutas);
 app.use("/api/productos",   verificarToken, productoRutas);
 app.use("/api/ventas", verificarToken, ventaRutas);
+app.use("/api/reportes", verificarToken, reporteRutas);
 
 // ── 404 ──
 app.use((req, res) => res.status(404).json({ error: "Ruta no encontrada" }));
