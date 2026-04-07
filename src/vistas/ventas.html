@@ -1,0 +1,1097 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ventas — Tienda</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&family=Pacifico&display=swap" rel="stylesheet" />
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --bg:          #f0f6ff;
+            --surface:     #ffffff;
+            --sidebar-bg:  #1e3a5f;
+            --sidebar-w:   240px;
+            --blue:        #5b9bd5;
+            --blue-light:  #d6e8f9;
+            --blue-mid:    #a8ccef;
+            --blue-dark:   #3a7abf;
+            --blue-soft:   #e8f3fd;
+            --text:        #2d3e50;
+            --muted:       #7a9ab8;
+            --border:      #ddeaf7;
+            --danger:      #e07070;
+            --danger-bg:   #fdf0f0;
+            --success:     #4caf7d;
+            --success-bg:  #f0fdf6;
+            --warn:        #e0a040;
+            --warn-bg:     #fff8e8;
+            --field-ok:    #4caf7d;
+            --field-error: #e05858;
+        }
+
+        html, body { height: 100%; font-family: 'Nunito', sans-serif; background: var(--bg); color: var(--text); overflow: hidden; }
+        .shell { display: flex; height: 100vh; }
+
+        /* ══ SIDEBAR ══ */
+        .sidebar { width: var(--sidebar-w); background: var(--sidebar-bg); display: flex; flex-direction: column; flex-shrink: 0; position: relative; z-index: 10; }
+        .sidebar::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(to right, #a8d8f0, var(--blue-mid), #a8d8f0); }
+        .sidebar-brand { padding: 28px 20px 24px; border-bottom: 1px solid rgba(255,255,255,0.08); cursor: pointer; }
+        .brand-logo { display: flex; align-items: center; gap: 10px; }
+        .brand-icon { width: 34px; height: 34px; background: rgba(255,255,255,0.1); border: 1.5px solid rgba(168,204,239,0.4); border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+        .brand-icon svg { width: 18px; height: 18px; }
+        .brand-name { font-family: 'Pacifico', cursive; font-size: 1.1rem; color: #e8f3fd; line-height: 1; }
+        .brand-sub { font-size: 0.62rem; color: rgba(255,255,255,0.35); letter-spacing: 0.12em; text-transform: uppercase; margin-top: 3px; font-weight: 400; }
+        .sidebar-user { display: flex; align-items: center; gap: 10px; padding: 12px 16px; margin: 16px 12px 0; background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; }
+        .user-avatar { width: 30px; height: 30px; border-radius: 50%; background: var(--blue-mid); display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 800; color: var(--sidebar-bg); flex-shrink: 0; }
+        .user-info { flex: 1; min-width: 0; }
+        .user-name { font-size: 0.78rem; font-weight: 700; color: #e8f3fd; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .user-role { font-size: 0.62rem; color: var(--blue-mid); letter-spacing: 0.06em; text-transform: uppercase; font-weight: 600; }
+        .sidebar-nav { flex: 1; padding: 20px 12px; overflow-y: auto; }
+        .nav-section-label { font-size: 0.6rem; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.25); padding: 0 8px; margin-bottom: 6px; margin-top: 20px; font-weight: 700; }
+        .nav-section-label:first-child { margin-top: 0; }
+        .nav-item { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: 10px; cursor: pointer; transition: background 0.15s; color: rgba(255,255,255,0.5); font-size: 0.83rem; font-weight: 600; border: none; background: none; width: 100%; text-align: left; position: relative; margin-bottom: 2px; }
+        .nav-item svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
+        .nav-item:hover { background: rgba(255,255,255,0.07); color: rgba(255,255,255,0.85); }
+        .nav-item.active { background: rgba(168,204,239,0.18); color: #c8e4f8; }
+        .nav-item.active::before { content: ''; position: absolute; left: 0; top: 25%; bottom: 25%; width: 3px; background: var(--blue-mid); border-radius: 3px; }
+        .sidebar-footer { padding: 16px 12px; border-top: 1px solid rgba(255,255,255,0.08); }
+        .btn-logout { display: flex; align-items: center; gap: 10px; width: 100%; padding: 10px 12px; background: none; border: 1px solid rgba(224,112,112,0.25); border-radius: 10px; color: rgba(224,112,112,0.65); font-family: 'Nunito', sans-serif; font-size: 0.78rem; font-weight: 700; cursor: pointer; transition: all 0.15s; }
+        .btn-logout svg { width: 15px; height: 15px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
+        .btn-logout:hover { background: rgba(224,112,112,0.1); color: var(--danger); border-color: rgba(224,112,112,0.45); }
+
+        /* ══ MAIN ══ */
+        .main { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
+        .topbar { background: var(--surface); border-bottom: 1.5px solid var(--border); padding: 0 32px; height: 62px; display: flex; align-items: center; justify-content: space-between; flex-shrink: 0; box-shadow: 0 2px 8px rgba(91,155,213,0.06); }
+        .topbar-left { display: flex; align-items: center; gap: 12px; }
+        .page-title { font-size: 1.05rem; font-weight: 800; color: var(--text); }
+        .page-badge { font-size: 0.65rem; background: var(--blue-light); color: var(--blue-dark); border: 1px solid rgba(91,155,213,0.2); padding: 3px 10px; border-radius: 20px; letter-spacing: 0.06em; text-transform: uppercase; font-weight: 700; }
+        .topbar-date { font-size: 0.75rem; color: var(--muted); font-weight: 600; }
+        .content { flex: 1; overflow-y: auto; padding: 32px; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        @keyframes popIn { from { opacity: 0; transform: scale(0.92); } to { opacity: 1; transform: scale(1); } }
+
+        /* ══ MODULE HEADER ══ */
+        .module-header { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 28px; padding-bottom: 20px; border-bottom: 1.5px solid var(--border); flex-wrap: wrap; gap: 12px; }
+        .module-title { font-size: 1.6rem; font-weight: 800; color: var(--text); line-height: 1; }
+        .module-desc { font-size: 0.82rem; color: var(--muted); margin-top: 5px; font-weight: 400; }
+
+        /* ══ BUTTONS ══ */
+        .btn-primary { display: inline-flex; align-items: center; gap: 7px; padding: 10px 18px; background: linear-gradient(135deg, var(--blue) 0%, var(--blue-dark) 100%); border: none; border-radius: 10px; color: #fff; font-family: 'Nunito', sans-serif; font-size: 0.82rem; font-weight: 700; cursor: pointer; transition: opacity 0.15s, box-shadow 0.15s; box-shadow: 0 3px 12px rgba(58,122,191,0.25); }
+        .btn-primary svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+        .btn-primary:hover { opacity: 0.9; box-shadow: 0 5px 16px rgba(58,122,191,0.35); }
+        .btn-primary:disabled { opacity: 0.55; cursor: not-allowed; }
+        .btn-secondary { display: inline-flex; align-items: center; gap: 7px; padding: 8px 14px; background: var(--surface); border: 1.5px solid var(--border); border-radius: 8px; color: var(--muted); font-family: 'Nunito', sans-serif; font-size: 0.8rem; font-weight: 700; cursor: pointer; transition: all 0.15s; }
+        .btn-secondary svg { width: 13px; height: 13px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+        .btn-secondary:hover { border-color: var(--blue-mid); color: var(--blue-dark); }
+        .btn-danger { display: inline-flex; align-items: center; gap: 6px; padding: 6px 11px; background: var(--danger-bg); border: 1.5px solid rgba(224,112,112,0.3); border-radius: 8px; color: var(--danger); font-family: 'Nunito', sans-serif; font-size: 0.75rem; font-weight: 700; cursor: pointer; transition: all 0.15s; }
+        .btn-danger svg { width: 12px; height: 12px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+        .btn-danger:hover { background: #fbe0e0; border-color: var(--danger); }
+        .btn-search { display: inline-flex; align-items: center; gap: 7px; padding: 10px 16px; background: var(--blue-soft); border: 1.5px solid rgba(91,155,213,0.3); border-radius: 8px; color: var(--blue-dark); font-family: 'Nunito', sans-serif; font-size: 0.82rem; font-weight: 700; cursor: pointer; transition: all 0.15s; white-space: nowrap; }
+        .btn-search svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+        .btn-search:hover { background: var(--blue-light); border-color: rgba(91,155,213,0.5); }
+        .btn-search:disabled { opacity: 0.6; cursor: not-allowed; }
+        .btn-success { display: inline-flex; align-items: center; gap: 7px; padding: 10px 20px; background: linear-gradient(135deg, #4caf7d, #3a9169); border: none; border-radius: 10px; color: #fff; font-family: 'Nunito', sans-serif; font-size: 0.85rem; font-weight: 700; cursor: pointer; box-shadow: 0 3px 12px rgba(76,175,125,0.3); transition: opacity 0.15s, box-shadow 0.15s; }
+        .btn-success svg { width: 15px; height: 15px; fill: none; stroke: currentColor; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+        .btn-success:hover { opacity: 0.9; box-shadow: 0 5px 18px rgba(76,175,125,0.4); }
+        .btn-success:disabled { opacity: 0.55; cursor: not-allowed; }
+
+        /* ══ SPINNER ══ */
+        .spinner { display: inline-block; width: 15px; height: 15px; border: 2px solid rgba(255,255,255,0.35); border-top-color: #fff; border-radius: 50%; animation: spin 0.7s linear infinite; flex-shrink: 0; }
+        .spinner-blue { border-color: rgba(91,155,213,0.3); border-top-color: var(--blue-dark); }
+
+        /* ══ FLUJO: PASOS ══ */
+        .steps-bar { display: flex; align-items: center; gap: 0; margin-bottom: 28px; }
+        .step { display: flex; align-items: center; gap: 8px; }
+        .step-num { width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.72rem; font-weight: 800; flex-shrink: 0; border: 2px solid var(--border); background: var(--surface); color: var(--muted); transition: all 0.3s; }
+        .step-label { font-size: 0.75rem; font-weight: 700; color: var(--muted); transition: color 0.3s; white-space: nowrap; }
+        .step.active .step-num { border-color: var(--blue); background: var(--blue); color: #fff; }
+        .step.active .step-label { color: var(--blue-dark); }
+        .step.done .step-num { border-color: var(--success); background: var(--success); color: #fff; }
+        .step.done .step-label { color: var(--success); }
+        .step-line { flex: 1; height: 2px; background: var(--border); margin: 0 8px; border-radius: 2px; min-width: 24px; transition: background 0.3s; }
+        .step-line.done { background: var(--success); }
+
+        /* ══ SECCIÓN DE PASO ══ */
+        .step-section { display: none; animation: fadeIn 0.3s ease; }
+        .step-section.visible { display: block; }
+
+        /* ══ CARD BÚSQUEDA ══ */
+        .search-card { background: var(--surface); border: 1.5px solid var(--border); border-radius: 14px; padding: 24px; margin-bottom: 20px; box-shadow: 0 2px 10px rgba(91,155,213,0.06); }
+        .search-card-title { font-size: 0.72rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+        .search-card-title svg { width: 14px; height: 14px; fill: none; stroke: var(--blue); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+        .search-row { display: flex; align-items: flex-end; gap: 12px; flex-wrap: wrap; }
+        .search-row .field { flex: 1; min-width: 180px; }
+
+        /* ══ RESULT CARD (cliente / producto) ══ */
+        .result-card { display: none; background: var(--blue-soft); border: 1.5px solid rgba(91,155,213,0.25); border-radius: 12px; padding: 16px 20px; margin-top: 16px; animation: fadeIn 0.3s ease; }
+        .result-card.visible { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+        .result-fields { display: flex; gap: 24px; flex-wrap: wrap; }
+        .result-field { display: flex; flex-direction: column; gap: 2px; }
+        .result-field-label { font-size: 0.63rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--blue-dark); opacity: 0.7; }
+        .result-field-value { font-size: 0.88rem; font-weight: 700; color: var(--text); }
+
+        /* ══ CAMPO CANTIDAD ══ */
+        .qty-row { display: flex; align-items: flex-end; gap: 12px; margin-top: 16px; flex-wrap: wrap; }
+        .qty-row .field { flex: 0 0 180px; }
+
+        /* ══ CARRITO ══ */
+        .carrito-wrap { background: var(--surface); border: 1.5px solid var(--border); border-radius: 14px; overflow: hidden; box-shadow: 0 2px 12px rgba(91,155,213,0.06); margin-bottom: 20px; }
+        .carrito-header { display: flex; align-items: center; justify-content: space-between; padding: 14px 20px; border-bottom: 1px solid var(--border); background: var(--bg); }
+        .carrito-title { font-size: 0.72rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); display: flex; align-items: center; gap: 8px; }
+        .carrito-title svg { width: 14px; height: 14px; fill: none; stroke: var(--blue); stroke-width: 2; stroke-linecap: round; }
+        .carrito-count { font-size: 0.72rem; font-weight: 700; color: var(--blue-dark); background: var(--blue-light); padding: 3px 10px; border-radius: 20px; }
+        .carrito-body { min-height: 80px; }
+        .carrito-empty { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 36px; text-align: center; }
+        .carrito-empty svg { width: 28px; height: 28px; fill: none; stroke: var(--blue-mid); stroke-width: 1.5; stroke-linecap: round; margin-bottom: 10px; }
+        .carrito-empty-text { font-size: 0.8rem; color: var(--muted); font-weight: 600; }
+        table.carrito-table { width: 100%; border-collapse: collapse; }
+        table.carrito-table thead th { background: var(--bg); padding: 10px 16px; text-align: left; font-size: 0.66rem; font-weight: 800; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; border-bottom: 1px solid var(--border); }
+        table.carrito-table tbody tr { border-bottom: 1px solid var(--border); transition: background 0.1s; }
+        table.carrito-table tbody tr:last-child { border-bottom: none; }
+        table.carrito-table tbody tr:hover { background: var(--blue-soft); }
+        table.carrito-table tbody td { padding: 11px 16px; font-size: 0.82rem; color: var(--text); font-weight: 600; vertical-align: middle; }
+        .td-muted { color: var(--muted); font-weight: 400; }
+        .td-money { font-variant-numeric: tabular-nums; }
+
+        /* ══ TOTALES ══ */
+        .totales-wrap { background: var(--surface); border: 1.5px solid var(--border); border-radius: 14px; padding: 20px 24px; box-shadow: 0 2px 10px rgba(91,155,213,0.06); }
+        .totales-grid { display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; }
+        .totales-row { display: flex; justify-content: space-between; align-items: center; font-size: 0.85rem; }
+        .totales-row.separator { border-top: 1.5px solid var(--border); padding-top: 10px; margin-top: 2px; }
+        .totales-label { color: var(--muted); font-weight: 600; }
+        .totales-value { font-weight: 700; color: var(--text); font-variant-numeric: tabular-nums; }
+        .totales-row.grand .totales-label { font-size: 0.95rem; font-weight: 800; color: var(--text); }
+        .totales-row.grand .totales-value { font-size: 1.1rem; font-weight: 800; color: var(--blue-dark); }
+        .totales-actions { display: flex; gap: 10px; justify-content: flex-end; flex-wrap: wrap; }
+
+        /* ══ FORM ══ */
+        .field { display: flex; flex-direction: column; gap: 4px; }
+        .field label { font-size: 0.72rem; font-weight: 800; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; }
+        .field .input-wrap { position: relative; }
+        .field input {
+            width: 100%; padding: 10px 36px 10px 14px;
+            border: 1.5px solid var(--border); border-radius: 8px;
+            font-family: 'Nunito', sans-serif; font-size: 0.85rem;
+            color: var(--text); font-weight: 600; outline: none;
+            transition: border-color 0.15s, box-shadow 0.15s; background: var(--bg);
+        }
+        .field input:focus { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(91,155,213,0.15); background: var(--surface); }
+        .field input::placeholder { color: var(--muted); font-weight: 400; }
+        .field input:disabled { opacity: 0.5; cursor: not-allowed; }
+        .field input.is-valid   { border-color: var(--field-ok); background: var(--surface); }
+        .field input.is-invalid { border-color: var(--field-error); background: #fff8f8; }
+        .field-msg { font-size: 0.7rem; font-weight: 700; min-height: 16px; }
+        .field-msg.error { color: var(--field-error); }
+
+        /* ══ ALERT ══ */
+        .alert-box { display: none; align-items: center; gap: 10px; padding: 10px 14px; border-radius: 8px; font-size: 0.8rem; font-weight: 600; margin-bottom: 16px; }
+        .alert-box.error   { display: flex; background: var(--danger-bg); border: 1px solid rgba(224,112,112,0.3); color: var(--danger); }
+        .alert-box.success { display: flex; background: var(--success-bg); border: 1px solid rgba(76,175,125,0.3); color: var(--success); }
+        .alert-box svg { width: 15px; height: 15px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; flex-shrink: 0; }
+
+        /* ══ TOAST ══ */
+        .toast { position: fixed; bottom: 28px; right: 28px; background: var(--text); color: #fff; padding: 12px 20px; border-radius: 10px; font-size: 0.82rem; font-weight: 700; box-shadow: 0 8px 24px rgba(30,58,95,0.2); z-index: 200; display: flex; align-items: center; gap: 10px; transform: translateY(60px); opacity: 0; transition: all 0.3s cubic-bezier(0.22,1,0.36,1); pointer-events: none; max-width: 340px; }
+        .toast.visible { transform: translateY(0); opacity: 1; }
+        .toast.toast-success { background: var(--success); }
+        .toast.toast-error   { background: var(--danger); }
+        .toast svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2.5; stroke-linecap: round; flex-shrink: 0; }
+
+        /* ══ MODAL CONFIRMACIÓN ══ */
+        .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(30,58,95,0.35); backdrop-filter: blur(3px); z-index: 100; align-items: center; justify-content: center; padding: 20px; }
+        .modal-overlay.open { display: flex; animation: fadeIn 0.2s ease; }
+
+        /* ══ TICKET / COMPROBANTE ══ */
+        .ticket { background: var(--surface); border-radius: 20px; width: 100%; max-width: 460px; box-shadow: 0 20px 60px rgba(30,58,95,0.2); overflow: hidden; animation: popIn 0.3s cubic-bezier(0.22,1,0.36,1); }
+        .ticket-top { background: linear-gradient(135deg, var(--blue-dark), #2a5a9f); padding: 28px 28px 24px; text-align: center; position: relative; }
+        .ticket-top::after { content: ''; position: absolute; bottom: -1px; left: 0; right: 0; height: 20px; background: var(--surface); border-radius: 50% 50% 0 0 / 100% 100% 0 0; }
+        .ticket-icon { width: 56px; height: 56px; background: rgba(255,255,255,0.15); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 14px; }
+        .ticket-icon svg { width: 26px; height: 26px; fill: none; stroke: #fff; stroke-width: 2; stroke-linecap: round; }
+        .ticket-heading { font-size: 1.1rem; font-weight: 800; color: #fff; margin-bottom: 4px; }
+        .ticket-sub { font-size: 0.78rem; color: rgba(255,255,255,0.7); font-weight: 600; }
+        .ticket-body { padding: 24px 28px; }
+        .ticket-code { display: flex; align-items: center; justify-content: space-between; background: var(--blue-soft); border: 1.5px dashed rgba(91,155,213,0.4); border-radius: 10px; padding: 12px 16px; margin-bottom: 20px; }
+        .ticket-code-label { font-size: 0.65rem; font-weight: 800; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; }
+        .ticket-code-value { font-size: 1.2rem; font-weight: 800; color: var(--blue-dark); font-variant-numeric: tabular-nums; }
+        .ticket-section { margin-bottom: 18px; }
+        .ticket-section-title { font-size: 0.63rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; padding-bottom: 6px; border-bottom: 1px solid var(--border); }
+        .ticket-row { display: flex; justify-content: space-between; font-size: 0.82rem; padding: 4px 0; }
+        .ticket-row-label { color: var(--muted); font-weight: 600; }
+        .ticket-row-value { font-weight: 700; color: var(--text); }
+        .ticket-divider { border: none; border-top: 1.5px dashed var(--border); margin: 16px 0; }
+        .ticket-total-row { display: flex; justify-content: space-between; align-items: center; }
+        .ticket-total-label { font-size: 0.95rem; font-weight: 800; color: var(--text); }
+        .ticket-total-value { font-size: 1.3rem; font-weight: 800; color: var(--blue-dark); font-variant-numeric: tabular-nums; }
+        .ticket-footer { padding: 0 28px 24px; display: flex; gap: 10px; justify-content: center; }
+        .ticket-items { display: flex; flex-direction: column; gap: 6px; }
+        .ticket-item { display: flex; justify-content: space-between; align-items: flex-start; font-size: 0.8rem; gap: 12px; }
+        .ticket-item-name { font-weight: 700; color: var(--text); flex: 1; }
+        .ticket-item-detail { color: var(--muted); font-weight: 600; text-align: right; white-space: nowrap; }
+
+        ::-webkit-scrollbar { width: 5px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 10px; }
+
+        @media (max-width: 768px) {
+            .sidebar { width: 56px; }
+            .sidebar .brand-name, .sidebar .brand-sub, .sidebar .user-info,
+            .nav-item span, .nav-section-label, .btn-logout span { display: none; }
+            .sidebar-brand { padding: 20px 12px; }
+            .nav-item { justify-content: center; padding: 12px; }
+            .btn-logout { justify-content: center; }
+            .content { padding: 16px; }
+            .topbar { padding: 0 16px; }
+        }
+    </style>
+</head>
+<body>
+<div class="shell">
+
+    <!-- ═══ SIDEBAR ═══ -->
+    <aside class="sidebar">
+        <div class="sidebar-brand" onclick="window.location.href='/dashboard'" title="Volver al Dashboard">
+            <div class="brand-logo">
+                <div class="brand-icon">
+                    <svg viewBox="0 0 32 32" fill="none">
+                        <path d="M4 8h24l-2.5 12H6.5L4 8z" fill="rgba(168,204,239,0.3)" stroke="#a8ccef" stroke-width="1.5" stroke-linejoin="round"/>
+                        <circle cx="11" cy="26" r="2" fill="#a8ccef"/>
+                        <circle cx="21" cy="26" r="2" fill="#a8ccef"/>
+                        <path d="M2 4h3l2 4" stroke="#a8ccef" stroke-width="1.5" stroke-linecap="round"/>
+                    </svg>
+                </div>
+                <div>
+                    <div class="brand-name">Tienda</div>
+                    <div class="brand-sub">Sistema Comercial</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="sidebar-user">
+            <div class="user-avatar" id="userInitial">A</div>
+            <div class="user-info">
+                <div class="user-name" id="userName">Cargando...</div>
+                <div class="user-role" id="userRoleLabel">Administrador</div>
+            </div>
+        </div>
+
+        <nav class="sidebar-nav">
+            <div class="nav-section-label">General</div>
+            <button class="nav-item" onclick="window.location.href='/dashboard'">
+                <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                <span>Inicio</span>
+            </button>
+
+            <div class="nav-section-label">Personas</div>
+            <button class="nav-item" id="navUsuarios" style="display:none" onclick="window.location.href='/dashboard'">
+                <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                <span>Usuarios</span>
+            </button>
+            <button class="nav-item" onclick="window.location.href='/clientes'">
+                <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                <span>Clientes</span>
+            </button>
+            <button class="nav-item" onclick="window.location.href='/proveedores'">
+                <svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13" rx="1"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+                <span>Proveedores</span>
+            </button>
+
+            <div class="nav-section-label">Inventario &amp; Ventas</div>
+            <button class="nav-item" onclick="window.location.href='/productos'">
+                <svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+                <span>Productos</span>
+            </button>
+            <button class="nav-item active">
+                <svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                <span>Ventas</span>
+            </button>
+
+            <div class="nav-section-label">Análisis</div>
+            <button class="nav-item" onclick="window.location.href='/dashboard'">
+                <svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+                <span>Reportes</span>
+            </button>
+        </nav>
+
+        <div class="sidebar-footer">
+            <button class="btn-logout" id="btnLogout">
+                <svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+                <span>Cerrar sesión</span>
+            </button>
+        </div>
+    </aside>
+
+    <!-- ═══ MAIN ═══ -->
+    <div class="main">
+        <header class="topbar">
+            <div class="topbar-left">
+                <span class="page-title">Ventas</span>
+                <span class="page-badge">Nueva Venta</span>
+            </div>
+            <span class="topbar-date" id="topbarDate"></span>
+        </header>
+
+        <div class="content">
+
+            <div class="module-header">
+                <div>
+                    <div class="module-title">Registrar Venta</div>
+                    <div class="module-desc">Busca el cliente, agrega productos y totaliza la venta</div>
+                </div>
+                <button class="btn-secondary" onclick="reiniciarVenta()">
+                    <svg viewBox="0 0 24 24"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.54"/></svg>
+                    Nueva venta
+                </button>
+            </div>
+
+            <!-- ALERTA GLOBAL -->
+            <div class="alert-box" id="alertGlobal">
+                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                <span id="alertGlobalMsg"></span>
+            </div>
+
+            <!-- BARRA DE PASOS -->
+            <div class="steps-bar">
+                <div class="step active" id="step1">
+                    <div class="step-num">1</div>
+                    <div class="step-label">Cliente</div>
+                </div>
+                <div class="step-line" id="line1"></div>
+                <div class="step" id="step2">
+                    <div class="step-num">2</div>
+                    <div class="step-label">Productos</div>
+                </div>
+                <div class="step-line" id="line2"></div>
+                <div class="step" id="step3">
+                    <div class="step-num">3</div>
+                    <div class="step-label">Totalizar</div>
+                </div>
+            </div>
+
+            <!-- ══ PASO 1: CLIENTE ══ -->
+            <div class="step-section visible" id="seccion-cliente">
+                <div class="search-card">
+                    <div class="search-card-title">
+                        <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                        Buscar cliente por cédula
+                    </div>
+                    <div class="search-row">
+                        <div class="field">
+                            <label>Cédula del cliente <span style="color:var(--danger)">*</span></label>
+                            <div class="input-wrap">
+                                <input type="text" id="inputCedulaCliente" placeholder="Ej: 1234567890" maxlength="15"
+                                       onkeydown="if(event.key==='Enter') buscarCliente()" />
+                            </div>
+                            <span class="field-msg" id="msgCedulaCliente"></span>
+                        </div>
+                        <button class="btn-search" id="btnBuscarCliente" onclick="buscarCliente()">
+                            <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                            Buscar
+                        </button>
+                    </div>
+
+                    <!-- Resultado cliente -->
+                    <div class="result-card" id="resultCliente">
+                        <div class="result-fields">
+                            <div class="result-field">
+                                <div class="result-field-label">Cédula</div>
+                                <div class="result-field-value" id="rc-cedula">—</div>
+                            </div>
+                            <div class="result-field">
+                                <div class="result-field-label">Nombre</div>
+                                <div class="result-field-value" id="rc-nombre">—</div>
+                            </div>
+                            <div class="result-field">
+                                <div class="result-field-label">Teléfono</div>
+                                <div class="result-field-value" id="rc-telefono">—</div>
+                            </div>
+                            <div class="result-field">
+                                <div class="result-field-label">Correo</div>
+                                <div class="result-field-value" id="rc-correo">—</div>
+                            </div>
+                        </div>
+                        <button class="btn-primary" onclick="irAPaso2()">
+                            Continuar
+                            <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ══ PASO 2: PRODUCTOS ══ -->
+            <div class="step-section" id="seccion-productos">
+
+                <!-- Info cliente compacta -->
+                <div class="search-card" style="padding: 14px 20px; margin-bottom: 16px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px;">
+                    <div style="display:flex; gap:20px; flex-wrap:wrap;">
+                        <div class="result-field"><div class="result-field-label">Cliente</div><div class="result-field-value" id="infoClienteNombre">—</div></div>
+                        <div class="result-field"><div class="result-field-label">Cédula</div><div class="result-field-value" id="infoClienteCedula">—</div></div>
+                    </div>
+                    <button class="btn-secondary" onclick="irAPaso1()">
+                        <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+                        Cambiar cliente
+                    </button>
+                </div>
+
+                <!-- Buscador de producto -->
+                <div class="search-card">
+                    <div class="search-card-title">
+                        <svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+                        Agregar producto
+                    </div>
+                    <div class="search-row">
+                        <div class="field">
+                            <label>Código del producto <span style="color:var(--danger)">*</span></label>
+                            <div class="input-wrap">
+                                <input type="text" id="inputCodigoProducto" placeholder="Ej: 1001" maxlength="20"
+                                       onkeydown="if(event.key==='Enter') buscarProducto()" />
+                            </div>
+                            <span class="field-msg" id="msgCodigoProducto"></span>
+                        </div>
+                        <button class="btn-search" id="btnBuscarProducto" onclick="buscarProducto()">
+                            <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                            Buscar
+                        </button>
+                    </div>
+
+                    <!-- Resultado producto -->
+                    <div class="result-card" id="resultProducto">
+                        <div class="result-fields">
+                            <div class="result-field">
+                                <div class="result-field-label">Código</div>
+                                <div class="result-field-value" id="rp-codigo">—</div>
+                            </div>
+                            <div class="result-field">
+                                <div class="result-field-label">Nombre</div>
+                                <div class="result-field-value" id="rp-nombre">—</div>
+                            </div>
+                            <div class="result-field">
+                                <div class="result-field-label">Precio venta</div>
+                                <div class="result-field-value" id="rp-precio">—</div>
+                            </div>
+                            <div class="result-field">
+                                <div class="result-field-label">IVA</div>
+                                <div class="result-field-value" id="rp-iva">—</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Cantidad -->
+                    <div class="qty-row" id="filaQty" style="display:none">
+                        <div class="field">
+                            <label>Cantidad <span style="color:var(--danger)">*</span></label>
+                            <div class="input-wrap">
+                                <input type="number" id="inputCantidad" placeholder="1" min="1" max="9999"
+                                       onkeydown="if(event.key==='Enter') agregarAlCarrito()" />
+                            </div>
+                            <span class="field-msg" id="msgCantidad"></span>
+                        </div>
+                        <button class="btn-primary" onclick="agregarAlCarrito()">
+                            <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                            Agregar al carrito
+                        </button>
+                    </div>
+                </div>
+
+                <!-- CARRITO -->
+                <div class="carrito-wrap">
+                    <div class="carrito-header">
+                        <div class="carrito-title">
+                            <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+                            Carrito de compra
+                        </div>
+                        <span class="carrito-count" id="carritoCount">0 productos</span>
+                    </div>
+                    <div class="carrito-body" id="carritoBody">
+                        <div class="carrito-empty">
+                            <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+                            <div class="carrito-empty-text">Busca y agrega productos</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Subtotal rápido + botón totalizar -->
+                <div class="totales-wrap" id="subtotalWrap" style="display:none">
+                    <div class="totales-grid">
+                        <div class="totales-row">
+                            <span class="totales-label">Subtotal (sin IVA)</span>
+                            <span class="totales-value" id="subtotalValor">$0</span>
+                        </div>
+                    </div>
+                    <div class="totales-actions">
+                        <button class="btn-success" onclick="irAPaso3()">
+                            <svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                            Totalizar venta
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- ══ PASO 3: TOTALIZAR ══ -->
+            <div class="step-section" id="seccion-totalizar">
+
+                <!-- Resumen cliente -->
+                <div class="search-card" style="padding: 14px 20px; margin-bottom: 16px; display:flex; align-items:center; gap:20px; flex-wrap:wrap;">
+                    <div class="result-field"><div class="result-field-label">Cliente</div><div class="result-field-value" id="t-clienteNombre">—</div></div>
+                    <div class="result-field"><div class="result-field-label">Cédula</div><div class="result-field-value" id="t-clienteCedula">—</div></div>
+                    <div class="result-field"><div class="result-field-label">Productos</div><div class="result-field-value" id="t-numProductos">—</div></div>
+                </div>
+
+                <!-- Tabla resumen carrito -->
+                <div class="carrito-wrap" style="margin-bottom:20px;">
+                    <div class="carrito-header">
+                        <div class="carrito-title">
+                            <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                            Detalle de la venta
+                        </div>
+                    </div>
+                    <div class="carrito-body" id="resumenBody"></div>
+                </div>
+
+                <!-- TOTALES FINALES -->
+                <div class="totales-wrap">
+                    <div class="totales-grid">
+                        <div class="totales-row">
+                            <span class="totales-label">Subtotal (sin IVA)</span>
+                            <span class="totales-value" id="finalSubtotal">$0</span>
+                        </div>
+                        <div class="totales-row separator">
+                            <span class="totales-label">IVA total</span>
+                            <span class="totales-value" id="finalIva">$0</span>
+                        </div>
+                        <div class="totales-row grand">
+                            <span class="totales-label">TOTAL CON IVA</span>
+                            <span class="totales-value" id="finalTotal">$0</span>
+                        </div>
+                    </div>
+                    <div class="totales-actions">
+                        <button class="btn-secondary" onclick="irAPaso2()">
+                            <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+                            Volver
+                        </button>
+                        <button class="btn-success" id="btnRegistrar" onclick="registrarVenta()">
+                            <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+                            <span id="btnRegistrarText">Confirmar y registrar venta</span>
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+
+        </div><!-- /content -->
+    </div><!-- /main -->
+</div><!-- /shell -->
+
+<!-- ═══ MODAL TICKET ═══ -->
+<div class="modal-overlay" id="modalTicket">
+    <div class="ticket">
+        <div class="ticket-top">
+            <div class="ticket-icon">
+                <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <div class="ticket-heading">¡Venta registrada!</div>
+            <div class="ticket-sub" id="ticketFecha">—</div>
+        </div>
+        <div class="ticket-body">
+            <!-- Código de venta -->
+            <div class="ticket-code">
+                <div>
+                    <div class="ticket-code-label">Código de venta</div>
+                    <div class="ticket-code-value" id="ticketCodigo">#0</div>
+                </div>
+                <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="var(--blue-mid)" stroke-width="1.5" stroke-linecap="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><path d="M14 14h3v3"/><path d="M17 17h3v3"/><path d="M14 20h3"/></svg>
+            </div>
+
+            <!-- Cliente -->
+            <div class="ticket-section">
+                <div class="ticket-section-title">Cliente</div>
+                <div class="ticket-row"><span class="ticket-row-label">Nombre</span><span class="ticket-row-value" id="ticketClienteNombre">—</span></div>
+                <div class="ticket-row"><span class="ticket-row-label">Cédula</span><span class="ticket-row-value" id="ticketClienteCedula">—</span></div>
+            </div>
+
+            <!-- Productos -->
+            <div class="ticket-section">
+                <div class="ticket-section-title">Productos</div>
+                <div class="ticket-items" id="ticketItems"></div>
+            </div>
+
+            <hr class="ticket-divider" />
+
+            <!-- Totales -->
+            <div class="ticket-section" style="margin-bottom:0">
+                <div class="ticket-row"><span class="ticket-row-label">Subtotal</span><span class="ticket-row-value" id="ticketSubtotal">$0</span></div>
+                <div class="ticket-row"><span class="ticket-row-label">IVA</span><span class="ticket-row-value" id="ticketIva">$0</span></div>
+                <div style="height:10px"></div>
+                <div class="ticket-total-row">
+                    <span class="ticket-total-label">Total con IVA</span>
+                    <span class="ticket-total-value" id="ticketTotal">$0</span>
+                </div>
+            </div>
+        </div>
+        <div class="ticket-footer">
+            <button class="btn-secondary" onclick="cerrarTicket()">
+                <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                Cerrar
+            </button>
+            <button class="btn-primary" onclick="reiniciarVenta()">
+                <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                Nueva venta
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast">
+    <svg id="toastIcon" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+    <span id="toastMsg"></span>
+</div>
+
+<script>
+    // ════════════════════════════════════════
+    //  AUTH
+    // ════════════════════════════════════════
+    const token = localStorage.getItem('token');
+    if (!token) window.location.href = '/login';
+
+    let payload = null;
+    try { payload = JSON.parse(atob(token.split('.')[1])); }
+    catch { localStorage.removeItem('token'); window.location.href = '/login'; }
+
+    const esSuperAdmin = payload.nombreUsuario === 'admininicial';
+
+    // ════════════════════════════════════════
+    //  INIT
+    // ════════════════════════════════════════
+    (function init() {
+        document.getElementById('topbarDate').textContent = new Date().toLocaleDateString('es-CO', {
+            weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
+        });
+        const nombre = payload.nombreUsuario || 'Usuario';
+        document.getElementById('userInitial').textContent = nombre.charAt(0).toUpperCase();
+        document.getElementById('userName').textContent    = nombre;
+        document.getElementById('userRoleLabel').textContent = esSuperAdmin ? 'Admin Principal' : 'Administrador';
+        if (esSuperAdmin) document.getElementById('navUsuarios').style.display = 'flex';
+    })();
+
+    document.getElementById('btnLogout').addEventListener('click', () => {
+        localStorage.removeItem('token');
+        window.location.href = '/login';
+    });
+
+    // ════════════════════════════════════════
+    //  HELPERS
+    // ════════════════════════════════════════
+    function getHeaders() {
+        return { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` };
+    }
+
+    function formatCOP(valor) {
+        return new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP', minimumFractionDigits: 0 }).format(valor);
+    }
+
+    let toastTimer = null;
+    function mostrarToast(msg, tipo = 'success') {
+        const t    = document.getElementById('toast');
+        const icon = document.getElementById('toastIcon');
+        document.getElementById('toastMsg').textContent = msg;
+        t.className = `toast toast-${tipo} visible`;
+        icon.innerHTML = tipo === 'success'
+            ? '<polyline points="20 6 9 17 4 12"/>'
+            : '<circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>';
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => t.classList.remove('visible'), 3500);
+    }
+
+    function setAlerta(tipo, msg) {
+        const box = document.getElementById('alertGlobal');
+        box.className = `alert-box ${tipo}`;
+        document.getElementById('alertGlobalMsg').textContent = msg;
+    }
+
+    function limpiarAlerta() {
+        document.getElementById('alertGlobal').className = 'alert-box';
+    }
+
+    // ════════════════════════════════════════
+    //  ESTADO GLOBAL DE LA VENTA
+    // ════════════════════════════════════════
+    let clienteActual   = null;   // objeto cliente encontrado
+    let productoActual  = null;   // objeto producto encontrado en la búsqueda activa
+    let carrito         = [];     // [{codigoProducto, nombre, precioVenta, ivaCompra, cantidad, totalLinea, ivaLinea}]
+
+    // ════════════════════════════════════════
+    //  NAVEGACIÓN DE PASOS
+    // ════════════════════════════════════════
+    function setStep(n) {
+        // Actualiza indicadores
+        [1, 2, 3].forEach(i => {
+            const s = document.getElementById(`step${i}`);
+            s.classList.remove('active', 'done');
+            if (i < n)  s.classList.add('done');
+            if (i === n) s.classList.add('active');
+        });
+        [1, 2].forEach(i => {
+            document.getElementById(`line${i}`).classList.toggle('done', i < n);
+        });
+
+        // Muestra sección correcta
+        document.getElementById('seccion-cliente').classList.toggle('visible', n === 1);
+        document.getElementById('seccion-productos').classList.toggle('visible', n === 2);
+        document.getElementById('seccion-totalizar').classList.toggle('visible', n === 3);
+
+        limpiarAlerta();
+    }
+
+    function irAPaso1() {
+        clienteActual  = null;
+        productoActual = null;
+        document.getElementById('inputCedulaCliente').value = '';
+        document.getElementById('resultCliente').classList.remove('visible');
+        setStep(1);
+    }
+
+    function irAPaso2() {
+        if (!clienteActual) return;
+        document.getElementById('infoClienteNombre').textContent = clienteActual.nombre_completo || clienteActual.nombreCompleto;
+        document.getElementById('infoClienteCedula').textContent = clienteActual.cedula;
+        // Limpiar búsqueda de producto
+        productoActual = null;
+        document.getElementById('inputCodigoProducto').value = '';
+        document.getElementById('resultProducto').classList.remove('visible');
+        document.getElementById('filaQty').style.display = 'none';
+        document.getElementById('msgCodigoProducto').textContent = '';
+        renderCarrito();
+        setStep(2);
+    }
+
+    function irAPaso3() {
+        if (carrito.length === 0) {
+            mostrarToast('Agrega al menos un producto antes de totalizar', 'error');
+            return;
+        }
+        // Calcular totales finales
+        let subtotal = 0, iva = 0;
+        carrito.forEach(item => {
+            subtotal += item.totalLinea;
+            iva      += item.ivaLinea;
+        });
+        const total = subtotal + iva;
+
+        // Poblar resumen
+        document.getElementById('t-clienteNombre').textContent  = clienteActual.nombre_completo || clienteActual.nombreCompleto;
+        document.getElementById('t-clienteCedula').textContent  = clienteActual.cedula;
+        document.getElementById('t-numProductos').textContent   = `${carrito.length} línea${carrito.length !== 1 ? 's' : ''}`;
+
+        document.getElementById('finalSubtotal').textContent = formatCOP(subtotal);
+        document.getElementById('finalIva').textContent      = formatCOP(iva);
+        document.getElementById('finalTotal').textContent    = formatCOP(total);
+
+        // Tabla resumen
+        const filas = carrito.map(item => `
+    <tr>
+      <td>${item.codigo}</td>
+      <td><strong>${item.nombre}</strong></td>
+      <td class="td-muted" style="text-align:center">${item.cantidad}</td>
+      <td class="td-money">${formatCOP(item.precioVenta)}</td>
+      <td class="td-money">${formatCOP(item.totalLinea)}</td>
+      <td class="td-money" style="color:var(--warn)">${formatCOP(item.ivaLinea)}</td>
+    </tr>`).join('');
+
+        document.getElementById('resumenBody').innerHTML = `
+    <table class="carrito-table">
+      <thead>
+        <tr>
+          <th>Código</th><th>Producto</th><th style="text-align:center">Cant.</th>
+          <th>Precio unit.</th><th>Subtotal</th><th>IVA línea</th>
+        </tr>
+      </thead>
+      <tbody>${filas}</tbody>
+    </table>`;
+
+        setStep(3);
+    }
+
+    // ════════════════════════════════════════
+    //  PASO 1: BUSCAR CLIENTE
+    // ════════════════════════════════════════
+    const RX_CEDULA = /^[0-9]{5,15}$/;
+
+    async function buscarCliente() {
+        const cedula = document.getElementById('inputCedulaCliente').value.trim();
+        const msgEl  = document.getElementById('msgCedulaCliente');
+
+        if (!cedula) { msgEl.className = 'field-msg error'; msgEl.textContent = 'Ingresa una cédula'; return; }
+        if (!RX_CEDULA.test(cedula)) { msgEl.className = 'field-msg error'; msgEl.textContent = 'Solo dígitos, 5–15 números'; return; }
+
+        msgEl.className = 'field-msg'; msgEl.textContent = '';
+
+        const btn = document.getElementById('btnBuscarCliente');
+        btn.disabled = true;
+        btn.innerHTML = '<span class="spinner"></span> Buscando...';
+        document.getElementById('resultCliente').classList.remove('visible');
+
+        try {
+            const res  = await fetch(`/api/ventas/cliente/${cedula}`, { headers: getHeaders() });
+            const data = await res.json();
+            if (!res.ok) throw new Error(data.error || 'No encontrado');
+
+            clienteActual = data;
+            document.getElementById('rc-cedula').textContent   = data.cedula;
+            document.getElementById('rc-nombre').textContent   = data.nombre_completo || data.nombreCompleto;
+            document.getElementById('rc-telefono').textContent = data.telefono || '—';
+            document.getElementById('rc-correo').textContent   = data.correo   || '—';
+            document.getElementById('resultCliente').classList.add('visible');
+        } catch (err) {
+            msgEl.className = 'field-msg error';
+            msgEl.textContent = err.message;
+        } finally {
+            btn.disabled = false;
+            btn.innerHTML = '<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg> Buscar';
+        }
+    }
+
+    // ════════════════════════════════════════
+    //  PASO 2: BUSCAR PRODUCTO
+    // ════════════════════════════════════════
+    async function buscarProducto() {
+        const codigo = document.getElementById('inputCodigoProducto').value.trim();
+        const msgEl  = document.getElementById('msgCodigoProducto');
+
+        if (!codigo) { msgEl.className = 'field-msg error'; msgEl.textContent = 'Ingresa el código del producto'; return; }
+        if (isNaN(Number(codigo)) || Number(codigo) <= 0) { msgEl.className = 'field-msg error'; msgEl.textContent = 'El código debe ser un número positivo'; return; }
+
+        msgEl.className = 'field-msg'; msgEl.textContent = '';
+
+        const btn = document.getElementById('btnBuscarProducto');
+        btn.disabled = true;
+        btn.innerHTML = '<span class="spinner"></span> Buscando...';
+        document.getElementById('resultProducto').classList.remove('visible');
+        document.getElementById('filaQty').style.display = 'none';
+        productoActual = null;
+
+        try {
+            const res  = await fetch(`/api/ventas/producto/${codigo}`, { headers: getHeaders() });
+            const data = await res.json();
+            if (!res.ok) throw new Error(data.error || 'No encontrado');
+
+            productoActual = data;
+            document.getElementById('rp-codigo').textContent = data.codigo_producto || data.codigoProducto;
+            document.getElementById('rp-nombre').textContent = data.nombre_producto || data.nombreProducto;
+            document.getElementById('rp-precio').textContent = formatCOP(data.precio_venta || data.precioVenta);
+            document.getElementById('rp-iva').textContent    = `${data.iva_compra || data.ivaCompra}%`;
+            document.getElementById('resultProducto').classList.add('visible');
+            document.getElementById('filaQty').style.display = 'flex';
+            document.getElementById('inputCantidad').value = '1';
+            document.getElementById('msgCantidad').textContent = '';
+            setTimeout(() => document.getElementById('inputCantidad').focus(), 80);
+        } catch (err) {
+            msgEl.className = 'field-msg error';
+            msgEl.textContent = err.message;
+        } finally {
+            btn.disabled = false;
+            btn.innerHTML = '<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg> Buscar';
+        }
+    }
+
+    // ════════════════════════════════════════
+    //  AGREGAR AL CARRITO
+    // ════════════════════════════════════════
+    function agregarAlCarrito() {
+        if (!productoActual) return;
+        const msgEl    = document.getElementById('msgCantidad');
+        const cantInput = document.getElementById('inputCantidad');
+        const cant = parseInt(cantInput.value, 10);
+
+        if (isNaN(cant) || cant < 1) {
+            msgEl.className = 'field-msg error';
+            msgEl.textContent = 'La cantidad debe ser al menos 1';
+            return;
+        }
+        if (cant > 9999) {
+            msgEl.className = 'field-msg error';
+            msgEl.textContent = 'La cantidad máxima es 9.999';
+            return;
+        }
+        msgEl.className = 'field-msg'; msgEl.textContent = '';
+
+        const codigo      = Number(productoActual.codigo_producto || productoActual.codigoProducto);
+        const nombre      = productoActual.nombre_producto || productoActual.nombreProducto;
+        const precioVenta = parseFloat(productoActual.precio_venta || productoActual.precioVenta);
+        const ivaPorc     = parseFloat(productoActual.iva_compra   || productoActual.ivaCompra);
+        const totalLinea  = precioVenta * cant;
+        const ivaLinea    = totalLinea * (ivaPorc / 100);
+
+        // Si ya existe el producto en el carrito, actualizamos la cantidad
+        const idx = carrito.findIndex(i => i.codigo === codigo);
+        if (idx >= 0) {
+            carrito[idx].cantidad   += cant;
+            carrito[idx].totalLinea  = carrito[idx].precioVenta * carrito[idx].cantidad;
+            carrito[idx].ivaLinea    = carrito[idx].totalLinea * (ivaPorc / 100);
+            mostrarToast(`Cantidad actualizada: ${carrito[idx].nombre}`, 'success');
+        } else {
+            carrito.push({ codigo, nombre, precioVenta, ivaPorc, cantidad: cant, totalLinea, ivaLinea });
+            mostrarToast(`${nombre} agregado al carrito`, 'success');
+        }
+
+        // Limpiar búsqueda de producto
+        productoActual = null;
+        document.getElementById('inputCodigoProducto').value = '';
+        document.getElementById('resultProducto').classList.remove('visible');
+        document.getElementById('filaQty').style.display = 'none';
+        document.getElementById('inputCodigoProducto').focus();
+
+        renderCarrito();
+    }
+
+    // ════════════════════════════════════════
+    //  RENDER CARRITO
+    // ════════════════════════════════════════
+    function renderCarrito() {
+        const body  = document.getElementById('carritoBody');
+        const count = document.getElementById('carritoCount');
+        const subtotalWrap = document.getElementById('subtotalWrap');
+
+        count.textContent = `${carrito.length} producto${carrito.length !== 1 ? 's' : ''}`;
+
+        if (carrito.length === 0) {
+            body.innerHTML = `<div class="carrito-empty">
+      <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+      <div class="carrito-empty-text">Busca y agrega productos</div>
+    </div>`;
+            subtotalWrap.style.display = 'none';
+            return;
+        }
+
+        let subtotal = 0;
+        const filas = carrito.map((item, i) => {
+            subtotal += item.totalLinea;
+            return `<tr>
+      <td>${item.codigo}</td>
+      <td><strong>${item.nombre}</strong></td>
+      <td style="text-align:center">${item.cantidad}</td>
+      <td class="td-money">${formatCOP(item.precioVenta)}</td>
+      <td class="td-money"><strong>${formatCOP(item.totalLinea)}</strong></td>
+      <td>
+        <button class="btn-danger" onclick="quitarDelCarrito(${i})">
+          <svg viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/></svg>
+        </button>
+      </td>
+    </tr>`;
+        }).join('');
+
+        body.innerHTML = `
+    <table class="carrito-table">
+      <thead><tr>
+        <th>Código</th><th>Producto</th><th style="text-align:center">Cant.</th>
+        <th>Precio unit.</th><th>Total línea</th><th></th>
+      </tr></thead>
+      <tbody>${filas}</tbody>
+    </table>`;
+
+        document.getElementById('subtotalValor').textContent = formatCOP(subtotal);
+        subtotalWrap.style.display = 'block';
+    }
+
+    function quitarDelCarrito(idx) {
+        const nombre = carrito[idx].nombre;
+        carrito.splice(idx, 1);
+        renderCarrito();
+        mostrarToast(`${nombre} eliminado del carrito`, 'error');
+    }
+
+    // ════════════════════════════════════════
+    //  PASO 3: REGISTRAR VENTA
+    // ════════════════════════════════════════
+    async function registrarVenta() {
+        if (carrito.length === 0) { mostrarToast('El carrito está vacío', 'error'); return; }
+
+        const btn     = document.getElementById('btnRegistrar');
+        const btnText = document.getElementById('btnRegistrarText');
+        btn.disabled = true;
+        btnText.innerHTML = '<span class="spinner"></span> Registrando...';
+        limpiarAlerta();
+
+        // La cédula del usuario viene del JWT
+        const cedulaUsuario = payload.cedula || payload.cedulaUsuario || payload.sub || '';
+
+        const body = {
+            cedulaCliente: clienteActual.cedula,
+            cedulaUsuario,
+            items: carrito.map(item => ({
+                codigoProducto: item.codigo,
+                cantidad:       item.cantidad
+            }))
+        };
+
+        try {
+            const res  = await fetch('/api/ventas', { method: 'POST', headers: getHeaders(), body: JSON.stringify(body) });
+            const data = await res.json();
+            if (!res.ok) throw new Error(data.error || 'Error al registrar');
+
+            // Mostrar ticket de confirmación
+            mostrarTicket(data);
+        } catch (err) {
+            setAlerta('error', err.message);
+            mostrarToast(err.message, 'error');
+        } finally {
+            btn.disabled = false;
+            btnText.innerHTML = '<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Confirmar y registrar venta';
+        }
+    }
+
+    // ════════════════════════════════════════
+    //  TICKET / COMPROBANTE
+    // ════════════════════════════════════════
+    function mostrarTicket(data) {
+        const venta   = data.venta;
+        const detalle = data.detalle || [];
+        const cliente = data.cliente;
+
+        document.getElementById('ticketCodigo').textContent        = `#${venta.codigoVenta}`;
+        document.getElementById('ticketFecha').textContent         = new Date(venta.fecha).toLocaleString('es-CO');
+        document.getElementById('ticketClienteNombre').textContent = cliente.nombre_completo || cliente.nombreCompleto;
+        document.getElementById('ticketClienteCedula').textContent = cliente.cedula;
+        document.getElementById('ticketSubtotal').textContent      = formatCOP(venta.valorTotal);
+        document.getElementById('ticketIva').textContent           = formatCOP(venta.valorIva);
+        document.getElementById('ticketTotal').textContent         = formatCOP(venta.totalConIva);
+
+        const itemsHtml = carrito.map(item => `
+    <div class="ticket-item">
+      <span class="ticket-item-name">${item.nombre}</span>
+      <span class="ticket-item-detail">${item.cantidad} × ${formatCOP(item.precioVenta)} = ${formatCOP(item.totalLinea)}</span>
+    </div>`).join('');
+        document.getElementById('ticketItems').innerHTML = itemsHtml;
+
+        document.getElementById('modalTicket').classList.add('open');
+    }
+
+    function cerrarTicket() {
+        document.getElementById('modalTicket').classList.remove('open');
+    }
+
+    // ════════════════════════════════════════
+    //  REINICIAR FLUJO
+    // ════════════════════════════════════════
+    function reiniciarVenta() {
+        cerrarTicket();
+        clienteActual  = null;
+        productoActual = null;
+        carrito        = [];
+        document.getElementById('inputCedulaCliente').value = '';
+        document.getElementById('msgCedulaCliente').textContent = '';
+        document.getElementById('resultCliente').classList.remove('visible');
+        setStep(1);
+    }
+
+    // Cerrar ticket al click fuera
+    document.getElementById('modalTicket').addEventListener('click', e => {
+        if (e.target === e.currentTarget) cerrarTicket();
+    });
+</script>
+</body>
+</html>

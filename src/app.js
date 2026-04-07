@@ -24,6 +24,7 @@ app.get("/dashboard",   (req, res) => res.sendFile(path.join(__dirname, "vistas"
 app.get("/clientes",    (req, res) => res.sendFile(path.join(__dirname, "vistas", "clientes.html")));
 app.get("/proveedores", (req, res) => res.sendFile(path.join(__dirname, "vistas", "proveedores.html")));
 app.get("/productos",   (req, res) => res.sendFile(path.join(__dirname, "vistas", "productos.html")));
+app.get("/ventas",      (req, res) =>  res.sendFile(path.join(__dirname, "vistas", "ventas.html")));
 
 // ── Rutas API ──
 app.use("/api/auth",        authRutas);

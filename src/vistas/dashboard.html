@@ -396,10 +396,37 @@
       <!-- VENTAS -->
       <div class="panel" id="panel-ventas">
         <div class="module-header">
-          <div><div class="module-title">Ventas</div><div class="module-desc">Registro y gestión de transacciones</div></div>
-          <button class="btn-primary"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Nueva venta</button>
+          <div>
+            <div class="module-title">Ventas</div>
+            <div class="module-desc">Registro y gestión de transacciones</div>
+          </div>
+          <button class="btn-primary" onclick="window.location.href='/ventas'">
+            <svg viewBox="0 0 24 24">
+              <line x1="12" y1="5" x2="12" y2="19"/>
+              <line x1="5" y1="12" x2="19" y2="12"/>
+            </svg>
+            Ir a Ventas
+          </button>
         </div>
-        <div class="empty-module"><div class="empty-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div><div class="empty-title">Módulo en construcción</div><div class="empty-text">Registra ventas y consulta el historial de transacciones de la tienda.</div><span class="coming-soon">Próximamente</span></div>
+
+        <div class="module-card" onclick="window.location.href='/ventas'">
+          <div class="empty-icon">
+            <svg viewBox="0 0 24 24">
+              <line x1="12" y1="1" x2="12" y2="23"/>
+              <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+            </svg>
+          </div>
+          <div class="empty-title">Gestión de Ventas</div>
+          <div class="empty-text">
+            Registra ventas y consulta el historial de transacciones de la tienda.
+          </div>
+          <span class="module-card-badge">
+      <svg viewBox="0 0 24 24">
+        <polyline points="9 18 15 12 9 6"/>
+      </svg>
+      Abrir módulo
+    </span>
+        </div>
       </div>
 
       <!-- REPORTES -->
