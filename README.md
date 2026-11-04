@@ -2,9 +2,8 @@
 
 Dashboard administrativo web para gestionar usuarios, clientes, proveedores, productos, ventas y reportes de una tienda.
 
-> ℹ️ Este README se generó a partir de `dashboard.html`. Los puntos marcados con ⚠️ no se pueden deducir del frontend; complétalos según tu backend.
 
----
+-
 
 ## 🚀 Características Principales
 
@@ -20,8 +19,6 @@ Dashboard administrativo web para gestionar usuarios, clientes, proveedores, pro
 ---
 
 ## 📦 Estructura del Proyecto
-
-⚠️ Solo `dashboard.html` es verificable; el resto es referencial.
 
 ```
 tienda/
@@ -91,4 +88,3 @@ Todas envían `Authorization: Bearer <token>`. Los errores múltiples del backen
 - **Tipografía**: Google Fonts — Nunito y Pacifico
 - **Iconos**: SVG inline
 - **Autenticación**: JWT en `localStorage`
-- **Backend / Base de datos**: ⚠️ por definir (API REST bajo `/api`)
